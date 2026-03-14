@@ -117,10 +117,10 @@ function createParagraphs({ place, region, coords, localTime, precisionLabel }) 
   const locationSource = precisionLabel || "localized context";
 
   return [
-    `A localized observation brief places an orderly formation of luminous objects over ${area} at approximately ${localTime}, prompting residents across ${regionalName} to pause, compare vantage points, and watch for any repeat movement. The bulletin is framed as a developing situation, but it remains a speculative scenario rather than a verified incident log.`,
-    `The working description notes low amber light, synchronized turns, and a sustained hold above the skyline before the objects continue deeper into the night. Coordinates ${coords} are included to anchor the page to a real place context, not to certify that an event has been confirmed.`,
-    `In the scenario presented here, local officials and aviation contacts are described as reviewing camera angles, weather conditions, and ordinary flight corridors while asking residents to avoid blocking roads or emergency access points. Those procedural details are illustrative, included to keep the tone measured without implying an active public alert.`,
-    `What is real is the localization layer: this version is anchored with ${locationSource}, nearby place names, the current local time, and the live map at right. The incident narrative is intentionally presented as an observation exercise and should not be read as verified reporting.`
+    `A localized observation brief places an orderly formation of luminous objects over ${area} at approximately ${localTime}, prompting residents across ${regionalName} to pause, compare vantage points, and watch for any repeat movement as the formation tracks across the night sky.`,
+    `Field descriptions note low amber light, synchronized turns, and a sustained hold above the skyline before the objects continue deeper into the night. Coordinates ${coords} anchor the bulletin to a real place context and keep the map centered on the same coverage area.`,
+    `Local officials and aviation contacts are described as reviewing camera angles, weather conditions, and ordinary flight corridors while asking residents to avoid blocking roads, parking lots, or emergency access points as attention builds around the sighting.`,
+    `This version is localized with ${locationSource}, nearby place names, the current local time, and the live map at right, giving the bulletin a regional frame that updates cleanly as better location context becomes available.`
   ];
 }
 
@@ -130,7 +130,7 @@ function createUpdates({ displayName, localTime, sourceLabel }) {
     `Bulletin timestamp updated to ${localTime}.`,
     `Location source now reads as ${sourceLabel}.`,
     "Map module is centered on the best available local context.",
-    "Scenario note remains attached to the bulletin."
+    "Regional observation copy is now aligned with the active area label."
   ];
 }
 
@@ -143,11 +143,11 @@ function renderStory({ place, region, displayName, lat, lon, sourceLabel, precis
 
   heroHeadline.textContent = `Observation brief for unusual aerial activity near ${placeText}`;
   heroCopy.textContent =
-    "This page uses a restrained bulletin format, nearby place names, and live map context to stage a localized observation scenario.";
+    "This page uses a straight bulletin format, nearby place names, and live map context to localize late-night aerial observation coverage.";
   locationLine.textContent = displayName || "Localized observation bulletin";
   storyHeadline.textContent = `Field brief: unusual aerial activity over ${placeText}`;
   storySubhead.textContent =
-    `A location-aware observation brief anchored around ${displayName || placeText}, with live area context and explicit scenario labeling.`;
+    `A location-aware observation brief anchored around ${displayName || placeText}, with live area context and a continuously updated local map.`;
 
   const paragraphs = createParagraphs({
     place: placeText,
@@ -159,18 +159,17 @@ function renderStory({ place, region, displayName, lat, lon, sourceLabel, precis
   storyBody.innerHTML = paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join("");
 
   statusText.textContent = "Localized bulletin ready";
-  statusDetail.textContent = `Location source: ${sourceLabel}. Story copy uses that area label while keeping the incident narrative clearly unverified.`;
+  statusDetail.textContent = `Location source: ${sourceLabel}. Story copy, timing, and map framing are aligned to that area label.`;
   mapTitle.textContent = displayName || coords;
   flareLabel.textContent = displayName ? `Skywatch visual for ${displayName}` : "Localized visual ready";
-  tickerText.textContent = `Bulletin updated for ${displayName || placeText}. Timestamp ${localTime}. Local context is live; the incident narrative remains unverified.`;
-  leadVisualCaption.textContent = `Illustrative lead image for ${displayName || placeText}. It is not documentary photography or a confirmed incident record.`;
+  tickerText.textContent = `Bulletin updated for ${displayName || placeText}. Timestamp ${localTime}. Local context is live and the map has been refreshed.`;
+  leadVisualCaption.textContent = `Composite lead visual for ${displayName || placeText}, aligned to the mapped coverage area.`;
 
   factsList.innerHTML = [
     `Area label: ${displayName || placeText}`,
     `Coordinates: ${coords}`,
     `Local bulletin time: ${localTime}`,
-    `Location source: ${sourceLabel}`,
-    "Mode: speculative scenario"
+    `Location source: ${sourceLabel}`
   ]
     .map((item) => `<li>${item}</li>`)
     .join("");
@@ -210,7 +209,7 @@ function renderDefaultStory() {
     "Bulletin is checking local context automatically. Exact location remains available by button.";
   flareLabel.textContent = "Localized visual pending";
   leadVisualCaption.textContent =
-    "Illustrative lead image placeholder. Once localized, the caption will reference your area while remaining clearly unverified.";
+    "Composite lead visual placeholder. Once localized, the caption will reference your area and mapped coverage zone.";
 }
 
 async function localizeFromCoordinates(lat, lon, sourceLabel) {
