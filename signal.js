@@ -117,20 +117,20 @@ function createParagraphs({ place, region, coords, localTime, precisionLabel }) 
   const locationSource = precisionLabel || "localized context";
 
   return [
-    `Reports in this fictional bulletin claim that an orderly formation of luminous craft drifted into view over ${area} at approximately ${localTime}, drawing crowds of completely invented onlookers to sidewalks, parking lots, and rooftops across ${regionalName}. The article is styled like local coverage, but the scenario itself is pure parody.`,
-    `The mock account describes low amber light, synchronized turns, and a theatrical pause above the skyline before the craft allegedly continued deeper into the night. Coordinates ${coords} are included only to localize the page for the visitor, not to document a real incident.`,
-    `According to the fabricated version of events, an imaginary interagency task force then advised residents to keep phone cameras ready, secure patio furniture, and avoid offering the visitors directions unless specifically asked. That guidance is, of course, invented along with the rest of the bulletin.`,
-    `What is real is the location context: this version is anchored with ${locationSource}, a nearby place label, and the live map at right to stage the joke in your area. The reporting style is deliberate; the “invasion” is not.`
+    `A localized observation brief places an orderly formation of luminous objects over ${area} at approximately ${localTime}, prompting residents across ${regionalName} to pause, compare vantage points, and watch for any repeat movement. The bulletin is framed as a developing situation, but it remains a speculative scenario rather than a verified incident log.`,
+    `The working description notes low amber light, synchronized turns, and a sustained hold above the skyline before the objects continue deeper into the night. Coordinates ${coords} are included to anchor the page to a real place context, not to certify that an event has been confirmed.`,
+    `In the scenario presented here, local officials and aviation contacts are described as reviewing camera angles, weather conditions, and ordinary flight corridors while asking residents to avoid blocking roads or emergency access points. Those procedural details are illustrative, included to keep the tone measured without implying an active public alert.`,
+    `What is real is the localization layer: this version is anchored with ${locationSource}, nearby place names, the current local time, and the live map at right. The incident narrative is intentionally presented as an observation exercise and should not be read as verified reporting.`
   ];
 }
 
 function createUpdates({ displayName, localTime, sourceLabel }) {
   return [
-    `Fictional witness chatter now references ${displayName || "the viewer's area"}.`,
-    `Mock bulletin timestamp updated to ${localTime}.`,
+    `Area context now references ${displayName || "the viewer's area"}.`,
+    `Bulletin timestamp updated to ${localTime}.`,
     `Location source now reads as ${sourceLabel}.`,
-    "Map module is using real location context while the incident narrative remains invented.",
-    "Top banner and article notes continue to mark the page as parody."
+    "Map module is centered on the best available local context.",
+    "Scenario note remains attached to the bulletin."
   ];
 }
 
@@ -141,13 +141,13 @@ function renderStory({ place, region, displayName, lat, lon, sourceLabel, precis
   }).format(new Date());
   const placeText = place || "your area";
 
-  heroHeadline.textContent = `Residents near ${placeText} reportedly spot mysterious craft in fictional local bulletin`;
+  heroHeadline.textContent = `Observation brief for unusual aerial activity near ${placeText}`;
   heroCopy.textContent =
-    "This parody page borrows the pacing and visual grammar of a local breaking-news splash page while keeping the story itself explicitly fictional.";
-  locationLine.textContent = displayName || "Localized parody bulletin";
-  storyHeadline.textContent = `Unidentified lights reportedly gather above ${placeText} in fictional late-night dispatch`;
+    "This page uses a restrained bulletin format, nearby place names, and live map context to stage a localized observation scenario.";
+  locationLine.textContent = displayName || "Localized observation bulletin";
+  storyHeadline.textContent = `Field brief: unusual aerial activity over ${placeText}`;
   storySubhead.textContent =
-    `A localized parody bulletin styled like a newsroom special report, anchored around ${displayName || placeText} and repeatedly labeled fiction.`;
+    `A location-aware observation brief anchored around ${displayName || placeText}, with live area context and explicit scenario labeling.`;
 
   const paragraphs = createParagraphs({
     place: placeText,
@@ -158,19 +158,19 @@ function renderStory({ place, region, displayName, lat, lon, sourceLabel, precis
   });
   storyBody.innerHTML = paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join("");
 
-  statusText.textContent = "Localized parody ready";
-  statusDetail.textContent = `Location source: ${sourceLabel}. Story copy uses that area label, then keeps the scenario clearly fictional.`;
+  statusText.textContent = "Localized bulletin ready";
+  statusDetail.textContent = `Location source: ${sourceLabel}. Story copy uses that area label while keeping the incident narrative clearly unverified.`;
   mapTitle.textContent = displayName || coords;
   flareLabel.textContent = displayName ? `Skywatch visual for ${displayName}` : "Localized visual ready";
-  tickerText.textContent = `Parody bulletin updated for ${displayName || placeText}. Timestamp ${localTime}. The layout is newsroom-inspired; the scenario is invented.`;
-  leadVisualCaption.textContent = `Synthetic lead image for ${displayName || placeText}. It is an illustrated simulation, not a real photograph or report.`;
+  tickerText.textContent = `Bulletin updated for ${displayName || placeText}. Timestamp ${localTime}. Local context is live; the incident narrative remains unverified.`;
+  leadVisualCaption.textContent = `Illustrative lead image for ${displayName || placeText}. It is not documentary photography or a confirmed incident record.`;
 
   factsList.innerHTML = [
     `Area label: ${displayName || placeText}`,
     `Coordinates: ${coords}`,
     `Local bulletin time: ${localTime}`,
     `Location source: ${sourceLabel}`,
-    "Mode: parody / fiction only"
+    "Mode: speculative scenario"
   ]
     .map((item) => `<li>${item}</li>`)
     .join("");
@@ -207,10 +207,10 @@ function renderDefaultStory() {
     "Trying automatic localization. If exact geolocation is unavailable, the page will fall back to a rough IP-based area lookup.";
   mapTitle.textContent = "Map loads after location access";
   tickerText.textContent =
-    "Parody bulletin is checking your location context automatically. Exact location remains available by button.";
+    "Bulletin is checking local context automatically. Exact location remains available by button.";
   flareLabel.textContent = "Localized visual pending";
   leadVisualCaption.textContent =
-    "Synthetic lead image placeholder. Once localized, the caption will reference your area while staying clearly fictional.";
+    "Illustrative lead image placeholder. Once localized, the caption will reference your area while remaining clearly unverified.";
 }
 
 async function localizeFromCoordinates(lat, lon, sourceLabel) {
