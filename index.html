@@ -743,7 +743,7 @@
 
         <section class="article card">
           <div class="section-kicker">Top story</div>
-          <h2 class="section-title">What would be visible on the ground right now</h2>
+          <h2 class="section-title">What is visible on the ground right now</h2>
           <p id="leadParagraph">
             Localized report copy is loading. If the lookup fails, the page will fall back to a
             regional briefing.
@@ -1057,11 +1057,11 @@
           leadParagraph:
             `${formatDateTime(firstCall, zone, { hour: "numeric", minute: "2-digit" })}, residents in ${fullLocation} began calling 911 to describe ${profile.object}. Several callers said the object paused above the same section of sky long enough for neighbors to come outside, point upward, and begin filming before it ${profile.behavior}.`,
           bodyParagraphA:
-            `If a discovery like this unfolded in public, what people on the ground would notice first is the mismatch between what they are seeing and how aircraft normally behave. Witnesses in ${location.city === "your area" ? regionPhrase : location.city} are describing a silhouette with clean geometric edges, no blinking navigation pattern, and no audible engine signature, even while it appears low enough to judge size against buildings and tree lines.`,
+            `What people on the ground notice first is the mismatch between what they are seeing and how aircraft normally behave. Witnesses in ${location.city === "your area" ? regionPhrase : location.city} are describing a silhouette with clean geometric edges, no blinking navigation pattern, and no audible engine signature, even while it appears low enough to judge size against buildings and tree lines.`,
           bodyParagraphB:
-            `${profile.effect} has become one of the most repeated details in the incoming calls. Drivers report dashboard glitches, residents say pets became agitated before looking up, and people standing in open lots describe a pressure change in the chest rather than a conventional passing sound. Those are the kinds of sensory details emergency managers would document immediately in a first-contact incident because they indicate a physical presence, not a distant light.`,
+            `${profile.effect} has become one of the most repeated details in the incoming calls. Drivers report dashboard glitches, residents say pets became agitated before looking up, and people standing in open lots describe a pressure change in the chest rather than a conventional passing sound. Emergency managers are documenting those sensory details immediately because they indicate a physical presence, not a distant light.`,
           bodyParagraphC:
-            `The local response described in this report reflects what agencies would likely do within the first hour of a confirmed unknown aerial event: isolate the clearest sightline, clear road shoulders and rooftops, lock down low-altitude traffic, and route anyone reporting burns, hearing distortion, panic symptoms, or contact with residue toward supervised medical screening. In ${fullLocation}, that means crews are focusing on ${trafficReference} while aviation monitors keep the sky above ${regionPhrase} under active review.`,
+            `The local response in this report shows how agencies are handling the first hour of a confirmed unknown aerial event: isolating the clearest sightline, clearing road shoulders and rooftops, locking down low-altitude traffic, and routing anyone reporting burns, hearing distortion, panic symptoms, or contact with residue toward supervised medical screening. In ${fullLocation}, that means crews are focusing on ${trafficReference} while aviation monitors keep the sky above ${regionPhrase} under active review.`,
           sightings: [
             `A hull shape with no wings, rotor blades, or exhaust trail, visible long enough for multiple witnesses to describe the same outline from different blocks.`,
             `A silent hover followed by a sudden sideways movement that looked wrong for any helicopter, drone, or fixed-wing aircraft normally seen over ${regionPhrase}.`,
@@ -1102,21 +1102,21 @@
             },
             {
               label: "Airspace",
-              value: `Regional flight paths would be rerouted to preserve a sterile observation zone above ${fullLocation}.`
+              value: `Regional flight paths are being rerouted to preserve a sterile observation zone above ${fullLocation}.`
             },
             {
               label: "Medical",
-              value: `Triage teams would prioritize dizziness, hearing changes, eye irritation, anxiety spikes, and any claimed contact with residue.`
+              value: `Triage teams are prioritizing dizziness, hearing changes, eye irritation, anxiety spikes, and any claimed contact with residue.`
             }
           ],
           advisories: [
             `Stay indoors or watch from a covered position if you are already near a clear line of sight in ${fullLocation}.`,
             `Do not stop on highway shoulders, parking ramps, or school grounds to record the object. Those spaces may be taken over by emergency crews without notice.`,
             `If you notice ringing in the ears, skin irritation, sudden disorientation, or contact with falling material, move away and seek medical direction immediately.`,
-            `Keep pets inside, charge devices, and preserve any original video files without editing or compressing them if investigators request evidence.`
+            `Keep pets inside, charge devices, and preserve any original video files without editing or compressing them for investigators.`
           ],
           watchStrip:
-            `Residents in ${fullLocation} should leave the clearest intersections, rooftops, and elevated lots to emergency teams. If the object drops debris or lands, do not approach it, touch residue, or attempt to collect fragments.`
+            `Residents in ${fullLocation} should leave the clearest intersections, rooftops, and elevated lots to emergency teams. Do not approach debris, residue, or any landing site, and do not attempt to collect fragments.`
         };
       }
 
