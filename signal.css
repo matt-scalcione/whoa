@@ -28,17 +28,6 @@ body.signal-body {
     linear-gradient(180deg, #08111d 0%, #091624 38%, #050b13 100%);
 }
 
-.signal-banner {
-  padding: 11px 18px;
-  text-align: center;
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  color: #fff5ef;
-  background: linear-gradient(90deg, #243446, #3f566b, #243446);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-}
-
 .signal-noise {
   position: fixed;
   inset: 0;
@@ -604,11 +593,6 @@ body.signal-body {
 }
 
 @media (max-width: 720px) {
-  .signal-banner {
-    font-size: 0.74rem;
-    line-height: 1.45;
-  }
-
   .signal-topbar {
     padding: 14px 16px;
   }
