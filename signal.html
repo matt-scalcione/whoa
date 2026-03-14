@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Midnight Signal | Local Encounter Bulletin (Parody)</title>
+    <meta
+      name="description"
+      content="A geolocation-aware sci-fi parody bulletin that generates a fictional local alien encounter story."
+    />
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="canonical" href="https://matt-scalcione.github.io/whoa/signal.html" />
+    <meta property="og:site_name" content="Midnight Signal" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Local Encounter Bulletin (Parody)" />
+    <meta
+      property="og:description"
+      content="A clearly fictional, localized sci-fi bulletin generated from browser geolocation."
+    />
+    <meta property="og:url" content="https://matt-scalcione.github.io/whoa/signal.html" />
+    <meta name="theme-color" content="#9b1c1c" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./signal.css" />
+  </head>
+  <body class="signal-body">
+    <div class="signal-noise" aria-hidden="true"></div>
+    <div class="parody-banner">
+      THIS IS PARODY. The layout uses real location context, but the story and “breaking news”
+      scenario are fictional.
+    </div>
+    <header class="signal-topbar">
+      <a class="signal-brand" href="./index.html">
+        <span class="signal-brand-mark">MS</span>
+        <span>
+          <strong>Midnight Signal</strong>
+          <span>fiction desk</span>
+        </span>
+      </a>
+      <div class="signal-meta">
+        <span class="signal-pill signal-pill-hot">Parody</span>
+        <span class="signal-pill">Fiction</span>
+        <span class="signal-pill">Location-aware</span>
+      </div>
+    </header>
+
+    <main class="signal-shell">
+      <section class="hero-banner">
+        <div>
+          <p class="kicker">Special bulletin</p>
+          <h1 id="heroHeadline">Strange lights reportedly circling your region</h1>
+          <p class="hero-copy" id="heroCopy">
+            This page is a clearly fictional parody. Allow location access to localize the satire
+            around your area with a mock “breaking bulletin.”
+          </p>
+        </div>
+        <div class="hero-actions">
+          <button class="action-primary" id="locateButton" type="button">Use my location</button>
+          <button class="action-secondary" id="demoButton" type="button">Use demo location</button>
+        </div>
+      </section>
+
+      <section class="ticker-strip" aria-label="Bulletin ticker">
+        <span class="ticker-label">Developing</span>
+        <p id="tickerText">
+          Parody bulletin ready. Allow location access to tailor the fictional dispatch to your
+          nearby area.
+        </p>
+      </section>
+
+      <section class="alert-strip" aria-label="Fiction notice">
+        <strong>Parody notice:</strong> every story element on this page is fabricated for comic,
+        science-fiction effect. It is not a real emergency alert or real reporting.
+      </section>
+
+      <section class="signal-grid">
+        <article class="story-panel">
+          <div class="story-head">
+            <p class="story-section">Local encounter bulletin</p>
+            <p class="story-dateline">
+              <span id="locationLine">Awaiting location</span>
+              <span class="divider">|</span>
+              <time id="storyTime"></time>
+            </p>
+            <h2 id="storyHeadline">Mock dispatch for your area</h2>
+            <p class="story-subhead" id="storySubhead">
+              Browser geolocation can personalize this fictional bulletin with nearby place names
+              and a live local map.
+            </p>
+            <p class="story-byline">By the Midnight Signal satire desk</p>
+          </div>
+
+          <div class="disclaimer-box">
+            <strong>Fiction:</strong> this is parody content generated in your browser. No alien
+            activity is being reported.
+          </div>
+
+          <figure class="lead-visual">
+            <div class="lead-visual-frame">
+              <span class="lead-visual-badge">Simulation</span>
+              <div class="lead-visual-glow"></div>
+            </div>
+            <figcaption id="leadVisualCaption">
+              Stylized newsroom visual. The map at right is real location context; the “incident”
+              itself is fictional.
+            </figcaption>
+          </figure>
+
+          <div class="story-body" id="storyBody">
+            <p>
+              Grant geolocation access and this page will rewrite itself into a playful faux news
+              article using your nearby area name, local time, and a map centered around you.
+            </p>
+            <p>
+              The visual tone is intentionally dramatic, but the copy stays explicitly fictional so
+              it does not pass as real reporting.
+            </p>
+          </div>
+        </article>
+
+        <aside class="rail-panel">
+          <section class="status-card">
+            <p class="status-label">Signal state</p>
+            <strong id="statusText">Ready to request location</strong>
+            <p id="statusDetail">
+              If permission is blocked, the page falls back to a generic fictional bulletin.
+            </p>
+          </section>
+
+          <section class="map-card">
+            <div class="map-card-head">
+              <div>
+                <p class="status-label">Area map</p>
+                <strong id="mapTitle">No coordinates yet</strong>
+              </div>
+              <span class="signal-pill signal-pill-outline">Live map</span>
+            </div>
+            <div class="map-frame-shell">
+              <iframe
+                id="mapFrame"
+                title="Local map"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </section>
+
+          <section class="facts-card">
+            <p class="status-label">Localized details</p>
+            <ul id="factsList" class="facts-list">
+              <li>Area label: pending</li>
+              <li>Coordinates: pending</li>
+              <li>Local bulletin time: pending</li>
+              <li>Mode: fictional satire</li>
+            </ul>
+          </section>
+
+          <section class="updates-card">
+            <p class="status-label">What the bulletin claims</p>
+            <ul id="updatesList" class="updates-list">
+              <li>The page is waiting for location permission.</li>
+              <li>Once granted, the fictional story will use a nearby place label.</li>
+              <li>The right-side map will center on your approximate position.</li>
+            </ul>
+          </section>
+
+          <section class="visual-card">
+            <div class="visual-grid">
+              <div class="visual-tile visual-tile-radar">
+                <span>Skywatch grid</span>
+              </div>
+              <div class="visual-tile visual-tile-flare">
+                <span id="flareLabel">Localized visual pending</span>
+              </div>
+            </div>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <script src="./signal.js"></script>
+  </body>
+</html>
