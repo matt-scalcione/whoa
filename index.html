@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Whoa</title>
+    <meta
+      name="description"
+      content="Whoa is a GitHub Pages project site published under matt-scalcione.github.io/whoa with a clean static front door."
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://matt-scalcione.github.io/whoa/" />
+    <meta property="og:site_name" content="Matt Scalcione" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Whoa" />
+    <meta
+      property="og:description"
+      content="A project-site starter published at matt-scalcione.github.io/whoa/."
+    />
+    <meta property="og:url" content="https://matt-scalcione.github.io/whoa/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Whoa" />
+    <meta
+      name="twitter:description"
+      content="A project-site starter published at matt-scalcione.github.io/whoa/."
+    />
+    <meta name="theme-color" content="#d4682f" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-left" aria-hidden="true"></div>
+    <div class="ambient ambient-right" aria-hidden="true"></div>
+
+    <main class="shell">
+      <header class="masthead">
+        <a class="badge" href="https://github.com/matt-scalcione/whoa">GitHub repo</a>
+        <p class="eyebrow">Project Site Starter</p>
+        <h1>Whoa</h1>
+        <p class="lede">
+          A standalone GitHub Pages project site published at
+          <strong>matt-scalcione.github.io/whoa/</strong>. The landing page stays static and light,
+          so you can layer a real application into this repo later without fighting Pages.
+        </p>
+        <div class="action-row">
+          <a class="button button-primary" href="https://matt-scalcione.github.io/whoa/">Open public URL</a>
+          <button class="button button-secondary" id="copyUrlButton" type="button">
+            Copy site URL
+          </button>
+        </div>
+      </header>
+
+      <section class="panel panel-grid" aria-label="Setup pattern">
+        <article class="card">
+          <p class="card-label">Model</p>
+          <h2>Project site, not user site</h2>
+          <p>
+            The repo name drives the URL, so this project publishes at <code>/whoa/</code> without
+            mixing new files into the main user-site repository.
+          </p>
+        </article>
+        <article class="card">
+          <p class="card-label">Root</p>
+          <h2>Static front door</h2>
+          <p>
+            Assets load through <code>./styles.css</code> and <code>./main.js</code>, which keeps
+            everything safe for Pages under a subpath.
+          </p>
+        </article>
+        <article class="card">
+          <p class="card-label">Next</p>
+          <h2>Room for the real app</h2>
+          <p>
+            If this grows into a full product, add it in a subdirectory such as <code>web/</code>
+            and leave the Pages root as the stable public entry point.
+          </p>
+        </article>
+      </section>
+
+      <section class="panel detail-panel">
+        <div>
+          <p class="card-label">Status</p>
+          <h2>Published as a clean starter</h2>
+        </div>
+        <div class="detail-grid">
+          <div>
+            <span class="detail-key">Repo</span>
+            <strong class="detail-value">matt-scalcione/whoa</strong>
+          </div>
+          <div>
+            <span class="detail-key">Pages source</span>
+            <strong class="detail-value">`main` branch root</strong>
+          </div>
+          <div>
+            <span class="detail-key">Public path</span>
+            <strong class="detail-value">/whoa/</strong>
+          </div>
+        </div>
+        <p class="timestamp">
+          Starter initialized <time id="buildStamp" datetime="2026-03-14">March 14, 2026</time>.
+        </p>
+      </section>
+    </main>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
