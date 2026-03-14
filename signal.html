@@ -54,12 +54,13 @@
           <p class="kicker">Special bulletin</p>
           <h1 id="heroHeadline">Strange lights reportedly circling your region</h1>
           <p class="hero-copy" id="heroCopy">
-            This page is a clearly fictional parody. Allow location access to localize the satire
-            around your area with a mock “breaking bulletin.”
+            This page is a clearly fictional parody. It will try to localize the satire
+            automatically with a rough area estimate, then can upgrade to exact browser
+            geolocation if you allow it.
           </p>
         </div>
         <div class="hero-actions">
-          <button class="action-primary" id="locateButton" type="button">Use my location</button>
+          <button class="action-primary" id="locateButton" type="button">Use exact location</button>
           <button class="action-secondary" id="demoButton" type="button">Use demo location</button>
         </div>
       </section>
@@ -67,8 +68,8 @@
       <section class="ticker-strip" aria-label="Bulletin ticker">
         <span class="ticker-label">Developing</span>
         <p id="tickerText">
-          Parody bulletin ready. Allow location access to tailor the fictional dispatch to your
-          nearby area.
+          Parody bulletin is checking your location context automatically. Exact location remains
+          available by button.
         </p>
       </section>
 
@@ -125,9 +126,10 @@
         <aside class="rail-panel">
           <section class="status-card">
             <p class="status-label">Signal state</p>
-            <strong id="statusText">Ready to request location</strong>
+            <strong id="statusText">Checking location context</strong>
             <p id="statusDetail">
-              If permission is blocked, the page falls back to a generic fictional bulletin.
+              Automatic load uses a rough IP-based area estimate when exact browser geolocation is
+              not already available.
             </p>
           </section>
 
@@ -162,9 +164,9 @@
           <section class="updates-card">
             <p class="status-label">What the bulletin claims</p>
             <ul id="updatesList" class="updates-list">
-              <li>The page is waiting for location permission.</li>
-              <li>Once granted, the fictional story will use a nearby place label.</li>
-              <li>The right-side map will center on your approximate position.</li>
+              <li>The page is checking for existing geolocation permission.</li>
+              <li>If exact access is unavailable, it will try a rough IP-based area estimate.</li>
+              <li>The right-side map will center on the best available location context.</li>
             </ul>
           </section>
 
