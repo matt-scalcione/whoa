@@ -3,19 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Midnight Signal | Local Observation Bulletin</title>
+    <title>Midnight Signal | Regional Night Watch Bulletin</title>
     <meta
       name="description"
-      content="A geolocation-aware observation bulletin that localizes aerial-activity coverage using nearby place names and map context."
+      content="A location-aware night-watch bulletin that localizes regional place names, timing, and map context into a newsroom-style dispatch."
     />
     <meta name="robots" content="noindex,nofollow" />
     <link rel="canonical" href="https://matt-scalcione.github.io/whoa/signal.html" />
     <meta property="og:site_name" content="Midnight Signal" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Local Observation Bulletin" />
+    <meta property="og:title" content="Regional Night Watch Bulletin" />
     <meta
       property="og:description"
-      content="A location-aware bulletin experience built around localized aerial-activity coverage."
+      content="A location-aware bulletin experience built around regional aerial-activity coverage."
     />
     <meta property="og:url" content="https://matt-scalcione.github.io/whoa/signal.html" />
     <meta name="theme-color" content="#9b1c1c" />
@@ -34,11 +34,11 @@
         <span class="signal-brand-mark">MS</span>
         <span>
           <strong>Midnight Signal</strong>
-          <span>regional desk</span>
+          <span>night desk</span>
         </span>
       </a>
       <div class="signal-meta">
-        <span class="signal-pill">Location-aware</span>
+        <span class="signal-pill">Night desk</span>
         <span class="signal-pill">Live map</span>
       </div>
     </header>
@@ -46,83 +46,82 @@
     <main class="signal-shell">
       <section class="hero-banner">
         <div>
-          <p class="kicker">Special bulletin</p>
-          <h1 id="heroHeadline">Observation brief for unusual aerial activity near your area</h1>
+          <p class="kicker">Night watch bulletin</p>
+          <h1 id="heroHeadline">Aerial activity reports moving across your region</h1>
           <p class="hero-copy" id="heroCopy">
-            This page localizes a late-night aerial observation bulletin around nearby place names
-            and live map context. It starts with a rough area estimate and can upgrade to exact
-            browser geolocation if you allow it.
+            Midnight Signal is assembling a localized overnight bulletin using the strongest
+            location context available, then pairing it with a live regional map and updated desk
+            timing.
           </p>
         </div>
         <div class="hero-actions">
-          <button class="action-primary" id="locateButton" type="button">Use exact location</button>
-          <button class="action-secondary" id="demoButton" type="button">Use demo location</button>
+          <button class="action-primary" id="demoButton" type="button">Load sample bulletin</button>
         </div>
       </section>
 
       <section class="ticker-strip" aria-label="Bulletin ticker">
         <span class="ticker-label">Developing</span>
         <p id="tickerText">
-          Bulletin is checking local context automatically. Exact location remains available by
-          button.
+          Desk is checking local context automatically and preparing the first regional update.
         </p>
       </section>
 
       <section class="signal-grid">
         <article class="story-panel">
           <div class="story-head">
-            <p class="story-section">Local observation bulletin</p>
+            <p class="story-section">Regional night watch</p>
             <p class="story-dateline">
               <span id="locationLine">Awaiting location</span>
               <span class="divider">|</span>
               <time id="storyTime"></time>
             </p>
-            <h2 id="storyHeadline">Regional observation brief pending location context</h2>
+            <h2 id="storyHeadline">Observation desk awaiting local area details</h2>
             <p class="story-subhead" id="storySubhead">
-              Browser geolocation can personalize this bulletin with nearby place names and a live
-              local map.
+              Once a nearby place name resolves, the bulletin refreshes its dateline, map, and
+              field notes for that coverage area.
             </p>
-            <p class="story-byline">By the Midnight Signal regional desk</p>
+            <p class="story-byline">By the Midnight Signal night desk</p>
           </div>
 
           <figure class="lead-visual">
             <div class="lead-visual-frame">
-              <span class="lead-visual-badge">Briefing visual</span>
+              <span class="lead-visual-badge">Desk composite</span>
               <div class="lead-visual-glow"></div>
             </div>
             <figcaption id="leadVisualCaption">
-              Composite newsroom visual aligned to the mapped area at right.
+              Composite desk visual prepared for the active coverage area.
             </figcaption>
           </figure>
 
           <div class="story-body" id="storyBody">
             <p>
-              Grant geolocation access and this page will rewrite itself into a location-aware
-              observation brief using your nearby area name, local time, and a map centered around
-              you.
+              Midnight Signal is assembling a localized overnight bulletin using the strongest
+              location signal presently available. As place, time, and map context come into focus,
+              the report will restage itself around the identified area.
             </p>
             <p>
-              The presentation follows a straight bulletin format with localized details, timing,
-              and map context.
+              Once location details resolve, the page updates its headline, dateline, field notes,
+              and supporting map so the bulletin reads like a continuous night-desk update.
             </p>
           </div>
+          <p class="story-note">Editorial note: this bulletin is fictional; map and location data are live.</p>
         </article>
 
         <aside class="rail-panel">
           <section class="status-card">
-            <p class="status-label">Signal state</p>
-            <strong id="statusText">Checking location context</strong>
+            <p class="status-label">Desk status</p>
+            <strong id="statusText">Checking regional context</strong>
             <p id="statusDetail">
-              Automatic load uses a rough IP-based area estimate when exact browser geolocation is
-              not already available.
+              Automatic load starts with previously available browser location context when present,
+              otherwise the page falls back to an approximate regional estimate.
             </p>
           </section>
 
           <section class="map-card">
             <div class="map-card-head">
               <div>
-                <p class="status-label">Area map</p>
-                <strong id="mapTitle">No coordinates yet</strong>
+                <p class="status-label">Coverage map</p>
+                <strong id="mapTitle">Area map pending</strong>
               </div>
               <span class="signal-pill signal-pill-outline">Live map</span>
             </div>
@@ -137,21 +136,21 @@
           </section>
 
           <section class="facts-card">
-            <p class="status-label">Localized details</p>
+            <p class="status-label">Dateline details</p>
             <ul id="factsList" class="facts-list">
               <li>Area label: pending</li>
               <li>Coordinates: pending</li>
-              <li>Local bulletin time: pending</li>
-              <li>Location source: pending</li>
+              <li>Bulletin time: pending</li>
+              <li>Source status: pending</li>
             </ul>
           </section>
 
           <section class="updates-card">
-            <p class="status-label">Current bulletin notes</p>
+            <p class="status-label">Desk updates</p>
             <ul id="updatesList" class="updates-list">
-              <li>The page is checking for existing geolocation permission.</li>
-              <li>If exact access is unavailable, it will use a rough IP-based area estimate.</li>
-              <li>The right-side map will center on the best available location context.</li>
+              <li>The desk is checking for the strongest available regional location context.</li>
+              <li>If precise access is unavailable, the bulletin will use a rough IP-based area estimate.</li>
+              <li>The right-side map will center on the active coverage zone.</li>
             </ul>
           </section>
 

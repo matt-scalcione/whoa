@@ -1,7 +1,6 @@
 const storyTime = document.getElementById("storyTime");
 const heroHeadline = document.getElementById("heroHeadline");
 const heroCopy = document.getElementById("heroCopy");
-const locateButton = document.getElementById("locateButton");
 const demoButton = document.getElementById("demoButton");
 const locationLine = document.getElementById("locationLine");
 const storyHeadline = document.getElementById("storyHeadline");
@@ -117,20 +116,20 @@ function createParagraphs({ place, region, coords, localTime, precisionLabel }) 
   const locationSource = precisionLabel || "localized context";
 
   return [
-    `A localized observation brief places an orderly formation of luminous objects over ${area} at approximately ${localTime}, prompting residents across ${regionalName} to pause, compare vantage points, and watch for any repeat movement as the formation tracks across the night sky.`,
-    `Field descriptions note low amber light, synchronized turns, and a sustained hold above the skyline before the objects continue deeper into the night. Coordinates ${coords} anchor the bulletin to a real place context and keep the map centered on the same coverage area.`,
-    `Local officials and aviation contacts are described as reviewing camera angles, weather conditions, and ordinary flight corridors while asking residents to avoid blocking roads, parking lots, or emergency access points as attention builds around the sighting.`,
-    `This version is localized with ${locationSource}, nearby place names, the current local time, and the live map at right, giving the bulletin a regional frame that updates cleanly as better location context becomes available.`
+    `Residents in and around ${area} are described as tracking a slow-moving formation of luminous objects first noticed at approximately ${localTime}, with observers across ${regionalName} reporting long holds, coordinated turns, and repeated passes above the same stretch of sky.`,
+    `Accounts gathered for the bulletin describe low amber light, minimal sound, and a measured drift across the skyline before the formation moved farther out over the region. Coordinates ${coords} keep the current desk map centered on the same area referenced in the dateline and field copy.`,
+    `The bulletin describes local officials and aviation contacts reviewing weather conditions, known flight paths, and available camera angles while residents continue gathering along sidewalks, parking lots, and rooftop vantage points to follow the movement.`,
+    `This edition is localized with ${locationSource}, nearby place names, the current local time, and the live map at right, allowing the desk to tighten the dateline and supporting notes as stronger regional context becomes available.`
   ];
 }
 
 function createUpdates({ displayName, localTime, sourceLabel }) {
   return [
-    `Area context now references ${displayName || "the viewer's area"}.`,
+    `Desk dateline now references ${displayName || "the current coverage area"}.`,
     `Bulletin timestamp updated to ${localTime}.`,
-    `Location source now reads as ${sourceLabel}.`,
-    "Map module is centered on the best available local context.",
-    "Regional observation copy is now aligned with the active area label."
+    `Source field now reads ${sourceLabel}.`,
+    "Coverage map has been centered on the active reporting zone.",
+    "Headline and field notes have been aligned with the latest area label."
   ];
 }
 
@@ -141,13 +140,13 @@ function renderStory({ place, region, displayName, lat, lon, sourceLabel, precis
   }).format(new Date());
   const placeText = place || "your area";
 
-  heroHeadline.textContent = `Observation brief for unusual aerial activity near ${placeText}`;
+  heroHeadline.textContent = `Aerial activity reports moving across ${placeText}`;
   heroCopy.textContent =
-    "This page uses a straight bulletin format, nearby place names, and live map context to localize late-night aerial observation coverage.";
-  locationLine.textContent = displayName || "Localized observation bulletin";
-  storyHeadline.textContent = `Field brief: unusual aerial activity over ${placeText}`;
+    "Midnight Signal is localizing an overnight bulletin around nearby place names, live map context, and a continuously updated desk timestamp.";
+  locationLine.textContent = displayName || "Regional night watch";
+  storyHeadline.textContent = `Night watch desk tracks reports over ${placeText}`;
   storySubhead.textContent =
-    `A location-aware observation brief anchored around ${displayName || placeText}, with live area context and a continuously updated local map.`;
+    `Witness descriptions, area timing, and the live desk map are now centered on ${displayName || placeText}.`;
 
   const paragraphs = createParagraphs({
     place: placeText,
@@ -158,18 +157,18 @@ function renderStory({ place, region, displayName, lat, lon, sourceLabel, precis
   });
   storyBody.innerHTML = paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join("");
 
-  statusText.textContent = "Localized bulletin ready";
-  statusDetail.textContent = `Location source: ${sourceLabel}. Story copy, timing, and map framing are aligned to that area label.`;
+  statusText.textContent = "Regional bulletin updated";
+  statusDetail.textContent = `Source status: ${sourceLabel}. Story copy, timing, and map framing are aligned to that area label.`;
   mapTitle.textContent = displayName || coords;
-  flareLabel.textContent = displayName ? `Skywatch visual for ${displayName}` : "Localized visual ready";
-  tickerText.textContent = `Bulletin updated for ${displayName || placeText}. Timestamp ${localTime}. Local context is live and the map has been refreshed.`;
-  leadVisualCaption.textContent = `Composite lead visual for ${displayName || placeText}, aligned to the mapped coverage area.`;
+  flareLabel.textContent = displayName ? `Desk composite for ${displayName}` : "Desk visual pending";
+  tickerText.textContent = `Desk update: ${displayName || placeText} is now the active coverage area. Bulletin time ${localTime}. Map and field notes have been refreshed.`;
+  leadVisualCaption.textContent = `Composite desk visual prepared for ${displayName || placeText} and the mapped coverage area.`;
 
   factsList.innerHTML = [
     `Area label: ${displayName || placeText}`,
     `Coordinates: ${coords}`,
-    `Local bulletin time: ${localTime}`,
-    `Location source: ${sourceLabel}`
+    `Bulletin time: ${localTime}`,
+    `Source status: ${sourceLabel}`
   ]
     .map((item) => `<li>${item}</li>`)
     .join("");
@@ -197,25 +196,25 @@ function renderDefaultStory() {
   renderStory({
     place: "your area",
     region: "the surrounding region",
-    displayName: "Generic mode",
+    displayName: "Night desk standby",
     sourceLabel: "fallback copy",
     precisionLabel: "generic fallback copy"
   });
   statusText.textContent = "Checking location context";
   statusDetail.textContent =
-    "Trying automatic localization. If exact geolocation is unavailable, the page will fall back to a rough IP-based area lookup.";
-  mapTitle.textContent = "Map loads after location access";
+    "The desk is checking automatic localization. If precise geolocation is unavailable, the bulletin will fall back to a rough IP-based area lookup.";
+  mapTitle.textContent = "Coverage map loads after localization";
   tickerText.textContent =
-    "Bulletin is checking local context automatically. Exact location remains available by button.";
-  flareLabel.textContent = "Localized visual pending";
+    "Desk is checking local context automatically and preparing the first regional update.";
+  flareLabel.textContent = "Desk visual pending";
   leadVisualCaption.textContent =
-    "Composite lead visual placeholder. Once localized, the caption will reference your area and mapped coverage zone.";
+    "Composite desk visual placeholder. Once localized, the caption will reference the active coverage area.";
 }
 
 async function localizeFromCoordinates(lat, lon, sourceLabel) {
   setStoryTime();
   statusText.textContent = "Resolving area name";
-  statusDetail.textContent = "Using your approximate coordinates to request a nearby locality label.";
+  statusDetail.textContent = "Using available coordinates to resolve the nearest locality label for the bulletin dateline.";
 
   try {
     const geo = await reverseGeocode(lat, lon);
@@ -240,7 +239,7 @@ async function localizeFromCoordinates(lat, lon, sourceLabel) {
       precisionLabel: "approximate browser coordinates"
     });
     statusDetail.textContent =
-      "Coordinates were available, but area-name lookup failed. The map still centers on the approximate location.";
+      "Coordinates were available, but the locality lookup failed. The map still centers on the approximate coverage area.";
   }
 }
 
@@ -257,7 +256,7 @@ function readPrecisePosition() {
 async function localizeFromIp() {
   statusText.textContent = "Estimating rough area";
   statusDetail.textContent =
-    "Using IP-based geolocation to infer an approximate city or region without prompting for exact location.";
+    "Using IP-based geolocation to infer an approximate city or region for the current bulletin.";
 
   const response = await fetch(IP_GEOLOCATION_URL, {
     headers: {
@@ -289,41 +288,8 @@ async function localizeFromIp() {
   });
 
   statusDetail.textContent =
-    "Location source: approximate IP geolocation. This is a rough city-or-region estimate gathered without prompting for exact browser location.";
+    "Source status: approximate IP geolocation. This is a rough city-or-region estimate gathered without a precise browser location.";
   mapTitle.textContent = lat !== null && lon !== null ? place.display : "Approximate area";
-}
-
-async function requestLocation() {
-  if (!navigator.geolocation) {
-    statusText.textContent = "Geolocation unavailable";
-    statusDetail.textContent =
-      "This browser does not expose geolocation, so the page is using the rough IP-based fallback when available.";
-    return;
-  }
-
-  statusText.textContent = "Requesting exact location";
-  statusDetail.textContent =
-    "Your browser will ask for permission. If granted, the page upgrades from rough area context to exact browser geolocation.";
-
-  try {
-    const position = await readPrecisePosition();
-    const { latitude, longitude } = position.coords;
-    await localizeFromCoordinates(latitude, longitude, "browser geolocation");
-  } catch (error) {
-    try {
-      await localizeFromIp();
-      statusDetail.textContent =
-        error?.code === error.PERMISSION_DENIED
-          ? "Exact browser location was denied, so the page fell back to a rough IP-based area estimate."
-          : "Exact browser location failed, so the page fell back to a rough IP-based area estimate.";
-    } catch {
-      statusText.textContent = "Location unavailable";
-      statusDetail.textContent =
-        error?.code === error.PERMISSION_DENIED
-          ? "Permission was denied and the IP-based fallback also failed. The page remains generic."
-          : "The browser could not provide a location and the IP-based fallback also failed. The page remains generic.";
-    }
-  }
 }
 
 async function autoLocalize() {
@@ -331,9 +297,9 @@ async function autoLocalize() {
     try {
       const permission = await navigator.permissions.query({ name: "geolocation" });
       if (permission.state === "granted") {
-        statusText.textContent = "Loading exact location";
+        statusText.textContent = "Loading precise location";
         statusDetail.textContent =
-          "Geolocation permission is already granted in this browser, so the page is loading precise area context automatically.";
+          "Precise browser geolocation is already available, so the desk is loading a tighter area dateline automatically.";
         try {
           const position = await readPrecisePosition();
           const { latitude, longitude } = position.coords;
@@ -353,7 +319,7 @@ async function autoLocalize() {
   } catch {
     statusText.textContent = "Automatic localization unavailable";
     statusDetail.textContent =
-      "Exact geolocation was not already granted and the rough IP-based lookup failed. You can still use the exact-location button.";
+      "Automatic localization did not return a usable area. The bulletin will remain in standby mode until a source resolves.";
   }
 }
 
@@ -361,12 +327,8 @@ setStoryTime();
 renderDefaultStory();
 autoLocalize();
 
-if (locateButton) {
-  locateButton.addEventListener("click", requestLocation);
-}
-
 if (demoButton) {
   demoButton.addEventListener("click", () => {
-    localizeFromCoordinates(40.7128, -74.006, "demo location");
+    localizeFromCoordinates(40.7128, -74.006, "sample bulletin");
   });
 }

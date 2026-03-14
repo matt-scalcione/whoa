@@ -128,8 +128,7 @@ body.signal-body {
 
 .hero-banner,
 .story-panel,
-.rail-panel > section,
-.alert-strip {
+.rail-panel > section {
   border: 1px solid var(--line);
   background: var(--panel);
   box-shadow: var(--shadow);
@@ -216,8 +215,7 @@ body.signal-body {
   align-self: end;
 }
 
-.action-primary,
-.action-secondary {
+.action-primary {
   min-height: 50px;
   padding: 0 18px;
   border-radius: 999px;
@@ -231,19 +229,6 @@ body.signal-body {
   color: #fff7f3;
   background: linear-gradient(135deg, #e04b3f, #8a1522);
   box-shadow: 0 12px 28px rgba(224, 75, 63, 0.24);
-}
-
-.action-secondary {
-  color: var(--ink);
-  background: #f0e7da;
-}
-
-.alert-strip {
-  margin-top: 16px;
-  padding: 14px 18px;
-  border-radius: 18px;
-  background: linear-gradient(90deg, rgba(63, 86, 107, 0.32), rgba(63, 86, 107, 0.12));
-  color: #eef3f8;
 }
 
 .signal-grid {
@@ -297,15 +282,6 @@ body.signal-body {
   color: var(--gold);
 }
 
-.disclaimer-box {
-  margin-top: 22px;
-  padding: 16px 18px;
-  border-radius: 18px;
-  border: 1px solid rgba(240, 195, 110, 0.24);
-  background: rgba(240, 195, 110, 0.06);
-  color: #f8ebcf;
-}
-
 .story-body {
   margin-top: 24px;
   font-family: "Newsreader", serif;
@@ -319,6 +295,14 @@ body.signal-body {
 .story-body p {
   margin: 0 0 1.05rem;
   break-inside: avoid;
+}
+
+.story-note {
+  margin: 18px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.86rem;
+  letter-spacing: 0.01em;
+  line-height: 1.5;
 }
 
 .story-body p:first-child::first-letter {
@@ -606,8 +590,7 @@ body.signal-body {
     width: 100%;
   }
 
-  .action-primary,
-  .action-secondary {
+  .action-primary {
     width: 100%;
   }
 
