@@ -1,0 +1,1381 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signal News Desk | Live Coverage</title>
+    <meta
+      name="description"
+      content="Workshop simulation page styled as a generic live television news network bulletin."
+    />
+    <meta
+      name="robots"
+      content="noindex, nofollow, noarchive, nosnippet, max-image-preview:none"
+    />
+    <meta name="theme-color" content="#b5121b" />
+    <link rel="canonical" href="https://matt-scalcione.github.io/whoa/newsroom.html" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #eef1f5;
+        --surface: #ffffff;
+        --surface-strong: #f6f7f9;
+        --ink: #121418;
+        --muted: #59616d;
+        --line: #d9dde3;
+        --red: #b5121b;
+        --red-deep: #7f0f15;
+        --red-soft: #f8d9db;
+        --black: #090b0f;
+        --gold: #ffd463;
+        --shadow: 0 16px 42px rgba(9, 11, 15, 0.14);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Public Sans", sans-serif;
+        color: var(--ink);
+        background:
+          linear-gradient(180deg, rgba(181, 18, 27, 0.06), transparent 220px),
+          linear-gradient(180deg, #f5f6f8 0%, #eceff3 100%);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .utility-bar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 18px;
+        background: var(--black);
+        color: #fff;
+        font-size: 0.84rem;
+        letter-spacing: 0.02em;
+      }
+
+      .utility-bar strong {
+        color: var(--gold);
+        text-transform: uppercase;
+      }
+
+      .brand-bar {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        background:
+          linear-gradient(90deg, rgba(255, 255, 255, 0.04), transparent 40%),
+          linear-gradient(180deg, #11141a 0%, #090b0f 100%);
+        color: #fff;
+      }
+
+      .brand-inner {
+        width: min(1380px, calc(100vw - 28px));
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 18px 0;
+      }
+
+      .brand-lockup {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .brand-mark {
+        display: grid;
+        place-items: center;
+        width: 62px;
+        height: 44px;
+        background: linear-gradient(135deg, var(--red) 0%, #e73641 100%);
+        color: #fff;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1.4rem;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+      }
+
+      .brand-copy {
+        line-height: 1;
+      }
+
+      .brand-copy strong {
+        display: block;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+
+      .brand-copy span {
+        display: block;
+        margin-top: 4px;
+        color: #c6ccd5;
+        font-size: 0.84rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .nav-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 16px;
+        color: #e7ebf1;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .status-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0.42rem 0.75rem;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 999px;
+      }
+
+      .status-chip::before {
+        content: "";
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #ff6161;
+        box-shadow: 0 0 0 0 rgba(255, 97, 97, 0.4);
+        animation: pulse 1.7s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 97, 97, 0.4);
+        }
+        70% {
+          box-shadow: 0 0 0 12px rgba(255, 97, 97, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(255, 97, 97, 0);
+        }
+      }
+
+      .breaking-bar {
+        background: linear-gradient(90deg, var(--red-deep) 0%, var(--red) 58%, #db2d36 100%);
+        color: #fff;
+        box-shadow: 0 8px 26px rgba(127, 15, 21, 0.22);
+      }
+
+      .breaking-inner {
+        width: min(1380px, calc(100vw - 28px));
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 170px minmax(0, 1fr);
+        align-items: center;
+      }
+
+      .breaking-label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 54px;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1.2rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        background: rgba(0, 0, 0, 0.18);
+      }
+
+      .breaking-copy {
+        overflow: hidden;
+        white-space: nowrap;
+        min-height: 54px;
+        display: flex;
+        align-items: center;
+      }
+
+      .ticker-track {
+        display: inline-flex;
+        gap: 34px;
+        min-width: max-content;
+        padding-left: 20px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        animation: ticker 24s linear infinite;
+      }
+
+      @keyframes ticker {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-34%);
+        }
+      }
+
+      .page-shell {
+        width: min(1380px, calc(100vw - 28px));
+        margin: 22px auto 40px;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 2.1fr) minmax(320px, 0.95fr);
+        gap: 22px;
+      }
+
+      .main-stack,
+      .rail-stack {
+        display: grid;
+        gap: 22px;
+      }
+
+      .hero-card,
+      .section-card,
+      .rail-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-card {
+        overflow: hidden;
+      }
+
+      .hero-top {
+        display: grid;
+        grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.9fr);
+      }
+
+      .hero-copy {
+        padding: 26px 28px 24px;
+      }
+
+      .eyebrow {
+        margin: 0;
+        color: var(--red);
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .hero-copy h1 {
+        margin: 10px 0 0;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: clamp(2.5rem, 4.4vw, 4.3rem);
+        line-height: 0.92;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+      }
+
+      .hero-dek {
+        margin: 16px 0 0;
+        color: #2a313c;
+        font-size: 1.08rem;
+        line-height: 1.66;
+      }
+
+      .hero-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 16px;
+        margin-top: 20px;
+        color: var(--muted);
+        font-size: 0.86rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .hero-bullets {
+        display: grid;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .hero-bullet {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        padding: 12px 14px;
+        background: var(--surface-strong);
+        border-left: 4px solid var(--red);
+      }
+
+      .hero-bullet strong {
+        color: var(--red);
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .hero-bullet span {
+        display: block;
+        margin-top: 4px;
+        color: #2d343f;
+        line-height: 1.52;
+      }
+
+      .hero-visual {
+        position: relative;
+        min-height: 100%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+        padding: 24px;
+        background:
+          linear-gradient(180deg, rgba(7, 10, 14, 0.08), rgba(7, 10, 14, 0.82)),
+          radial-gradient(circle at 72% 18%, rgba(255, 102, 84, 0.62), transparent 16%),
+          radial-gradient(circle at 38% 42%, rgba(255, 255, 255, 0.22), transparent 12%),
+          linear-gradient(180deg, #8b97a5 0%, #415062 45%, #171d26 100%);
+        overflow: hidden;
+      }
+
+      .hero-visual::before,
+      .hero-visual::after {
+        content: "";
+        position: absolute;
+        inset: auto 0 0 0;
+      }
+
+      .hero-visual::before {
+        height: 46%;
+        background:
+          linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0 12%, transparent 12% 16%, rgba(0, 0, 0, 0.5) 16% 22%, transparent 22% 100%),
+          linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.26) 100%);
+      }
+
+      .hero-visual::after {
+        top: 0;
+        inset: 0;
+        background:
+          linear-gradient(0deg, transparent 88%, rgba(255, 255, 255, 0.12) 88% 89%, transparent 89%),
+          linear-gradient(90deg, transparent 74%, rgba(255, 255, 255, 0.08) 74% 75%, transparent 75%);
+      }
+
+      .visual-lower-third {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        padding: 14px 16px;
+        background: rgba(9, 11, 15, 0.82);
+        color: #fff;
+        border-top: 4px solid var(--red);
+      }
+
+      .visual-lower-third strong {
+        display: block;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1.55rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .visual-lower-third span {
+        display: block;
+        margin-top: 4px;
+        color: #d7dce3;
+        font-size: 0.9rem;
+      }
+
+      .hero-bottom {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        border-top: 1px solid var(--line);
+        background: #f7f8fa;
+      }
+
+      .metric {
+        padding: 16px 18px;
+        border-right: 1px solid var(--line);
+      }
+
+      .metric:last-child {
+        border-right: 0;
+      }
+
+      .metric span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+
+      .metric strong {
+        display: block;
+        margin-top: 8px;
+        font-size: 1rem;
+        line-height: 1.35;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px 18px;
+        border-bottom: 1px solid var(--line);
+        background: #fafbfc;
+      }
+
+      .section-head h2 {
+        margin: 0;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1.7rem;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .section-head span {
+        color: var(--muted);
+        font-size: 0.84rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .updates-list {
+        display: grid;
+        gap: 0;
+      }
+
+      .update-item {
+        display: grid;
+        grid-template-columns: 120px minmax(0, 1fr);
+        gap: 18px;
+        padding: 18px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .update-item:last-child {
+        border-bottom: 0;
+      }
+
+      .update-time {
+        color: var(--red);
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1.35rem;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+      }
+
+      .update-copy strong {
+        display: block;
+        font-size: 1.05rem;
+      }
+
+      .update-copy p {
+        margin: 8px 0 0;
+        color: #2d343f;
+        line-height: 1.62;
+      }
+
+      .two-up {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .panel-body {
+        padding: 18px;
+      }
+
+      .checklist,
+      .guidance-list {
+        display: grid;
+        gap: 12px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .checklist li,
+      .guidance-list li {
+        padding: 14px 14px 14px 18px;
+        border-left: 4px solid var(--red);
+        background: var(--surface-strong);
+        line-height: 1.58;
+      }
+
+      .rail-card {
+        overflow: hidden;
+      }
+
+      .rail-emphasis {
+        background:
+          linear-gradient(180deg, rgba(181, 18, 27, 0.1), rgba(181, 18, 27, 0)),
+          linear-gradient(180deg, #ffffff 0%, #fbfbfc 100%);
+      }
+
+      .rail-body {
+        padding: 18px;
+      }
+
+      .live-box {
+        display: grid;
+        gap: 14px;
+      }
+
+      .live-topline {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--red);
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1.15rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .live-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #ff4b56;
+        box-shadow: 0 0 0 0 rgba(255, 75, 86, 0.36);
+        animation: pulse 1.7s infinite;
+      }
+
+      .rail-title {
+        margin: 0;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 2rem;
+        line-height: 0.95;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+
+      .rail-copy {
+        margin: 0;
+        color: #2d343f;
+        line-height: 1.62;
+      }
+
+      .facts-grid {
+        display: grid;
+        gap: 12px;
+        margin-top: 14px;
+      }
+
+      .fact {
+        padding: 13px 14px;
+        background: #f6f7f9;
+        border: 1px solid var(--line);
+      }
+
+      .fact span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .fact strong {
+        display: block;
+        margin-top: 6px;
+        font-size: 0.98rem;
+        line-height: 1.4;
+      }
+
+      .coverage-frame {
+        position: relative;
+        min-height: 210px;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        background:
+          radial-gradient(circle at 68% 30%, rgba(255, 255, 255, 0.7), transparent 8%),
+          radial-gradient(circle at 36% 56%, rgba(181, 18, 27, 0.32), transparent 18%),
+          linear-gradient(90deg, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+          linear-gradient(0deg, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+          linear-gradient(180deg, #ccd3dc 0%, #e8edf3 100%);
+        background-size: auto, auto, 38px 38px, 38px 38px, auto;
+      }
+
+      .coverage-pin {
+        position: absolute;
+        left: 55%;
+        top: 46%;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--red);
+        transform: translate(-50%, -50%);
+        box-shadow:
+          0 0 0 8px rgba(181, 18, 27, 0.16),
+          0 0 0 20px rgba(181, 18, 27, 0.08);
+      }
+
+      .coverage-tag {
+        position: absolute;
+        left: calc(55% + 16px);
+        top: calc(46% - 14px);
+        padding: 8px 10px;
+        background: rgba(9, 11, 15, 0.82);
+        color: #fff;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .watch-box {
+        padding: 18px;
+        background: linear-gradient(180deg, #11141a 0%, #0b0e13 100%);
+        color: #fff;
+      }
+
+      .watch-box h3 {
+        margin: 0;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1.8rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .watch-box p {
+        margin: 12px 0 0;
+        color: #dbe1ea;
+        line-height: 1.6;
+      }
+
+      .watch-list {
+        display: grid;
+        gap: 10px;
+        margin: 16px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .watch-list li {
+        padding-left: 16px;
+        position: relative;
+        line-height: 1.55;
+      }
+
+      .watch-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.68em;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #ff5762;
+      }
+
+      .footer-note {
+        margin-top: 18px;
+        color: #69727f;
+        font-size: 0.84rem;
+        text-align: right;
+      }
+
+      @media (max-width: 1160px) {
+        .layout,
+        .hero-top,
+        .two-up {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .hero-visual {
+          min-height: 300px;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .brand-inner,
+        .breaking-inner,
+        .page-shell {
+          width: min(100vw - 18px, 1380px);
+        }
+
+        .brand-inner {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .nav-row {
+          justify-content: flex-start;
+        }
+
+        .breaking-inner {
+          grid-template-columns: 1fr;
+        }
+
+        .breaking-label {
+          min-height: 42px;
+        }
+
+        .breaking-copy {
+          min-height: 46px;
+        }
+
+        .hero-copy,
+        .rail-body,
+        .panel-body,
+        .watch-box {
+          padding: 16px;
+        }
+
+        .hero-bottom {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .update-item {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="utility-bar">
+      <div><strong>Workshop Simulation</strong> Fictional page for classroom review only.</div>
+      <div id="utilityStamp">Loading local desk time...</div>
+    </div>
+
+    <header class="brand-bar">
+      <div class="brand-inner">
+        <div class="brand-lockup">
+          <div class="brand-mark">SND</div>
+          <div class="brand-copy">
+            <strong>Signal News Desk</strong>
+            <span>Live Network Coverage</span>
+          </div>
+        </div>
+        <nav class="nav-row" aria-label="Primary">
+          <a href="./">Home</a>
+          <span>U.S.</span>
+          <span>World</span>
+          <span>Politics</span>
+          <span>Business</span>
+          <span>Video</span>
+          <span class="status-chip">Live Desk</span>
+        </nav>
+      </div>
+    </header>
+
+    <section class="breaking-bar" aria-label="Breaking news ticker">
+      <div class="breaking-inner">
+        <div class="breaking-label">Breaking News</div>
+        <div class="breaking-copy">
+          <div class="ticker-track" id="tickerTrack">
+            <span>Live desk is assembling regional updates.</span>
+            <span>Field status is loading.</span>
+            <span>Coverage zone is resolving.</span>
+            <span>Official posture is updating.</span>
+            <span>Live desk is assembling regional updates.</span>
+            <span>Field status is loading.</span>
+            <span>Coverage zone is resolving.</span>
+            <span>Official posture is updating.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="page-shell">
+      <div class="layout">
+        <div class="main-stack">
+          <article class="hero-card">
+            <div class="hero-top">
+              <div class="hero-copy">
+                <p class="eyebrow" id="heroKicker">Live Developments</p>
+                <h1 id="heroHeadline">Regional response underway after repeated aerial reports</h1>
+                <p class="hero-dek" id="heroDek">
+                  Signal News Desk is loading a location-aware bulletin with live local timing,
+                  response posture, and witness patterns.
+                </p>
+                <div class="hero-meta">
+                  <span id="heroDateline">Awaiting local desk</span>
+                  <span id="heroUpdated">Updating</span>
+                  <span>Workshop feed</span>
+                </div>
+                <div class="hero-bullets" id="heroBullets">
+                  <div class="hero-bullet">
+                    <div>
+                      <strong>Developing</strong>
+                      <span>Local details are loading.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="hero-visual">
+                <div class="visual-lower-third">
+                  <strong id="lowerThirdTitle">Signal News Desk Live</strong>
+                  <span id="lowerThirdCopy">Regional field coverage is loading.</span>
+                </div>
+              </div>
+            </div>
+            <div class="hero-bottom">
+              <div class="metric">
+                <span>Coverage Zone</span>
+                <strong id="metricLocation">Resolving...</strong>
+              </div>
+              <div class="metric">
+                <span>Local Time</span>
+                <strong id="metricTime">Synchronizing...</strong>
+              </div>
+              <div class="metric">
+                <span>Coordinates</span>
+                <strong id="metricCoords">Pending...</strong>
+              </div>
+              <div class="metric">
+                <span>Status</span>
+                <strong id="metricStatus">Desk review underway</strong>
+              </div>
+            </div>
+          </article>
+
+          <section class="section-card">
+            <div class="section-head">
+              <h2>Latest Updates</h2>
+              <span id="updatesLabel">Rolling coverage</span>
+            </div>
+            <div class="updates-list" id="updatesList"></div>
+          </section>
+
+          <div class="two-up">
+            <section class="section-card">
+              <div class="section-head">
+                <h2>Response Posture</h2>
+                <span>Field operations</span>
+              </div>
+              <div class="panel-body">
+                <ul class="checklist" id="responseList"></ul>
+              </div>
+            </section>
+
+            <section class="section-card">
+              <div class="section-head">
+                <h2>Public Guidance</h2>
+                <span>Advisories</span>
+              </div>
+              <div class="panel-body">
+                <ul class="guidance-list" id="guidanceList"></ul>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <aside class="rail-stack">
+          <section class="rail-card rail-emphasis">
+            <div class="section-head">
+              <h2>Live Now</h2>
+              <span>Desk channel</span>
+            </div>
+            <div class="rail-body">
+              <div class="live-box">
+                <div class="live-topline"><span class="live-dot"></span>On the Air</div>
+                <h3 class="rail-title" id="railHeadline">Monitoring regional witness traffic</h3>
+                <p class="rail-copy" id="railCopy">
+                  Location-aware coverage is loading from the strongest available regional context.
+                </p>
+              </div>
+              <div class="facts-grid">
+                <div class="fact">
+                  <span>Desk Dateline</span>
+                  <strong id="factDateline">Pending</strong>
+                </div>
+                <div class="fact">
+                  <span>Primary Corridor</span>
+                  <strong id="factCorridor">Pending</strong>
+                </div>
+                <div class="fact">
+                  <span>Airspace Status</span>
+                  <strong id="factAirspace">Pending</strong>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="rail-card">
+            <div class="section-head">
+              <h2>Coverage Map</h2>
+              <span id="mapLabel">Regional view</span>
+            </div>
+            <div class="coverage-frame" aria-hidden="true">
+              <div class="coverage-pin"></div>
+              <div class="coverage-tag" id="coverageTag">Coverage zone</div>
+            </div>
+            <div class="rail-body">
+              <div class="facts-grid">
+                <div class="fact">
+                  <span>Area</span>
+                  <strong id="mapArea">Resolving...</strong>
+                </div>
+                <div class="fact">
+                  <span>Observation Time</span>
+                  <strong id="mapTime">Synchronizing...</strong>
+                </div>
+                <div class="fact">
+                  <span>Signal Read</span>
+                  <strong id="mapSignal">Awaiting witness pattern</strong>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="watch-box">
+            <h3>What We’re Watching</h3>
+            <p id="watchIntro">
+              The desk is tracking local movement, road posture, and witness consistency.
+            </p>
+            <ul class="watch-list" id="watchList">
+              <li>Witness reports are loading.</li>
+            </ul>
+          </section>
+        </aside>
+      </div>
+
+      <div class="footer-note">
+        Signal News Desk workshop route: <code>/whoa/newsroom.html</code>
+      </div>
+    </div>
+
+    <script>
+      const GEO_PROVIDERS = [
+        {
+          url: "https://get.geojs.io/v1/ip/geo.json",
+          parse: (data) => ({
+            city: data?.city,
+            region: data?.region,
+            regionCode: data?.region_code,
+            country: data?.country,
+            countryCode: data?.country_code,
+            latitude: data?.latitude,
+            longitude: data?.longitude,
+            timezone: data?.timezone
+          })
+        },
+        {
+          url: "https://ipwho.is/",
+          parse: (data) =>
+            data?.success
+              ? {
+                  city: data?.city,
+                  region: data?.region,
+                  regionCode: data?.region_code,
+                  country: data?.country,
+                  countryCode: data?.country_code,
+                  latitude: data?.latitude,
+                  longitude: data?.longitude,
+                  timezone: data?.timezone?.id
+                }
+              : null
+        },
+        {
+          url: "https://ipapi.co/json/",
+          parse: (data) =>
+            data && !data.error
+              ? {
+                  city: data?.city,
+                  region: data?.region,
+                  regionCode: data?.region_code,
+                  country: data?.country_name,
+                  countryCode: data?.country_code,
+                  latitude: data?.latitude,
+                  longitude: data?.longitude,
+                  timezone: data?.timezone
+                }
+              : null
+        }
+      ];
+
+      function escapeHtml(value) {
+        return String(value ?? "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function formatDateTime(date, timezone, options) {
+        try {
+          return new Intl.DateTimeFormat("en-US", { timeZone: timezone, ...options }).format(date);
+        } catch {
+          return new Intl.DateTimeFormat("en-US", options).format(date);
+        }
+      }
+
+      function fetchWithTimeout(url, timeoutMs = 4000) {
+        const controller = new AbortController();
+        const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+        return fetch(url, {
+          signal: controller.signal,
+          headers: { Accept: "application/json" }
+        }).finally(() => window.clearTimeout(timer));
+      }
+
+      function normalizeLocation(input) {
+        const timezone = String(
+          input?.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone || "America/New_York"
+        ).trim();
+        const city = String(input?.city || "").trim();
+        const region = String(input?.region || "").trim();
+        const regionCode = String(input?.regionCode || "").trim();
+        const country = String(input?.country || "").trim() || "United States";
+        const countryCode = String(input?.countryCode || "").trim();
+        const latitude = Number.parseFloat(input?.latitude);
+        const longitude = Number.parseFloat(input?.longitude);
+
+        return {
+          city: city || "your area",
+          region: region || "",
+          regionCode: regionCode || "",
+          country,
+          countryCode,
+          latitude: Number.isFinite(latitude) ? latitude : null,
+          longitude: Number.isFinite(longitude) ? longitude : null,
+          timezone
+        };
+      }
+
+      async function resolveLocation() {
+        for (const provider of GEO_PROVIDERS) {
+          try {
+            const response = await fetchWithTimeout(provider.url, 4500);
+            if (!response.ok) {
+              continue;
+            }
+            const data = await response.json();
+            const parsed = provider.parse(data);
+            if (parsed) {
+              return normalizeLocation(parsed);
+            }
+          } catch {}
+        }
+
+        return normalizeLocation(null);
+      }
+
+      function compactLocationLabel(location) {
+        if (location.regionCode && location.countryCode === "US") {
+          return `${location.city}, ${location.regionCode}`;
+        }
+        if (location.region) {
+          return `${location.city}, ${location.region}`;
+        }
+        return location.city;
+      }
+
+      function fullLocationLabel(location) {
+        if (location.regionCode && location.countryCode === "US") {
+          return `${location.city}, ${location.regionCode}`;
+        }
+        if (location.region && location.country) {
+          return `${location.city}, ${location.region}, ${location.country}`;
+        }
+        if (location.city !== "your area" && location.country) {
+          return `${location.city}, ${location.country}`;
+        }
+        return location.city;
+      }
+
+      function formatCoordinates(location) {
+        if (!Number.isFinite(location.latitude) || !Number.isFinite(location.longitude)) {
+          return "Unavailable";
+        }
+        return `${location.latitude.toFixed(3)}, ${location.longitude.toFixed(3)}`;
+      }
+
+      function getLocalHour(date, timezone) {
+        const hour = Number.parseInt(
+          formatDateTime(date, timezone, { hour: "numeric", hour12: false }),
+          10
+        );
+        return Number.isFinite(hour) ? hour : date.getHours();
+      }
+
+      function sceneProfile(hour) {
+        if (hour >= 5 && hour < 11) {
+          return {
+            sky: "morning sky",
+            object:
+              "a reflective craft moving against the early light with no visible rotor wash or exhaust",
+            behavior:
+              "hovering over rooftops before shifting laterally in a single abrupt move",
+            effect: "brief white flare bursts reflecting across windshields and upper-story windows"
+          };
+        }
+
+        if (hour >= 11 && hour < 17) {
+          return {
+            sky: "daylight sky",
+            object:
+              "a sharply outlined metallic airframe holding nearly motionless against the clouds",
+            behavior:
+              "stopping midair before accelerating sideways without a visible bank or turn arc",
+            effect: "hard glare flashes and low vibration reports from vehicles below"
+          };
+        }
+
+        if (hour >= 17 && hour < 21) {
+          return {
+            sky: "dusk sky",
+            object:
+              "a dark triangular craft with a cold underside glow and no visible engine wash",
+            behavior:
+              "holding at the skyline before cutting across the horizon in near silence",
+            effect: "electric-blue rim light over intersections, parking lots, and tree lines"
+          };
+        }
+
+        return {
+          sky: "night sky",
+          object:
+            "a dark airframe outlined by thin amber edge lights that do not blink like standard aircraft",
+          behavior:
+            "drifting low enough for witnesses to make out the underside while remaining nearly silent",
+          effect: "radio static bursts and faint halo light over nearby rooftops"
+        };
+      }
+
+      function buildReport(location) {
+        const now = new Date();
+        const zone = location.timezone;
+        const localHour = getLocalHour(now, zone);
+        const profile = sceneProfile(localHour);
+        const compactLocation = compactLocationLabel(location);
+        const fullLocation = fullLocationLabel(location);
+        const regionPhrase = location.region || location.country || "the surrounding area";
+        const firstCall = new Date(now.getTime() - 48 * 60 * 1000);
+        const perimeterTime = new Date(now.getTime() - 31 * 60 * 1000);
+        const aviationTime = new Date(now.getTime() - 19 * 60 * 1000);
+        const triageTime = new Date(now.getTime() - 9 * 60 * 1000);
+        const topStamp = formatDateTime(now, zone, {
+          month: "short",
+          day: "numeric",
+          hour: "numeric",
+          minute: "2-digit",
+          timeZoneName: "short"
+        });
+        const fullStamp = formatDateTime(now, zone, {
+          weekday: "long",
+          month: "long",
+          day: "numeric",
+          hour: "numeric",
+          minute: "2-digit"
+        });
+        const coords = formatCoordinates(location);
+        const corridor =
+          location.city === "your area"
+            ? "major roads around the clearest viewing corridor"
+            : `${location.city}'s south and east approach corridors`;
+
+        return {
+          ticker: [
+            `${compactLocation}: dispatch traffic describes ${profile.object}`,
+            `Witnesses report ${profile.effect}`,
+            `Traffic posture is tightening around ${corridor}`,
+            `Aviation monitors are holding the sky above ${regionPhrase}`
+          ],
+          headline: `Live response builds after repeated aerial reports over ${compactLocation}`,
+          dek:
+            `Dispatch traffic from ${fullLocation} describes ${profile.object}. Witnesses say the object stays visible in the ${profile.sky} and moves with no obvious propulsion, rotor wash, or conventional engine noise.`,
+          dateline: fullLocation,
+          updated: `Updated ${topStamp}`,
+          lowerThirdTitle: `${compactLocation} | Live Coverage`,
+          lowerThirdCopy: `${profile.behavior}. Field posture remains active across ${regionPhrase}.`,
+          metrics: {
+            location: fullLocation,
+            time: topStamp,
+            coords,
+            status: "Perimeter active, aviation hold requested, medical screening posture up"
+          },
+          bullets: [
+            {
+              label: "Witnesses",
+              value: `Residents describe silent movement, unusual light behavior, and repeated signal interference across ${regionPhrase}.`
+            },
+            {
+              label: "Roads",
+              value: `Units are clearing shoulders, elevated lots, and other clear sightlines around ${corridor}.`
+            },
+            {
+              label: "Airspace",
+              value: `Regional flight paths are being rerouted to preserve a sterile observation zone above ${fullLocation}.`
+            }
+          ],
+          updates: [
+            {
+              time: formatDateTime(firstCall, zone, { hour: "numeric", minute: "2-digit" }),
+              title: "Dispatch traffic clusters around the same sector",
+              body: `Callers from ${compactLocation} report ${profile.object} and describe the object holding over the same section of sky long enough for neighbors to come outside and begin filming.`
+            },
+            {
+              time: formatDateTime(perimeterTime, zone, { hour: "numeric", minute: "2-digit" }),
+              title: "Perimeter control expands around clear viewing lanes",
+              body: `Police units are moving vehicles away from overpasses, school lots, parking decks, and open medians to keep the primary sightline clear for emergency crews.`
+            },
+            {
+              time: formatDateTime(aviationTime, zone, { hour: "numeric", minute: "2-digit" }),
+              title: "Aviation hold is requested for the local coverage zone",
+              body: `Regional monitors are relaying an advisory to keep low-altitude traffic clear while the object remains visible above ${regionPhrase}.`
+            },
+            {
+              time: formatDateTime(triageTime, zone, { hour: "numeric", minute: "2-digit" }),
+              title: "Medical screening posture is activated",
+              body: `Hospitals are watching for patients reporting dizziness, hearing changes, eye irritation, panic spikes, burns, or contact with unusual debris.`
+            }
+          ],
+          response: [
+            `Crews are isolating the clearest sightline and holding open access lanes for emergency units.`,
+            `Traffic control is pushing bystanders away from rooftops, shoulders, ramps, and parking decks near ${corridor}.`,
+            `Aviation monitors are coordinating a protected zone above ${fullLocation}.`,
+            `Triage teams are prioritizing dizziness, hearing changes, eye irritation, anxiety spikes, and any claimed contact with residue.`
+          ],
+          guidance: [
+            `Stay indoors or watch only from a covered position if you already have a direct line of sight in ${fullLocation}.`,
+            `Do not stop on highway shoulders, overpasses, school property, or elevated lots to record the object.`,
+            `If you notice ringing in the ears, skin irritation, sudden disorientation, or contact with falling material, move away and seek medical direction immediately.`,
+            `Keep pets inside, charge devices, and preserve any original video files without editing or compressing them for investigators.`
+          ],
+          railHeadline: `Field crews tighten posture over ${compactLocation}`,
+          railCopy:
+            `${profile.effect} is one of the most repeated details in incoming calls. The desk is tracking witness consistency, local road closures, and airspace posture in real time.`,
+          datelineFact: fullStamp,
+          corridorFact: corridor,
+          airspaceFact: `Protected observation zone above ${regionPhrase}`,
+          mapArea: fullLocation,
+          mapTime: topStamp,
+          mapSignal: "Silent motion, strong light bursts, repeated signal disruption",
+          coverageTag: compactLocation,
+          watchIntro: `The desk is watching conditions around ${fullLocation} as response agencies coordinate traffic, medical screening, and airspace control.`,
+          watchList: [
+            `Witness descriptions are staying consistent across different blocks and neighborhoods.`,
+            `Signal interference reports are clustering during the brightest visible pulses.`,
+            `Crews are leaving the clearest intersections and open lots to emergency teams only.`,
+            `Any debris, residue, or landing area is being treated as restricted immediately.`
+          ]
+        };
+      }
+
+      function setText(id, value) {
+        const node = document.getElementById(id);
+        if (node) {
+          node.textContent = value;
+        }
+      }
+
+      function renderList(id, items, markupBuilder) {
+        const node = document.getElementById(id);
+        if (!node) {
+          return;
+        }
+        node.innerHTML = items.map(markupBuilder).join("");
+      }
+
+      function applyMeta(report) {
+        document.title = `${report.dateline} | Signal News Desk`;
+        const description = document.querySelector('meta[name="description"]');
+        if (description) {
+          description.setAttribute(
+            "content",
+            `${report.dateline}: workshop simulation page styled as a generic live television news network bulletin.`
+          );
+        }
+      }
+
+      function renderReport(report) {
+        applyMeta(report);
+
+        setText("utilityStamp", `Local desk time: ${report.metrics.time}`);
+        setText("heroHeadline", report.headline);
+        setText("heroDek", report.dek);
+        setText("heroDateline", report.dateline);
+        setText("heroUpdated", report.updated);
+        setText("lowerThirdTitle", report.lowerThirdTitle);
+        setText("lowerThirdCopy", report.lowerThirdCopy);
+        setText("metricLocation", report.metrics.location);
+        setText("metricTime", report.metrics.time);
+        setText("metricCoords", report.metrics.coords);
+        setText("metricStatus", report.metrics.status);
+        setText("updatesLabel", report.updated);
+        setText("railHeadline", report.railHeadline);
+        setText("railCopy", report.railCopy);
+        setText("factDateline", report.datelineFact);
+        setText("factCorridor", report.corridorFact);
+        setText("factAirspace", report.airspaceFact);
+        setText("mapArea", report.mapArea);
+        setText("mapTime", report.mapTime);
+        setText("mapSignal", report.mapSignal);
+        setText("coverageTag", report.coverageTag);
+        setText("mapLabel", report.dateline);
+        setText("watchIntro", report.watchIntro);
+
+        const tickerTrack = document.getElementById("tickerTrack");
+        if (tickerTrack) {
+          const repeated = [...report.ticker, ...report.ticker];
+          tickerTrack.innerHTML = repeated.map((item) => `<span>${escapeHtml(item)}</span>`).join("");
+        }
+
+        renderList(
+          "heroBullets",
+          report.bullets,
+          (item) => `
+            <div class="hero-bullet">
+              <div>
+                <strong>${escapeHtml(item.label)}</strong>
+                <span>${escapeHtml(item.value)}</span>
+              </div>
+            </div>
+          `
+        );
+
+        renderList(
+          "updatesList",
+          report.updates,
+          (item) => `
+            <article class="update-item">
+              <div class="update-time">${escapeHtml(item.time)}</div>
+              <div class="update-copy">
+                <strong>${escapeHtml(item.title)}</strong>
+                <p>${escapeHtml(item.body)}</p>
+              </div>
+            </article>
+          `
+        );
+
+        renderList("responseList", report.response, (item) => `<li>${escapeHtml(item)}</li>`);
+        renderList("guidanceList", report.guidance, (item) => `<li>${escapeHtml(item)}</li>`);
+        renderList("watchList", report.watchList, (item) => `<li>${escapeHtml(item)}</li>`);
+      }
+
+      async function init() {
+        const location = await resolveLocation();
+        const report = buildReport(location);
+        renderReport(report);
+      }
+
+      init().catch(() => renderReport(buildReport(normalizeLocation(null))));
+    </script>
+  </body>
+</html>
