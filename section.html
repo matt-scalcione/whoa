@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signal News Desk | Section</title>
+    <meta
+      name="description"
+      content="Signal News Desk section front for the workshop site."
+    />
+    <meta
+      name="robots"
+      content="noindex, nofollow, noarchive, nosnippet, max-image-preview:none"
+    />
+    <meta name="theme-color" content="#8f1018" />
+    <link rel="canonical" href="https://matt-scalcione.github.io/whoa/section.html" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #edf1f6;
+        --surface: rgba(255, 255, 255, 0.95);
+        --surface-strong: #f7f9fc;
+        --ink: #111722;
+        --muted: #5a6674;
+        --line: rgba(17, 23, 34, 0.1);
+        --red: #b5121b;
+        --red-deep: #891018;
+        --shadow: 0 24px 58px rgba(17, 23, 34, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Public Sans", "Segoe UI", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(181, 18, 27, 0.12), transparent 28%),
+          linear-gradient(180deg, #f8fafc 0%, var(--bg) 100%);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .brand-bar {
+        color: #fff;
+        background: linear-gradient(180deg, #12161d 0%, #0c1016 100%);
+      }
+
+      .brand-inner,
+      .subnav-inner,
+      .page-shell {
+        width: min(1320px, calc(100vw - 28px));
+        margin: 0 auto;
+      }
+
+      .brand-inner {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px 24px;
+        padding: 18px 0;
+      }
+
+      .brand-lockup {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .brand-mark {
+        display: grid;
+        place-items: center;
+        width: 60px;
+        height: 44px;
+        background: linear-gradient(135deg, var(--red) 0%, #e73641 100%);
+        color: #fff;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1.4rem;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+      }
+
+      .brand-copy strong {
+        display: block;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+
+      .brand-copy span {
+        display: block;
+        margin-top: 4px;
+        color: #c4cbd6;
+        font-size: 0.82rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .brand-nav,
+      .subnav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 16px;
+        font-family: "Barlow Condensed", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .brand-nav a,
+      .subnav a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .brand-nav a:hover,
+      .brand-nav a:focus-visible,
+      .subnav a:hover,
+      .subnav a:focus-visible,
+      .brand-nav a[aria-current="page"],
+      .subnav a[aria-current="page"] {
+        color: #ff7a80;
+      }
+
+      .subnav-bar {
+        border-bottom: 1px solid #d9dfe7;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(14px);
+      }
+
+      .subnav-inner {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px 20px;
+        padding: 10px 0;
+      }
+
+      .subnav-note {
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .page-shell {
+        padding: 22px 0 42px;
+      }
+
+      .hero,
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+      }
+
+      .hero {
+        padding: 28px;
+      }
+
+      .eyebrow {
+        margin: 0;
+        color: var(--red);
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+      }
+
+      .hero h1 {
+        margin: 10px 0 0;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: clamp(2.6rem, 4.4vw, 4.4rem);
+        line-height: 0.93;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+      }
+
+      .hero-dek {
+        max-width: 900px;
+        margin: 16px 0 0;
+        color: #27303b;
+        font-size: 1.08rem;
+        line-height: 1.66;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      .hero-actions a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        padding: 0 16px;
+        border: 1px solid var(--line);
+        color: inherit;
+        text-decoration: none;
+        font-weight: 700;
+        background: #fff;
+      }
+
+      .hero-actions a.primary {
+        color: #fff;
+        background: linear-gradient(135deg, var(--red-deep) 0%, var(--red) 100%);
+        border-color: transparent;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 22px;
+      }
+
+      .stat {
+        padding: 16px;
+        background: var(--surface-strong);
+        border: 1px solid var(--line);
+      }
+
+      .stat span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .stat strong {
+        display: block;
+        margin-top: 8px;
+        font-size: 1rem;
+        line-height: 1.42;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.7fr) minmax(300px, 0.9fr);
+        gap: 22px;
+        margin-top: 22px;
+      }
+
+      .main-stack,
+      .rail-stack {
+        display: grid;
+        gap: 22px;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 18px 20px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .section-head h2 {
+        margin: 0;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 2rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .section-head span {
+        color: var(--muted);
+        font-size: 0.84rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .story-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        padding: 20px;
+      }
+
+      .story-card {
+        display: block;
+        padding: 20px;
+        color: inherit;
+        text-decoration: none;
+        background: var(--surface-strong);
+        border: 1px solid var(--line);
+      }
+
+      .story-card:hover h3,
+      .story-card:focus-visible h3 {
+        color: var(--red);
+      }
+
+      .story-card span {
+        color: var(--red);
+        font-size: 0.8rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .story-card h3 {
+        margin: 10px 0 0;
+        font-size: 1.15rem;
+        line-height: 1.35;
+      }
+
+      .story-card p {
+        margin: 10px 0 0;
+        color: #2e3641;
+        line-height: 1.58;
+      }
+
+      .panel-body {
+        padding: 20px;
+      }
+
+      .brief-copy {
+        margin: 0;
+        color: #2b3440;
+        line-height: 1.68;
+      }
+
+      .link-list {
+        display: grid;
+        gap: 0;
+        margin: 18px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .link-list li {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .link-list li:last-child {
+        border-bottom: 0;
+      }
+
+      .link-list a {
+        display: block;
+        padding: 14px 0;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .link-list a:hover strong,
+      .link-list a:focus-visible strong {
+        color: var(--red);
+      }
+
+      .link-list strong {
+        display: block;
+        line-height: 1.45;
+      }
+
+      .link-list span {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .footer-note {
+        margin-top: 18px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      @media (max-width: 980px) {
+        .layout,
+        .story-grid,
+        .stats {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      @media (max-width: 760px) {
+        .brand-inner,
+        .subnav-inner,
+        .page-shell {
+          width: min(100vw - 18px, 1320px);
+        }
+
+        .hero,
+        .panel-body,
+        .story-grid {
+          padding: 16px;
+        }
+
+        .section-head {
+          padding: 16px;
+        }
+
+        .story-grid {
+          gap: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="brand-bar">
+      <div class="brand-inner">
+        <div class="brand-lockup">
+          <div class="brand-mark">SND</div>
+          <div class="brand-copy">
+            <strong>Signal News Desk</strong>
+            <span>Section Front</span>
+          </div>
+        </div>
+        <nav class="brand-nav" aria-label="Primary">
+          <a href="./">Home</a>
+          <a href="./newsroom.html">Live Desk</a>
+          <a href="./section.html?topic=latest" data-topic-link="latest">Latest</a>
+          <a href="./section.html?topic=analysis" data-topic-link="analysis">Analysis</a>
+          <a href="./section.html?topic=us" data-topic-link="us">U.S.</a>
+          <a href="./section.html?topic=world" data-topic-link="world">World</a>
+          <a href="./section.html?topic=politics" data-topic-link="politics">Politics</a>
+          <a href="./section.html?topic=business" data-topic-link="business">Business</a>
+          <a href="./section.html?topic=video" data-topic-link="video">Video</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="subnav-bar">
+      <div class="subnav-inner">
+        <nav class="subnav" aria-label="Section switcher">
+          <a href="./section.html?topic=latest" data-topic-link="latest">Latest</a>
+          <a href="./section.html?topic=live-tv" data-topic-link="live-tv">Live TV</a>
+          <a href="./section.html?topic=analysis" data-topic-link="analysis">Analysis</a>
+          <a href="./section.html?topic=us" data-topic-link="us">U.S.</a>
+          <a href="./section.html?topic=world" data-topic-link="world">World</a>
+          <a href="./section.html?topic=politics" data-topic-link="politics">Politics</a>
+          <a href="./section.html?topic=business" data-topic-link="business">Business</a>
+          <a href="./section.html?topic=video" data-topic-link="video">Video</a>
+        </nav>
+        <div class="subnav-note" id="sectionNote">Loading section</div>
+      </div>
+    </div>
+
+    <main class="page-shell">
+      <section class="hero">
+        <p class="eyebrow" id="sectionLabel">Section</p>
+        <h1 id="sectionTitle">Loading section front</h1>
+        <p class="hero-dek" id="sectionDek">Assembling coverage desk modules.</p>
+        <div class="hero-actions">
+          <a class="primary" href="./newsroom.html">Open Live Desk</a>
+          <a id="leadAction" href="./story.html?id=dispatch-now">Read Lead Story</a>
+        </div>
+        <div class="stats" id="statsGrid"></div>
+      </section>
+
+      <div class="layout">
+        <div class="main-stack">
+          <section class="card">
+            <div class="section-head">
+              <h2>Lead Stories</h2>
+              <span id="leadStamp">Desk lineup</span>
+            </div>
+            <div class="story-grid" id="leadGrid"></div>
+          </section>
+        </div>
+
+        <aside class="rail-stack">
+          <section class="card">
+            <div class="section-head">
+              <h2>Desk Brief</h2>
+              <span id="briefLabel">Editor note</span>
+            </div>
+            <div class="panel-body">
+              <p class="brief-copy" id="briefCopy">Loading section note.</p>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="section-head">
+              <h2>Related Reads</h2>
+              <span>Curated links</span>
+            </div>
+            <div class="panel-body">
+              <ul class="link-list" id="relatedList"></ul>
+            </div>
+          </section>
+        </aside>
+      </div>
+
+      <div class="footer-note">
+        Signal News Desk section page for the workshop site. This route is a lightweight front and
+        uses reusable story pages for linked coverage.
+      </div>
+    </main>
+
+    <script>
+      const STORIES = {
+        "dispatch-now": {
+          label: "Live coverage",
+          title: "What dispatch traffic is reporting right now",
+          summary:
+            "A minute-by-minute look at how emergency traffic and witness calls are converging around the same sector."
+        },
+        "dispatch-clusters": {
+          label: "Latest",
+          title: "Dispatch traffic clusters around the same sector",
+          summary:
+            "Why separate callers are describing the same position, timing, and movement pattern."
+        },
+        "perimeter-control": {
+          label: "Field operations",
+          title: "Perimeter control expands around clear viewing lanes",
+          summary:
+            "Traffic units are pushing vehicles out of open sightlines and keeping lanes open for official access."
+        },
+        "aviation-hold": {
+          label: "Airspace",
+          title: "Aviation hold is requested for the local coverage zone",
+          summary:
+            "Monitors are relaying advisories intended to keep low-altitude traffic outside the active scene."
+        },
+        "medical-screening": {
+          label: "Health",
+          title: "Medical screening is activated",
+          summary:
+            "Hospitals and triage teams are watching for irritation, disorientation, and debris-contact reports."
+        },
+        "airspace-restrictions": {
+          label: "Analysis",
+          title: "How airspace restrictions are changing above the area",
+          summary:
+            "A quick explainer on reroutes, observation corridors, and why low-altitude traffic is being shifted."
+        },
+        "triage-teams": {
+          label: "Health",
+          title: "What triage teams are watching for after exposure reports",
+          summary:
+            "The symptoms, screenings, and precaution language being repeated to hospitals and urgent care desks."
+        },
+        "road-closures": {
+          label: "Explainer",
+          title: "Why road closures are clustering near the viewing corridor",
+          summary:
+            "An overview of why shoulders, decks, overpasses, and open lots are being cleared first."
+        }
+      };
+
+      const TOPICS = {
+        latest: {
+          label: "Latest",
+          title: "Latest coverage and rolling developments",
+          dek:
+            "The latest front pulls together the desk’s quickest updates, rolling field notes, and the most current explanatory reads linked from the live route.",
+          note: "Latest desk lineup",
+          brief:
+            "This front is meant to feel like the site-wide catch-up page: one lead story, a few secondary reads, and enough routing for the workshop to feel like a complete news surface.",
+          leadIds: ["dispatch-now", "dispatch-clusters", "perimeter-control"],
+          relatedIds: ["aviation-hold", "airspace-restrictions", "triage-teams"],
+          stats: [
+            { label: "Lead focus", value: "Rolling scene updates" },
+            { label: "Format", value: "Live desk handoff" },
+            { label: "Editors watching", value: "Dispatch, perimeter, advisories" },
+            { label: "Best next click", value: "Open the live desk or lead story" }
+          ]
+        },
+        "live-tv": {
+          label: "Live TV",
+          title: "Live TV programming and on-air desk windows",
+          dek:
+            "The live television front packages the on-air angle of the coverage with the strongest segment-ready stories and the routes that support the broadcast framing.",
+          note: "Broadcast lineup",
+          brief:
+            "This page stands in for the site’s broadcast section. The links are real, but the page is intentionally lightweight so the site feels complete without building a full TV stack.",
+          leadIds: ["dispatch-now", "aviation-hold", "perimeter-control"],
+          relatedIds: ["dispatch-clusters", "road-closures", "triage-teams"],
+          stats: [
+            { label: "Primary block", value: "Continuous live desk" },
+            { label: "Segment mix", value: "Live hit, explainer, analyst" },
+            { label: "Studio handoff", value: "Field desk to anchor" },
+            { label: "Lead clip", value: "Coverage zone developments" }
+          ]
+        },
+        analysis: {
+          label: "Analysis",
+          title: "Analysis, explainers, and desk interpretation",
+          dek:
+            "The analysis front groups the background pieces that help a reader understand why restrictions, routing, and response language are changing around the scene.",
+          note: "Analysis desk",
+          brief:
+            "For the workshop, this page behaves like a generic analysis hub with a few explainers and follow-on reads linked to reusable article pages.",
+          leadIds: ["airspace-restrictions", "road-closures", "triage-teams"],
+          relatedIds: ["dispatch-now", "aviation-hold", "medical-screening"],
+          stats: [
+            { label: "Focus", value: "Context and explanation" },
+            { label: "Editors watching", value: "Policy, routing, health guidance" },
+            { label: "Primary audience", value: "Readers catching up" },
+            { label: "Lead format", value: "Explainer and FAQ" }
+          ]
+        },
+        us: {
+          label: "U.S.",
+          title: "U.S. desk coverage and domestic updates",
+          dek:
+            "The U.S. front collects domestic desk reads, regional explainers, and the localized stories being routed across the wider site.",
+          note: "National desk",
+          brief:
+            "This is a generic domestic hub for the workshop site. It is enough to make the navigation feel complete without needing a full national section build.",
+          leadIds: ["dispatch-now", "road-closures", "medical-screening"],
+          relatedIds: ["dispatch-clusters", "airspace-restrictions", "triage-teams"],
+          stats: [
+            { label: "Desk", value: "Domestic reporting" },
+            { label: "Surface", value: "Section front" },
+            { label: "Lead angle", value: "Regional impact and routing" },
+            { label: "Supporting reads", value: "Health and response" }
+          ]
+        },
+        world: {
+          label: "World",
+          title: "World desk front and international context",
+          dek:
+            "The world front is a placeholder international section that still gives the site a believable route structure and a place for broad context and external comparisons.",
+          note: "World desk",
+          brief:
+            "This front is intentionally thin. It exists so the nav behaves like a real site section and gives the workshop a more complete shell.",
+          leadIds: ["airspace-restrictions", "dispatch-now", "aviation-hold"],
+          relatedIds: ["dispatch-clusters", "road-closures", "triage-teams"],
+          stats: [
+            { label: "Desk", value: "International context" },
+            { label: "Lead format", value: "Overview and comparison" },
+            { label: "Best next click", value: "Open analysis or live desk" },
+            { label: "Reader need", value: "Broader framing" }
+          ]
+        },
+        politics: {
+          label: "Politics",
+          title: "Politics coverage and official response",
+          dek:
+            "The politics front frames the official side of the coverage, with focus on advisories, agency coordination language, and government-facing reaction pieces.",
+          note: "Politics desk",
+          brief:
+            "This page gives the site a politics section without needing deep downstream routing. The cards reuse the same article pages where appropriate.",
+          leadIds: ["dispatch-now", "airspace-restrictions", "road-closures"],
+          relatedIds: ["aviation-hold", "dispatch-clusters", "medical-screening"],
+          stats: [
+            { label: "Desk", value: "Official response" },
+            { label: "Lead angle", value: "Advisories and control" },
+            { label: "Secondary angle", value: "Traffic and closures" },
+            { label: "Next stop", value: "Live desk or analysis" }
+          ]
+        },
+        business: {
+          label: "Business",
+          title: "Business front and operational impacts",
+          dek:
+            "The business front packages the disruption angle of the coverage, focusing on routing, interruptions, and operational knock-on effects.",
+          note: "Business desk",
+          brief:
+            "This route stands in for a business vertical. It keeps the newsroom nav believable and gives the site one more section that lands on real pages.",
+          leadIds: ["road-closures", "aviation-hold", "airspace-restrictions"],
+          relatedIds: ["dispatch-now", "medical-screening", "triage-teams"],
+          stats: [
+            { label: "Desk", value: "Operations and disruption" },
+            { label: "Lead format", value: "Explainer" },
+            { label: "Key impact", value: "Road and air routing" },
+            { label: "Audience", value: "Readers tracking effects" }
+          ]
+        },
+        video: {
+          label: "Video",
+          title: "Video front, clips, and segment routes",
+          dek:
+            "The video front behaves like a lightweight streaming/video section, with clip-style story entries and direct paths back to the live desk coverage.",
+          note: "Video desk",
+          brief:
+            "This page is a simple shell for the workshop. The links are live, but the video blocks are intentionally represented as article cards instead of a real player stack.",
+          leadIds: ["dispatch-now", "dispatch-clusters", "aviation-hold"],
+          relatedIds: ["perimeter-control", "road-closures", "triage-teams"],
+          stats: [
+            { label: "Format", value: "Clip and segment pages" },
+            { label: "Lead item", value: "Continuous desk coverage" },
+            { label: "Secondary items", value: "Field segment and explainer" },
+            { label: "Action", value: "Jump back to live desk" }
+          ]
+        }
+      };
+
+      function storyHref(id) {
+        return `./story.html?id=${encodeURIComponent(id)}`;
+      }
+
+      function renderStoryCard(id) {
+        const story = STORIES[id];
+        return `
+          <a class="story-card" href="${storyHref(id)}">
+            <span>${story.label}</span>
+            <h3>${story.title}</h3>
+            <p>${story.summary}</p>
+          </a>
+        `;
+      }
+
+      function renderLinkItem(id) {
+        const story = STORIES[id];
+        return `
+          <li>
+            <a href="${storyHref(id)}">
+              <strong>${story.title}</strong>
+              <span>${story.label}</span>
+            </a>
+          </li>
+        `;
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      const topicKey = params.get("topic") || "latest";
+      const topic = TOPICS[topicKey] || TOPICS.latest;
+
+      document.title = `${topic.title} | Signal News Desk`;
+      const description = document.querySelector('meta[name="description"]');
+      if (description) {
+        description.setAttribute("content", `${topic.title} | Signal News Desk section front.`);
+      }
+
+      document.getElementById("sectionLabel").textContent = topic.label;
+      document.getElementById("sectionTitle").textContent = topic.title;
+      document.getElementById("sectionDek").textContent = topic.dek;
+      document.getElementById("sectionNote").textContent = `${topic.label} section`;
+      document.getElementById("leadStamp").textContent = topic.note;
+      document.getElementById("briefLabel").textContent = `${topic.label} brief`;
+      document.getElementById("briefCopy").textContent = topic.brief;
+      document.getElementById("leadAction").href = storyHref(topic.leadIds[0]);
+
+      document.getElementById("statsGrid").innerHTML = topic.stats
+        .map(
+          (item) => `
+            <div class="stat">
+              <span>${item.label}</span>
+              <strong>${item.value}</strong>
+            </div>
+          `
+        )
+        .join("");
+
+      document.getElementById("leadGrid").innerHTML = topic.leadIds.map(renderStoryCard).join("");
+      document.getElementById("relatedList").innerHTML = topic.relatedIds.map(renderLinkItem).join("");
+
+      document.querySelectorAll("[data-topic-link]").forEach((node) => {
+        if (node.getAttribute("data-topic-link") === topicKey) {
+          node.setAttribute("aria-current", "page");
+        }
+      });
+    </script>
+  </body>
+</html>

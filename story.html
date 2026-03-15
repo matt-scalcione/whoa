@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signal News Desk | Story</title>
+    <meta
+      name="description"
+      content="Signal News Desk story page for the workshop site."
+    />
+    <meta
+      name="robots"
+      content="noindex, nofollow, noarchive, nosnippet, max-image-preview:none"
+    />
+    <meta name="theme-color" content="#8f1018" />
+    <link rel="canonical" href="https://matt-scalcione.github.io/whoa/story.html" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #edf1f6;
+        --surface: rgba(255, 255, 255, 0.96);
+        --surface-strong: #f7f9fc;
+        --ink: #111722;
+        --muted: #5a6674;
+        --line: rgba(17, 23, 34, 0.1);
+        --red: #b5121b;
+        --red-deep: #891018;
+        --shadow: 0 24px 58px rgba(17, 23, 34, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Public Sans", "Segoe UI", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top right, rgba(181, 18, 27, 0.12), transparent 28%),
+          linear-gradient(180deg, #f8fafc 0%, var(--bg) 100%);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .brand-bar {
+        color: #fff;
+        background: linear-gradient(180deg, #12161d 0%, #0c1016 100%);
+      }
+
+      .brand-inner,
+      .page-shell {
+        width: min(1320px, calc(100vw - 28px));
+        margin: 0 auto;
+      }
+
+      .brand-inner {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px 24px;
+        padding: 18px 0;
+      }
+
+      .brand-lockup {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .brand-mark {
+        display: grid;
+        place-items: center;
+        width: 60px;
+        height: 44px;
+        background: linear-gradient(135deg, var(--red) 0%, #e73641 100%);
+        color: #fff;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1.4rem;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+      }
+
+      .brand-copy strong {
+        display: block;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+
+      .brand-copy span {
+        display: block;
+        margin-top: 4px;
+        color: #c4cbd6;
+        font-size: 0.82rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .brand-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 16px;
+        font-family: "Barlow Condensed", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .brand-nav a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .brand-nav a:hover,
+      .brand-nav a:focus-visible,
+      .brand-nav a[aria-current="page"] {
+        color: #ff7a80;
+      }
+
+      .page-shell {
+        padding: 22px 0 42px;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.8fr) minmax(300px, 0.86fr);
+        gap: 22px;
+      }
+
+      .hero,
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+      }
+
+      .hero {
+        grid-column: 1 / -1;
+        padding: 28px;
+      }
+
+      .eyebrow {
+        margin: 0;
+        color: var(--red);
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+      }
+
+      .hero h1 {
+        margin: 10px 0 0;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: clamp(2.6rem, 4.4vw, 4.5rem);
+        line-height: 0.93;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+      }
+
+      .hero-dek {
+        max-width: 900px;
+        margin: 16px 0 0;
+        color: #27303b;
+        font-size: 1.08rem;
+        line-height: 1.66;
+      }
+
+      .hero-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 16px;
+        margin-top: 20px;
+        color: var(--muted);
+        font-size: 0.84rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .hero-actions a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        padding: 0 16px;
+        border: 1px solid var(--line);
+        color: inherit;
+        text-decoration: none;
+        font-weight: 700;
+        background: #fff;
+      }
+
+      .hero-actions a.primary {
+        color: #fff;
+        background: linear-gradient(135deg, var(--red-deep) 0%, var(--red) 100%);
+        border-color: transparent;
+      }
+
+      .article-body {
+        padding: 24px 26px 28px;
+      }
+
+      .article-body p {
+        margin: 0 0 18px;
+        font-size: 1.03rem;
+        line-height: 1.74;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 18px 20px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .section-head h2 {
+        margin: 0;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1.95rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .section-head span {
+        color: var(--muted);
+        font-size: 0.84rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .panel-body {
+        padding: 20px;
+      }
+
+      .fact-list,
+      .related-list {
+        display: grid;
+        gap: 0;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .fact-list li,
+      .related-list li {
+        padding: 14px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .fact-list li:last-child,
+      .related-list li:last-child {
+        border-bottom: 0;
+      }
+
+      .fact-list span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .fact-list strong {
+        display: block;
+        margin-top: 8px;
+        line-height: 1.48;
+      }
+
+      .related-list a {
+        display: block;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .related-list a:hover strong,
+      .related-list a:focus-visible strong {
+        color: var(--red);
+      }
+
+      .related-list strong {
+        display: block;
+        line-height: 1.45;
+      }
+
+      .related-list span {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .footer-note {
+        margin-top: 18px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      @media (max-width: 980px) {
+        .layout {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      @media (max-width: 760px) {
+        .brand-inner,
+        .page-shell {
+          width: min(100vw - 18px, 1320px);
+        }
+
+        .hero,
+        .article-body,
+        .panel-body {
+          padding: 16px;
+        }
+
+        .section-head {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="brand-bar">
+      <div class="brand-inner">
+        <div class="brand-lockup">
+          <div class="brand-mark">SND</div>
+          <div class="brand-copy">
+            <strong>Signal News Desk</strong>
+            <span>Story Page</span>
+          </div>
+        </div>
+        <nav class="brand-nav" aria-label="Primary">
+          <a href="./">Home</a>
+          <a href="./newsroom.html">Live Desk</a>
+          <a href="./section.html?topic=latest">Latest</a>
+          <a href="./section.html?topic=analysis">Analysis</a>
+          <a href="./section.html?topic=us">U.S.</a>
+          <a href="./section.html?topic=world">World</a>
+          <a href="./section.html?topic=politics">Politics</a>
+          <a href="./section.html?topic=business">Business</a>
+          <a href="./section.html?topic=video">Video</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="hero">
+        <p class="eyebrow" id="storyLabel">Story</p>
+        <h1 id="storyTitle">Loading story</h1>
+        <p class="hero-dek" id="storyDek">Assembling article shell.</p>
+        <div class="hero-meta">
+          <span id="storySectionMeta">Signal News Desk</span>
+          <span id="storyUpdated">Updated recently</span>
+          <span>Workshop route</span>
+        </div>
+        <div class="hero-actions">
+          <a class="primary" href="./newsroom.html">Back to Live Desk</a>
+          <a id="sectionAction" href="./section.html?topic=latest">Open Section Front</a>
+        </div>
+      </section>
+
+      <div class="layout">
+        <article class="card">
+          <div class="section-head">
+            <h2>The Story</h2>
+            <span id="storyStamp">Signal News Desk</span>
+          </div>
+          <div class="article-body" id="storyBody"></div>
+        </article>
+
+        <aside>
+          <section class="card">
+            <div class="section-head">
+              <h2>Key Points</h2>
+              <span>At a glance</span>
+            </div>
+            <div class="panel-body">
+              <ul class="fact-list" id="factList"></ul>
+            </div>
+          </section>
+
+          <section class="card" style="margin-top: 22px;">
+            <div class="section-head">
+              <h2>Related Stories</h2>
+              <span>Continue reading</span>
+            </div>
+            <div class="panel-body">
+              <ul class="related-list" id="relatedList"></ul>
+            </div>
+          </section>
+        </aside>
+      </div>
+
+      <div class="footer-note">
+        Signal News Desk story page for the workshop site. This route is intentionally lightweight
+        and exists to make the outer site navigation land on real pages.
+      </div>
+    </main>
+
+    <script>
+      function storyHref(id) {
+        return `./story.html?id=${encodeURIComponent(id)}`;
+      }
+
+      function sectionHref(topic) {
+        return `./section.html?topic=${encodeURIComponent(topic)}`;
+      }
+
+      const STORIES = {
+        "dispatch-now": {
+          label: "Live coverage",
+          section: "latest",
+          sectionLabel: "Latest",
+          title: "What dispatch traffic is reporting right now",
+          dek:
+            "A quick article shell collecting the core details repeated across call traffic, desk notes, and the live route.",
+          updated: "Updated for the workshop route",
+          facts: [
+            { label: "Angle", value: "Rolling dispatch and caller traffic" },
+            { label: "Best companion page", value: "Live Desk coverage route" },
+            { label: "Primary use", value: "Lead explainer from the front page" }
+          ],
+          paragraphs: [
+            "This story page exists to give the newsroom route a believable lead article destination. It packages the dispatch angle in a straighter article format while keeping the build lightweight.",
+            "The article shell mirrors the sort of follow-on piece a user would expect after clicking a lead link from a homepage module or most-read rail. It is intentionally shorter than a full newsroom build but still presents a real page structure.",
+            "For the workshop, the important part is that the navigation flow behaves like a real site: the live desk links out, the story route loads, and the reader can move back into the section or live coverage without hitting dead ends."
+          ],
+          related: ["dispatch-clusters", "perimeter-control", "airspace-restrictions"]
+        },
+        "dispatch-clusters": {
+          label: "Latest",
+          section: "latest",
+          sectionLabel: "Latest",
+          title: "Dispatch traffic clusters around the same sector",
+          dek:
+            "A short explainer on why incoming calls, desk notes, and responder routing start to converge around one visible corridor.",
+          updated: "Desk note route",
+          facts: [
+            { label: "Angle", value: "Witness and dispatch consistency" },
+            { label: "Useful context", value: "Sector matching and repeated descriptors" },
+            { label: "Format", value: "Fast-turn follow-up story" }
+          ],
+          paragraphs: [
+            "This story gives the site a dedicated landing page for the update card about clustered dispatch traffic. It is meant to feel like a fast-turn follow-up article tied closely to the live feed.",
+            "In a fuller build, this route could host maps, embedded clips, or a more detailed timeline. For this workshop site, the simplified article shell is enough to make the newsroom front feel properly connected.",
+            "The page also provides a stable destination for internal links from the section fronts, which helps the site read as a coherent news product rather than a single isolated page."
+          ],
+          related: ["dispatch-now", "aviation-hold", "road-closures"]
+        },
+        "perimeter-control": {
+          label: "Field operations",
+          section: "us",
+          sectionLabel: "U.S.",
+          title: "Perimeter control expands around clear viewing lanes",
+          dek:
+            "A generic field-operations read focused on traffic control, access routes, and how open sightlines are being managed.",
+          updated: "Operations route",
+          facts: [
+            { label: "Angle", value: "Perimeter and lane control" },
+            { label: "Readers expect", value: "Traffic and access specifics" },
+            { label: "Works best from", value: "Live updates or U.S. section" }
+          ],
+          paragraphs: [
+            "This article page is the destination for the perimeter-control update card. It reframes that same newsroom snippet as a standalone operations story.",
+            "On a full site, this kind of route would likely accumulate maps, route diagrams, or a running list of closures and reopened corridors. Here, it simply needs to exist and feel structurally credible.",
+            "That is enough for the workshop goal: the homepage and section fronts can link outward in a way that resembles a broader news site without needing a full multi-page editorial stack."
+          ],
+          related: ["road-closures", "dispatch-now", "airspace-restrictions"]
+        },
+        "aviation-hold": {
+          label: "Airspace",
+          section: "analysis",
+          sectionLabel: "Analysis",
+          title: "Aviation hold is requested for the local coverage zone",
+          dek:
+            "A generic explainer on observation corridors, reroutes, and why low-altitude traffic may be asked to stay clear.",
+          updated: "Analysis route",
+          facts: [
+            { label: "Angle", value: "Airspace and rerouting" },
+            { label: "Secondary read", value: "Works well beside analysis coverage" },
+            { label: "Story type", value: "Explainer" }
+          ],
+          paragraphs: [
+            "This route gives the site a place to land the aviation-hold update from the newsroom. It reads like a quick analysis piece rather than a live blog item.",
+            "Because the workshop site is static, the article does not need to go deep. It only needs to feel like a plausible destination the reader could reach from a homepage module or section front.",
+            "That extra layer of routing makes the overall build feel more complete and more like a conventional news property, which is the point of this pass."
+          ],
+          related: ["airspace-restrictions", "dispatch-clusters", "dispatch-now"]
+        },
+        "medical-screening": {
+          label: "Health",
+          section: "us",
+          sectionLabel: "U.S.",
+          title: "Medical screening is activated",
+          dek:
+            "A concise health-focused route that groups the triage and screening angle into its own destination page.",
+          updated: "Health route",
+          facts: [
+            { label: "Angle", value: "Triage and symptom screening" },
+            { label: "Best companion", value: "Triage explainer coverage" },
+            { label: "Use on site", value: "Follow-up from live updates" }
+          ],
+          paragraphs: [
+            "This story page exists to catch readers who click through from the medical-screening update card. It behaves like a health-side follow-up within the larger site shell.",
+            "The story is intentionally compact, but it still gives the site a proper article route, which is more convincing than routing readers back into the same page or leaving cards unlinked.",
+            "That structure is enough to create the impression of a fuller editorial site without taking on the complexity of a real newsroom CMS build."
+          ],
+          related: ["triage-teams", "dispatch-now", "road-closures"]
+        },
+        "airspace-restrictions": {
+          label: "Analysis",
+          section: "analysis",
+          sectionLabel: "Analysis",
+          title: "How airspace restrictions are changing above the area",
+          dek:
+            "A reusable analysis page that stands in for a fuller explainer on flight paths, advisories, and coverage corridors.",
+          updated: "Explainer route",
+          facts: [
+            { label: "Angle", value: "Airspace restrictions and control" },
+            { label: "Home section", value: "Analysis" },
+            { label: "Primary role", value: "Reusable explainer page" }
+          ],
+          paragraphs: [
+            "This article is a reusable explainer route. It gives section fronts and the newsroom rail a real place to send readers who want a broader read on the airspace angle.",
+            "The content is intentionally generic because the main requirement here is structural: the site should behave like a network of linked pages rather than a single isolated front.",
+            "That makes the workshop build feel much closer to a complete publication while keeping implementation light enough to manage in static hosting."
+          ],
+          related: ["aviation-hold", "dispatch-now", "perimeter-control"]
+        },
+        "triage-teams": {
+          label: "Health",
+          section: "analysis",
+          sectionLabel: "Analysis",
+          title: "What triage teams are watching for after exposure reports",
+          dek:
+            "A follow-on health explainer that packages the symptom-screening angle as a standalone article.",
+          updated: "Health explainer route",
+          facts: [
+            { label: "Angle", value: "Screening and symptom watchlists" },
+            { label: "Works best from", value: "Most Read or Analysis front" },
+            { label: "Role", value: "Secondary explainer" }
+          ],
+          paragraphs: [
+            "This page is the destination for the triage-teams most-read slot. It makes that rail item feel like a real article rather than a decorative headline.",
+            "For the workshop build, that is enough. The page gives the site a second layer of depth without requiring a full library of custom templates or bespoke routes.",
+            "Readers can move from the homepage-style newsroom page to this story, then back into the section front or live desk, which is the core experience you asked for."
+          ],
+          related: ["medical-screening", "dispatch-now", "airspace-restrictions"]
+        },
+        "road-closures": {
+          label: "Explainer",
+          section: "business",
+          sectionLabel: "Business",
+          title: "Why road closures are clustering near the viewing corridor",
+          dek:
+            "A route focused on traffic and access management, standing in for a fuller transportation or operational-impact article.",
+          updated: "Explainer route",
+          facts: [
+            { label: "Angle", value: "Traffic and closure logic" },
+            { label: "Home section", value: "Business" },
+            { label: "Use on site", value: "Most Read and section card destination" }
+          ],
+          paragraphs: [
+            "This story page catches the road-closure explainer links from the newsroom and section fronts. It reads like the sort of operational-impact article a major site would link repeatedly.",
+            "It does not need a deep reporting stack to serve the workshop. The presence of a real route, a coherent headline, and a properly structured page is enough to complete the illusion of a broader site.",
+            "That means the top-level pages can link naturally without every click collapsing back into the same route."
+          ],
+          related: ["perimeter-control", "dispatch-now", "airspace-restrictions"]
+        }
+      };
+
+      const params = new URLSearchParams(window.location.search);
+      const storyKey = params.get("id") || "dispatch-now";
+      const story = STORIES[storyKey] || STORIES["dispatch-now"];
+
+      document.title = `${story.title} | Signal News Desk`;
+      const description = document.querySelector('meta[name="description"]');
+      if (description) {
+        description.setAttribute("content", `${story.title} | Signal News Desk story route.`);
+      }
+
+      document.getElementById("storyLabel").textContent = story.label;
+      document.getElementById("storyTitle").textContent = story.title;
+      document.getElementById("storyDek").textContent = story.dek;
+      document.getElementById("storySectionMeta").textContent = `${story.sectionLabel} desk`;
+      document.getElementById("storyUpdated").textContent = story.updated;
+      document.getElementById("storyStamp").textContent = `${story.sectionLabel} route`;
+      document.getElementById("sectionAction").href = sectionHref(story.section);
+      document.getElementById("sectionAction").textContent = `Open ${story.sectionLabel} Section`;
+
+      document.getElementById("storyBody").innerHTML = story.paragraphs
+        .map((paragraph) => `<p>${paragraph}</p>`)
+        .join("");
+
+      document.getElementById("factList").innerHTML = story.facts
+        .map(
+          (item) => `
+            <li>
+              <span>${item.label}</span>
+              <strong>${item.value}</strong>
+            </li>
+          `
+        )
+        .join("");
+
+      document.getElementById("relatedList").innerHTML = story.related
+        .map((id) => {
+          const related = STORIES[id];
+          return `
+            <li>
+              <a href="${storyHref(id)}">
+                <strong>${related.title}</strong>
+                <span>${related.label}</span>
+              </a>
+            </li>
+          `;
+        })
+        .join("");
+    </script>
+  </body>
+</html>
