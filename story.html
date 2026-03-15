@@ -188,6 +188,41 @@
         text-transform: uppercase;
       }
 
+      .story-visual {
+        position: relative;
+        min-height: 280px;
+        border-bottom: 1px solid var(--line);
+        background:
+          linear-gradient(180deg, rgba(8, 12, 17, 0.1), rgba(8, 12, 17, 0.58)),
+          radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.16), transparent 18%),
+          radial-gradient(circle at 72% 38%, rgba(181, 18, 27, 0.2), transparent 22%),
+          linear-gradient(135deg, #dee4ec 0%, #c8d0db 36%, #7c8793 100%);
+      }
+
+      .story-visual-copy {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 22px 26px;
+        color: #fff;
+      }
+
+      .story-visual-copy strong {
+        display: block;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 2rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .story-visual-copy span {
+        display: block;
+        margin-top: 8px;
+        color: rgba(255, 255, 255, 0.86);
+        line-height: 1.5;
+      }
+
       .hero-actions {
         display: flex;
         flex-wrap: wrap;
@@ -222,6 +257,53 @@
         margin: 0 0 18px;
         font-size: 1.03rem;
         line-height: 1.74;
+      }
+
+      .article-body p.lede {
+        font-size: 1.14rem;
+        color: #242d39;
+      }
+
+      .context-list {
+        display: grid;
+        gap: 0;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .context-list li {
+        padding: 14px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .context-list li:last-child {
+        border-bottom: 0;
+      }
+
+      .context-list a {
+        display: block;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .context-list a:hover strong,
+      .context-list a:focus-visible strong {
+        color: var(--red);
+      }
+
+      .context-list strong {
+        display: block;
+        font-size: 0.95rem;
+        line-height: 1.42;
+      }
+
+      .context-list span {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.82rem;
+        line-height: 1.56;
       }
 
       .section-head {
@@ -341,6 +423,10 @@
         .section-head {
           padding: 16px;
         }
+
+        .story-visual-copy {
+          padding: 16px;
+        }
       }
     </style>
   </head>
@@ -371,12 +457,16 @@
     <main class="page-shell">
       <section class="hero">
         <p class="eyebrow" id="storyLabel">Story</p>
-        <h1 id="storyTitle">Loading story</h1>
-        <p class="hero-dek" id="storyDek">Assembling article shell.</p>
+        <h1 id="storyTitle">What dispatch traffic is reporting right now</h1>
+        <p class="hero-dek" id="storyDek">
+          A lead article route collecting the main details repeated across call traffic, desk
+          notes, and the live coverage page.
+        </p>
         <div class="hero-meta">
+          <span id="storyAuthor">By Signal News Desk</span>
           <span id="storySectionMeta">Signal News Desk</span>
           <span id="storyUpdated">Updated recently</span>
-          <span>Workshop route</span>
+          <span id="storyReadTime">4 minute read</span>
         </div>
         <div class="hero-actions">
           <a class="primary" href="./newsroom.html">Back to Live Desk</a>
@@ -389,6 +479,15 @@
           <div class="section-head">
             <h2>The Story</h2>
             <span id="storyStamp">Signal News Desk</span>
+          </div>
+          <div class="story-visual">
+            <div class="story-visual-copy">
+              <strong id="storyVisualLabel">Signal News Desk</strong>
+              <span id="storyCaption">
+                Editors are comparing call timestamps, landmark references, and the corridor notes
+                now shaping the lead file.
+              </span>
+            </div>
           </div>
           <div class="article-body" id="storyBody"></div>
         </article>
@@ -411,6 +510,16 @@
             </div>
             <div class="panel-body">
               <ul class="related-list" id="relatedList"></ul>
+            </div>
+          </section>
+
+          <section class="card" style="margin-top: 22px;">
+            <div class="section-head">
+              <h2>From This Desk</h2>
+              <span id="contextStamp">Continue reading</span>
+            </div>
+            <div class="panel-body">
+              <ul class="context-list" id="contextList"></ul>
             </div>
           </section>
         </aside>
@@ -438,19 +547,42 @@
           sectionLabel: "Latest",
           title: "What dispatch traffic is reporting right now",
           dek:
-            "A quick article shell collecting the core details repeated across call traffic, desk notes, and the live route.",
-          updated: "Updated for the workshop route",
+            "A lead article route collecting the main details repeated across call traffic, desk notes, and the live coverage page.",
+          author: "By Signal News Desk",
+          updated: "Updated 8 minutes ago",
+          readTime: "5 minute read",
+          visualLabel: "Dispatch Traffic Review",
+          caption:
+            "Editors are comparing call timestamps, repeated landmark references, and the corridor notes now shaping the live file.",
           facts: [
-            { label: "Angle", value: "Rolling dispatch and caller traffic" },
-            { label: "Best companion page", value: "Live Desk coverage route" },
-            { label: "Primary use", value: "Lead explainer from the front page" }
+            { label: "Lead angle", value: "Rolling dispatch and caller traffic" },
+            { label: "Desk status", value: "Continuous live file with follow-up reporting" },
+            { label: "Why it matters", value: "This is the primary handoff article from the homepage and live desk" }
           ],
           paragraphs: [
-            "This story page exists to give the newsroom route a believable lead article destination. It packages the dispatch angle in a straighter article format while keeping the build lightweight.",
-            "The article shell mirrors the sort of follow-on piece a user would expect after clicking a lead link from a homepage module or most-read rail. It is intentionally shorter than a full newsroom build but still presents a real page structure.",
-            "For the workshop, the important part is that the navigation flow behaves like a real site: the live desk links out, the story route loads, and the reader can move back into the section or live coverage without hitting dead ends."
+            "Desk editors say the most consistent thread in incoming traffic is not a single dramatic description but the way separate callers continue to point toward the same narrow sector over a relatively short window.",
+            "That pattern is what turns a burst of unverified reports into a sustained live file. Once timestamps, landmarks, and responder routing begin to line up, the desk has enough structure to move from a broad alert to a more focused story build.",
+            "This route is meant to read like the first article a user would open after seeing a breaking homepage module. It carries the lead facts in a straighter article form while keeping the navigation path clean and easy to follow.",
+            "For the workshop site, that structure matters as much as the prose. A reader should be able to move from the front page to this story, then into related coverage or back to the live desk without landing on empty routes."
           ],
-          related: ["dispatch-clusters", "perimeter-control", "airspace-restrictions"]
+          related: ["dispatch-clusters", "perimeter-control", "airspace-restrictions"],
+          context: [
+            {
+              title: "Open the latest section front",
+              detail: "The broader latest page groups this live file with the strongest follow-up reads and national side stories.",
+              href: sectionHref("latest")
+            },
+            {
+              title: "Go back to the live desk",
+              detail: "The live route still carries the fastest updates, time markers, and link-outs tied to this story.",
+              href: "./newsroom.html"
+            },
+            {
+              title: "Read the airspace explainer",
+              detail: "A second click often goes toward the rules, reroutes, and corridor logic behind the advisories.",
+              href: storyHref("airspace-restrictions")
+            }
+          ]
         },
         "dispatch-clusters": {
           label: "Latest",
@@ -458,19 +590,42 @@
           sectionLabel: "Latest",
           title: "Dispatch traffic clusters around the same sector",
           dek:
-            "A short explainer on why incoming calls, desk notes, and responder routing start to converge around one visible corridor.",
-          updated: "Desk note route",
+            "A quick follow-up on why incoming calls, desk notes, and responder routing are converging around one visible corridor.",
+          author: "By Desk Reporting Team",
+          updated: "Updated 13 minutes ago",
+          readTime: "4 minute read",
+          visualLabel: "Repeated Landmark Matches",
+          caption:
+            "The strongest desk signal is the number of callers repeating the same cluster of streets, sightlines, and directional cues.",
           facts: [
             { label: "Angle", value: "Witness and dispatch consistency" },
-            { label: "Useful context", value: "Sector matching and repeated descriptors" },
-            { label: "Format", value: "Fast-turn follow-up story" }
+            { label: "Reader takeaway", value: "Location matching matters more than dramatic wording" },
+            { label: "Best companion", value: "The main dispatch review and airspace explainer" }
           ],
           paragraphs: [
-            "This story gives the site a dedicated landing page for the update card about clustered dispatch traffic. It is meant to feel like a fast-turn follow-up article tied closely to the live feed.",
-            "In a fuller build, this route could host maps, embedded clips, or a more detailed timeline. For this workshop site, the simplified article shell is enough to make the newsroom front feel properly connected.",
-            "The page also provides a stable destination for internal links from the section fronts, which helps the site read as a coherent news product rather than a single isolated page."
+            "Editors tracking the dispatch side of the file say the strongest sign of a coherent story is the narrowing of caller geography. Different voices using the same landmarks tends to move a file forward faster than raw call volume alone.",
+            "That does not settle what happened, but it does explain why the desk continues to treat the visible corridor as the main reference point. The cluster makes it easier to compare time stamps, route changes, and field positioning without chasing every outlier report.",
+            "As a story route, this page works like the natural second click after the homepage lead. It gives readers a narrower angle without forcing them back into the larger live page.",
+            "The result is a section of the site that feels layered rather than repetitive: one page holds the live rhythm, another explains the reporting logic behind the scene."
           ],
-          related: ["dispatch-now", "aviation-hold", "road-closures"]
+          related: ["dispatch-now", "aviation-hold", "road-closures"],
+          context: [
+            {
+              title: "Return to latest coverage",
+              detail: "The latest section front places this story beside broader desk updates so the routing feels site-wide.",
+              href: sectionHref("latest")
+            },
+            {
+              title: "Read the closure explainer",
+              detail: "Traffic and access logic are some of the strongest follow-on reads after a clustered dispatch story.",
+              href: storyHref("road-closures")
+            },
+            {
+              title: "Jump to the live desk",
+              detail: "The live route still carries the fastest headline changes tied to this file.",
+              href: "./newsroom.html"
+            }
+          ]
         },
         "perimeter-control": {
           label: "Field operations",
@@ -478,19 +633,42 @@
           sectionLabel: "U.S.",
           title: "Perimeter control expands around clear viewing lanes",
           dek:
-            "A generic field-operations read focused on traffic control, access routes, and how open sightlines are being managed.",
-          updated: "Operations route",
+            "A field-operations route focused on how access lanes, shoulders, lots, and open sightlines are being managed around the active scene.",
+          author: "By Metro Desk",
+          updated: "Updated 21 minutes ago",
+          readTime: "4 minute read",
+          visualLabel: "Perimeter and Access Review",
+          caption:
+            "Operational coverage centers on how crews balance visibility, public access, and emergency movement through a narrow corridor.",
           facts: [
             { label: "Angle", value: "Perimeter and lane control" },
-            { label: "Readers expect", value: "Traffic and access specifics" },
-            { label: "Works best from", value: "Live updates or U.S. section" }
+            { label: "Readers expect", value: "Practical details about closures and access" },
+            { label: "Section home", value: "U.S. desk and domestic follow-up coverage" }
           ],
           paragraphs: [
-            "This article page is the destination for the perimeter-control update card. It reframes that same newsroom snippet as a standalone operations story.",
-            "On a full site, this kind of route would likely accumulate maps, route diagrams, or a running list of closures and reopened corridors. Here, it simply needs to exist and feel structurally credible.",
-            "That is enough for the workshop goal: the homepage and section fronts can link outward in a way that resembles a broader news site without needing a full multi-page editorial stack."
+            "The perimeter-control angle tends to become its own story once the scene matures beyond the first burst of eyewitness reporting. Readers want to know not just what is being seen, but how officials are actually managing movement around it.",
+            "That usually means a mix of closures, redirected traffic, preserved access lanes, and the gradual clearing of open sightlines that could complicate operations or create crowding.",
+            "This page packages that operational side into a straightforward article route. It is less about speculation and more about the practical logic of scene control, which helps it sit comfortably beside broader domestic coverage.",
+            "Even in a workshop build, that distinction is useful. A believable site usually separates the live eyewitness file from the more procedural story about how the scene is being handled."
           ],
-          related: ["road-closures", "dispatch-now", "airspace-restrictions"]
+          related: ["road-closures", "dispatch-now", "airspace-restrictions"],
+          context: [
+            {
+              title: "Browse the U.S. section",
+              detail: "The domestic desk groups this story with weather, health, and infrastructure coverage.",
+              href: sectionHref("us")
+            },
+            {
+              title: "Open the closures explainer",
+              detail: "The transport-side follow-up gives readers a more detailed reason for the road pattern around the scene.",
+              href: storyHref("road-closures")
+            },
+            {
+              title: "Return to the live route",
+              detail: "Use the live desk if you want the headline version of the same operational changes.",
+              href: "./newsroom.html"
+            }
+          ]
         },
         "aviation-hold": {
           label: "Airspace",
@@ -498,19 +676,42 @@
           sectionLabel: "Analysis",
           title: "Aviation hold is requested for the local coverage zone",
           dek:
-            "A generic explainer on observation corridors, reroutes, and why low-altitude traffic may be asked to stay clear.",
-          updated: "Analysis route",
+            "A quick analysis route explaining how observation corridors, reroutes, and low-altitude restrictions can be described on a breaking file.",
+          author: "By Analysis Desk",
+          updated: "Updated 27 minutes ago",
+          readTime: "5 minute read",
+          visualLabel: "Airspace and Routing",
+          caption:
+            "The analysis desk is focused on why an advisory changes the shape of a story even when the visible scene on the ground stays the same.",
           facts: [
             { label: "Angle", value: "Airspace and rerouting" },
-            { label: "Secondary read", value: "Works well beside analysis coverage" },
-            { label: "Story type", value: "Explainer" }
+            { label: "Story type", value: "Explainer with live-desk crossover" },
+            { label: "Best companion", value: "The broader airspace restrictions explainer" }
           ],
           paragraphs: [
-            "This route gives the site a place to land the aviation-hold update from the newsroom. It reads like a quick analysis piece rather than a live blog item.",
-            "Because the workshop site is static, the article does not need to go deep. It only needs to feel like a plausible destination the reader could reach from a homepage module or section front.",
-            "That extra layer of routing makes the overall build feel more complete and more like a conventional news property, which is the point of this pass."
+            "The language around an aviation hold often becomes one of the most important pieces of a fast-breaking file because it changes how both readers and editors interpret the scene.",
+            "Once an advisory is in play, the story stops being just a set of witness descriptions. It gains a procedural frame that points to monitoring, caution, and a more organized response pattern above the visible corridor.",
+            "That makes this route useful as an analysis page rather than a live update. It answers the next question readers tend to ask after the initial scene summary: what do these operational terms actually mean in practice?",
+            "On a larger site, this would likely sit beside maps or expert commentary. Here it serves the same structural role in a lighter, static format."
           ],
-          related: ["airspace-restrictions", "dispatch-clusters", "dispatch-now"]
+          related: ["airspace-restrictions", "dispatch-clusters", "dispatch-now"],
+          context: [
+            {
+              title: "Open the analysis front",
+              detail: "The analysis section groups this explainer with health, legal, and transport reads.",
+              href: sectionHref("analysis")
+            },
+            {
+              title: "Read the full airspace explainer",
+              detail: "That story goes broader on reroutes, corridor logic, and why restrictions can expand over time.",
+              href: storyHref("airspace-restrictions")
+            },
+            {
+              title: "Check the live desk",
+              detail: "The live route is still the fastest place to see the advisory language surface in headlines.",
+              href: "./newsroom.html"
+            }
+          ]
         },
         "medical-screening": {
           label: "Health",
@@ -518,19 +719,42 @@
           sectionLabel: "U.S.",
           title: "Medical screening is activated",
           dek:
-            "A concise health-focused route that groups the triage and screening angle into its own destination page.",
-          updated: "Health route",
+            "A health-focused follow-up that groups the triage and symptom-screening angle into its own destination page.",
+          author: "By Health Desk",
+          updated: "Updated 33 minutes ago",
+          readTime: "4 minute read",
+          visualLabel: "Health and Screening",
+          caption:
+            "The health-side route tracks the symptoms, thresholds, and practical guidance that often emerge after exposure concerns appear in a live file.",
           facts: [
             { label: "Angle", value: "Triage and symptom screening" },
-            { label: "Best companion", value: "Triage explainer coverage" },
-            { label: "Use on site", value: "Follow-up from live updates" }
+            { label: "Primary audience", value: "Readers looking for public-health style guidance" },
+            { label: "Best companion", value: "The triage explainer and U.S. section front" }
           ],
           paragraphs: [
-            "This story page exists to catch readers who click through from the medical-screening update card. It behaves like a health-side follow-up within the larger site shell.",
-            "The story is intentionally compact, but it still gives the site a proper article route, which is more convincing than routing readers back into the same page or leaving cards unlinked.",
-            "That structure is enough to create the impression of a fuller editorial site without taking on the complexity of a real newsroom CMS build."
+            "Health-side stories often arrive just after the first big operational updates. Once the scene has stabilized enough for screening language to appear, the file starts to branch into a more service-oriented form of coverage.",
+            "That is the role of this route. Instead of repeating the main live summary, it focuses on the symptoms, escalation terms, and screening posture readers would expect to see collected in one place.",
+            "Pages like this help the broader site feel more complete because they behave like natural secondary coverage rather than more versions of the same headline.",
+            "They also improve the click path: someone arriving through the homepage or a most-read rail has a clear health angle to follow without leaving the site shell."
           ],
-          related: ["triage-teams", "dispatch-now", "road-closures"]
+          related: ["triage-teams", "dispatch-now", "road-closures"],
+          context: [
+            {
+              title: "Browse the U.S. section",
+              detail: "The domestic desk bundles this story with service coverage and operational guidance.",
+              href: sectionHref("us")
+            },
+            {
+              title: "Read the triage explainer",
+              detail: "The analysis-side follow-up goes deeper on screening lists and escalation language.",
+              href: storyHref("triage-teams")
+            },
+            {
+              title: "Return to the live route",
+              detail: "Use the live desk for the shorter headline version of the same health update.",
+              href: "./newsroom.html"
+            }
+          ]
         },
         "airspace-restrictions": {
           label: "Analysis",
@@ -538,19 +762,42 @@
           sectionLabel: "Analysis",
           title: "How airspace restrictions are changing above the area",
           dek:
-            "A reusable analysis page that stands in for a fuller explainer on flight paths, advisories, and coverage corridors.",
-          updated: "Explainer route",
+            "A reusable explainer page covering reroutes, advisories, and the way a protected corridor changes the structure of the wider story.",
+          author: "By Aviation Analysis Team",
+          updated: "Updated 41 minutes ago",
+          readTime: "5 minute read",
+          visualLabel: "Restrictions and Reroutes",
+          caption:
+            "Aviation-side reads work best when they explain the practical meaning of restrictions instead of repeating the dramatic language from the live file.",
           facts: [
-            { label: "Angle", value: "Airspace restrictions and control" },
+            { label: "Angle", value: "Airspace restrictions and scene control" },
             { label: "Home section", value: "Analysis" },
-            { label: "Primary role", value: "Reusable explainer page" }
+            { label: "Primary role", value: "Evergreen explainer route inside the site" }
           ],
           paragraphs: [
-            "This article is a reusable explainer route. It gives section fronts and the newsroom rail a real place to send readers who want a broader read on the airspace angle.",
-            "The content is intentionally generic because the main requirement here is structural: the site should behave like a network of linked pages rather than a single isolated front.",
-            "That makes the workshop build feel much closer to a complete publication while keeping implementation light enough to manage in static hosting."
+            "This page is meant to serve as one of the main explainer destinations in the site. It takes a term-heavy part of the story and slows it down just enough for a reader to understand what is changing and why.",
+            "That matters because readers arriving from side rails or section fronts often want context more than urgency. They have already seen the headline; what they need next is a clear explanation of the operational language surrounding it.",
+            "In a fuller newsroom build this route might include charts, maps, or quoted analysis. In the workshop version it still performs the same editorial job, just in a more compact package.",
+            "Used this way, the page helps the site feel broader and more layered while keeping all of the linked content within the same design system."
           ],
-          related: ["aviation-hold", "dispatch-now", "perimeter-control"]
+          related: ["aviation-hold", "dispatch-now", "perimeter-control"],
+          context: [
+            {
+              title: "Open the analysis section",
+              detail: "The analysis front is the main home for explainer-style stories like this one.",
+              href: sectionHref("analysis")
+            },
+            {
+              title: "Go back to the live desk",
+              detail: "Readers often return to the live route after getting the terminology and scene-control context.",
+              href: "./newsroom.html"
+            },
+            {
+              title: "Read the closures story",
+              detail: "Transport-side coverage is the next logical click after airspace and corridor rules.",
+              href: storyHref("road-closures")
+            }
+          ]
         },
         "triage-teams": {
           label: "Health",
@@ -558,19 +805,42 @@
           sectionLabel: "Analysis",
           title: "What triage teams are watching for after exposure reports",
           dek:
-            "A follow-on health explainer that packages the symptom-screening angle as a standalone article.",
-          updated: "Health explainer route",
+            "A follow-on health explainer packaging screening language, symptom watchlists, and escalation thresholds into one route.",
+          author: "By Health and Science Desk",
+          updated: "Updated 52 minutes ago",
+          readTime: "4 minute read",
+          visualLabel: "Screening and Triage",
+          caption:
+            "Health-side explainers tend to work best when they separate symptom screening from the noise of the main breaking file.",
           facts: [
-            { label: "Angle", value: "Screening and symptom watchlists" },
-            { label: "Works best from", value: "Most Read or Analysis front" },
-            { label: "Role", value: "Secondary explainer" }
+            { label: "Angle", value: "Screening lists and symptom watchlists" },
+            { label: "Section home", value: "Analysis and health explainer coverage" },
+            { label: "Reader value", value: "A clearer follow-up after the faster live update" }
           ],
           paragraphs: [
-            "This page is the destination for the triage-teams most-read slot. It makes that rail item feel like a real article rather than a decorative headline.",
-            "For the workshop build, that is enough. The page gives the site a second layer of depth without requiring a full library of custom templates or bespoke routes.",
-            "Readers can move from the homepage-style newsroom page to this story, then back into the section front or live desk, which is the core experience you asked for."
+            "The triage angle is one of the clearest examples of why a fuller site structure matters. It is related to the main file, but it reads much better as a contained explainer than as another sentence added to a breaking-news page.",
+            "That is what this route provides: a home for the health-side detail that readers are likely to look for once they have already taken in the core scene summary.",
+            "It also gives the section fronts more depth. A headline can sit on analysis, U.S., or most-read rails and still land on a page that feels like a complete editorial destination.",
+            "Even without a full CMS behind it, that layered routing is enough to make the overall site feel much more natural."
           ],
-          related: ["medical-screening", "dispatch-now", "airspace-restrictions"]
+          related: ["medical-screening", "dispatch-now", "airspace-restrictions"],
+          context: [
+            {
+              title: "Browse the analysis front",
+              detail: "This story is one of the main health-side explainers living inside the analysis section.",
+              href: sectionHref("analysis")
+            },
+            {
+              title: "Read the screening update",
+              detail: "The shorter health route gives a faster, more headline-driven version of the same issue.",
+              href: storyHref("medical-screening")
+            },
+            {
+              title: "Open the live desk",
+              detail: "If you want the faster headline rhythm instead of the explainer view, return to the live page.",
+              href: "./newsroom.html"
+            }
+          ]
         },
         "road-closures": {
           label: "Explainer",
@@ -578,19 +848,300 @@
           sectionLabel: "Business",
           title: "Why road closures are clustering near the viewing corridor",
           dek:
-            "A route focused on traffic and access management, standing in for a fuller transportation or operational-impact article.",
-          updated: "Explainer route",
+            "A route focused on traffic, access, and operational logic, standing in for a fuller transportation or infrastructure explainer.",
+          author: "By Business and Infrastructure Desk",
+          updated: "Updated 1 hour ago",
+          readTime: "4 minute read",
+          visualLabel: "Closures and Access Routes",
+          caption:
+            "Operational-impact coverage often works best when it explains why closures gather around one specific corridor instead of appearing evenly across a city.",
           facts: [
             { label: "Angle", value: "Traffic and closure logic" },
-            { label: "Home section", value: "Business" },
-            { label: "Use on site", value: "Most Read and section card destination" }
+            { label: "Home section", value: "Business and operations desk" },
+            { label: "Why readers click", value: "To understand the practical shape of disruption" }
           ],
           paragraphs: [
-            "This story page catches the road-closure explainer links from the newsroom and section fronts. It reads like the sort of operational-impact article a major site would link repeatedly.",
-            "It does not need a deep reporting stack to serve the workshop. The presence of a real route, a coherent headline, and a properly structured page is enough to complete the illusion of a broader site.",
-            "That means the top-level pages can link naturally without every click collapsing back into the same route."
+            "Closure stories are often some of the most useful pieces on a fast-moving site because they turn a dramatic top-line file into something practical and legible for readers.",
+            "This route takes that approach. Rather than repeating the central scene description, it focuses on why open lots, decks, overpasses, and approach lanes become the first places officials try to control.",
+            "That makes it a natural business or operations story. It is about movement, capacity, access, and the mechanics of a visible disruption rather than just the disruption itself.",
+            "Pages like this also help the broader site feel balanced. Not every click should lead back to the same dramatic frame; some should land on a cleaner, more procedural explanation."
           ],
-          related: ["perimeter-control", "dispatch-now", "airspace-restrictions"]
+          related: ["perimeter-control", "dispatch-now", "airspace-restrictions"],
+          context: [
+            {
+              title: "Open the business front",
+              detail: "The business section groups closures, market reaction, and logistics pressure in one lane.",
+              href: sectionHref("business")
+            },
+            {
+              title: "Read the perimeter story",
+              detail: "That route focuses more directly on how officials are handling access and scene control on the ground.",
+              href: storyHref("perimeter-control")
+            },
+            {
+              title: "Return to the live route",
+              detail: "The live desk still holds the fastest headline version of the same closure pattern.",
+              href: "./newsroom.html"
+            }
+          ]
+        },
+        "senate-stopgap": {
+          label: "Politics",
+          section: "politics",
+          sectionLabel: "Politics",
+          title: "Senate leaders test support for a stopgap funding plan",
+          dek:
+            "A politics route built to feel like a conventional Capitol follow-up, with a narrower focus on vote counts, timing, and negotiation strategy.",
+          author: "By Congressional Team",
+          updated: "Updated 48 minutes ago",
+          readTime: "4 minute read",
+          visualLabel: "Funding Vote Pressure",
+          caption:
+            "This kind of politics page gives the site broader range and breaks the user out of the workshop file without leaving the same design system.",
+          facts: [
+            { label: "Angle", value: "Funding strategy and vote counting" },
+            { label: "Section home", value: "Politics desk" },
+            { label: "Role on site", value: "Broader headline that makes the nav feel complete" }
+          ],
+          paragraphs: [
+            "This article is not tied to the workshop story directly. Its purpose is to give the politics section and the latest front a broader news feel, the kind of coverage a reader would expect to find surrounding a breaking file on a larger site.",
+            "The frame is intentionally familiar: leadership testing support, negotiations shifting behind the scenes, and lawmakers trying to narrow the terms of a short-term deal before the next deadline pressure point arrives.",
+            "That recognizable structure is useful in a static site because it reads like a normal politics follow-up even without live sourcing or a full archive behind it.",
+            "Pages like this help the overall build feel like a complete publication rather than a single-topic microsite."
+          ],
+          related: ["court-privacy-ruling", "market-rate-watch", "dispatch-now"],
+          context: [
+            {
+              title: "Browse the politics section",
+              detail: "The politics front groups this story with court coverage and official-response pieces.",
+              href: sectionHref("politics")
+            },
+            {
+              title: "Watch the debate highlights route",
+              detail: "The video desk carries a lighter, segment-style version of political coverage.",
+              href: storyHref("streaming-debate-highlights")
+            },
+            {
+              title: "Open the latest front",
+              detail: "The homepage-style latest section mixes this broader politics story with the live desk file.",
+              href: sectionHref("latest")
+            }
+          ]
+        },
+        "market-rate-watch": {
+          label: "Business",
+          section: "business",
+          sectionLabel: "Business",
+          title: "Stocks open mixed as investors weigh rate signals and guidance",
+          dek:
+            "A markets route intended to make the business section feel more complete with a familiar pre-close style article.",
+          author: "By Markets Desk",
+          updated: "Updated 35 minutes ago",
+          readTime: "3 minute read",
+          visualLabel: "Markets and Rate Signals",
+          caption:
+            "A straightforward markets page adds range to the site and gives business-side rails something recognizable to point toward.",
+          facts: [
+            { label: "Angle", value: "Market tone and rate expectations" },
+            { label: "Section home", value: "Business desk" },
+            { label: "Reader use", value: "Quick market catch-up alongside operational stories" }
+          ],
+          paragraphs: [
+            "Markets pages do useful structural work on a site like this because they create a familiar editorial rhythm. Even a short article about mixed trading, rate pressure, and corporate guidance helps the business section feel like a working desk.",
+            "The story is intentionally general, leaning on themes that stay recognizable without needing a day-specific market tape. That keeps it stable while still reading like a conventional business brief.",
+            "On the section front, this route balances the more workshop-related infrastructure stories with a broader financial headline that feels independent of the main file.",
+            "That independence matters. It gives the site texture and keeps the whole experience from feeling over-centered on one storyline."
+          ],
+          related: ["road-closures", "port-shipping-delays", "senate-stopgap"],
+          context: [
+            {
+              title: "Browse the business front",
+              detail: "This story sits beside operations, ports, and closure logic on the business section page.",
+              href: sectionHref("business")
+            },
+            {
+              title: "Read the ports story",
+              detail: "Global trade coverage gives the business desk a broader, more international read.",
+              href: storyHref("port-shipping-delays")
+            },
+            {
+              title: "Open the latest front",
+              detail: "The latest page mixes markets with breaking and service-driven desk coverage.",
+              href: sectionHref("latest")
+            }
+          ]
+        },
+        "storm-grid-alert": {
+          label: "U.S.",
+          section: "us",
+          sectionLabel: "U.S.",
+          title: "Utilities prepare for storm-driven outages as crews move inland",
+          dek:
+            "A domestic service-style route covering outage preparation, crew staging, and the practical effects of an incoming weather band.",
+          author: "By National Desk",
+          updated: "Updated 1 hour ago",
+          readTime: "4 minute read",
+          visualLabel: "Storm and Utility Readiness",
+          caption:
+            "A weather-driven utility story gives the U.S. section a second strong service angle beyond the main workshop-related coverage.",
+          facts: [
+            { label: "Angle", value: "Preparedness and outage response" },
+            { label: "Section home", value: "U.S. desk" },
+            { label: "Primary role", value: "Domestic service and readiness coverage" }
+          ],
+          paragraphs: [
+            "This route is built to feel like the sort of weather-and-utility story that sits naturally on a national front. It focuses on preparedness language, crew movement, and the operational side of an incoming storm band.",
+            "That tone helps the site because it introduces a second kind of urgency, one tied to practical service information rather than the central workshop file.",
+            "A domestic section usually feels thin if every link is a direct branch of the lead breaking story. Adding a utility and weather page like this gives it needed range.",
+            "The result is a U.S. front that reads more like a living site and less like a single-topic package."
+          ],
+          related: ["medical-screening", "market-rate-watch", "port-shipping-delays"],
+          context: [
+            {
+              title: "Browse the U.S. front",
+              detail: "The domestic section uses weather, health, and response stories to create a broader service-news feel.",
+              href: sectionHref("us")
+            },
+            {
+              title: "Check the latest section",
+              detail: "The latest front folds this national story into the broader desk mix beside breaking coverage.",
+              href: sectionHref("latest")
+            },
+            {
+              title: "Open the closures explainer",
+              detail: "Operational-impact coverage is a natural companion to weather and outage readiness stories.",
+              href: storyHref("road-closures")
+            }
+          ]
+        },
+        "court-privacy-ruling": {
+          label: "Politics",
+          section: "politics",
+          sectionLabel: "Politics",
+          title: "Appeals court weighs the limits of a new digital privacy rule",
+          dek:
+            "A legal affairs route giving the politics page a more conventional court-and-policy story alongside the workshop-linked coverage.",
+          author: "By Legal Affairs Desk",
+          updated: "Updated 2 hours ago",
+          readTime: "4 minute read",
+          visualLabel: "Court and Policy Review",
+          caption:
+            "Legal and court coverage helps the politics section feel broader than a single government-response lane.",
+          facts: [
+            { label: "Angle", value: "Court scrutiny and regulatory power" },
+            { label: "Section home", value: "Politics desk" },
+            { label: "Editorial role", value: "Broader policy read beyond the main live file" }
+          ],
+          paragraphs: [
+            "Court stories add a useful counterweight to the faster, more tactical feel of campaign and congressional coverage. They slow the section down and give readers a more institutional angle.",
+            "This article uses that logic. It reads like a compact legal-affairs piece focused on the limits of a rule, the questions judges are asking, and the practical reach of the policy under review.",
+            "For the workshop site, that is exactly the kind of broader material that helps a politics page feel full without requiring a deep archive.",
+            "It gives readers another familiar lane to click into, which makes the overall structure feel much more natural."
+          ],
+          related: ["senate-stopgap", "dispatch-now", "market-rate-watch"],
+          context: [
+            {
+              title: "Browse the politics front",
+              detail: "The politics section mixes court coverage, congressional reporting, and official-response stories.",
+              href: sectionHref("politics")
+            },
+            {
+              title: "Read the Senate funding story",
+              detail: "That route gives the politics desk a more traditional Hill-centered follow-up.",
+              href: storyHref("senate-stopgap")
+            },
+            {
+              title: "Open analysis coverage",
+              detail: "Readers who want more context often move from legal stories to explainers and analysis.",
+              href: sectionHref("analysis")
+            }
+          ]
+        },
+        "port-shipping-delays": {
+          label: "World",
+          section: "world",
+          sectionLabel: "World",
+          title: "Shipping delays ripple outward as major ports absorb rerouted cargo",
+          dek:
+            "A global trade and logistics route designed to make the world desk feel like more than a placeholder section.",
+          author: "By Global Trade Desk",
+          updated: "Updated 2 hours ago",
+          readTime: "4 minute read",
+          visualLabel: "Trade and Logistics Pressure",
+          caption:
+            "A ports-and-shipping page gives the world desk a practical angle that fits naturally beside politics and business coverage.",
+          facts: [
+            { label: "Angle", value: "Ports, freight, and rerouted cargo" },
+            { label: "Section home", value: "World desk" },
+            { label: "Use on site", value: "Global context and secondary business read" }
+          ],
+          paragraphs: [
+            "Trade and logistics coverage is one of the easiest ways to make a world section feel broader without overcommitting to a full foreign desk. The themes are familiar, practical, and easy to route across business and world pages.",
+            "This story leans on that strength. It focuses on congestion, rerouted cargo, and how capacity pressure can shift from one hub to the next once the primary route starts to back up.",
+            "Because the angle is broad and recognizable, it works well as a stable destination link inside a static site. Readers do not need a full archive to understand why it belongs here.",
+            "That is enough to make the world front feel like a real section rather than a decorative nav item."
+          ],
+          related: ["market-rate-watch", "storm-grid-alert", "airspace-restrictions"],
+          context: [
+            {
+              title: "Browse the world front",
+              detail: "The world section pairs this trade story with global context, policy reads, and broader desk analysis.",
+              href: sectionHref("world")
+            },
+            {
+              title: "Open the business section",
+              detail: "Readers interested in logistics pressure often move into markets and operations coverage next.",
+              href: sectionHref("business")
+            },
+            {
+              title: "Read the markets story",
+              detail: "Market reaction is the most natural companion route after a shipping or freight article.",
+              href: storyHref("market-rate-watch")
+            }
+          ]
+        },
+        "streaming-debate-highlights": {
+          label: "Video",
+          section: "video",
+          sectionLabel: "Video",
+          title: "Watch the key moments from last night's prime-time debate",
+          dek:
+            "A video-desk route that reads like a replay page, with enough article framing to work inside the broader site shell.",
+          author: "By Video Desk",
+          updated: "Updated 3 hours ago",
+          readTime: "3 minute read",
+          visualLabel: "Clip and Replay Desk",
+          caption:
+            "The video page behaves more like a replay article than a true player route, but it still gives the site a convincing clip surface.",
+          facts: [
+            { label: "Angle", value: "Replay highlights and segment routing" },
+            { label: "Section home", value: "Video desk" },
+            { label: "Editorial role", value: "Clip-style companion route" }
+          ],
+          paragraphs: [
+            "A video page on a static site has to do a slightly different job. It needs to feel like a clip destination without relying on a full player stack or a streaming backend.",
+            "This article-style route handles that by framing the story as a highlight package: the key exchanges, the reset moments, and the lines that shaped follow-up coverage afterward.",
+            "That is a recognizable pattern on large sites, and it gives the video section a believable reason to exist inside the nav.",
+            "As a result, the site gains another internal loop. A reader can move from politics to video, then back to a broader section or the live desk without the shell breaking down."
+          ],
+          related: ["senate-stopgap", "court-privacy-ruling", "dispatch-now"],
+          context: [
+            {
+              title: "Browse the video section",
+              detail: "The video front mixes replay-style pages with live-desk handoffs and explainer links.",
+              href: sectionHref("video")
+            },
+            {
+              title: "Open the politics front",
+              detail: "Readers leaving a debate replay often move into politics coverage for the broader policy frame.",
+              href: sectionHref("politics")
+            },
+            {
+              title: "Read the Senate funding story",
+              detail: "That route keeps the political thread going in a more conventional article form.",
+              href: storyHref("senate-stopgap")
+            }
+          ]
         }
       };
 
@@ -607,14 +1158,19 @@
       document.getElementById("storyLabel").textContent = story.label;
       document.getElementById("storyTitle").textContent = story.title;
       document.getElementById("storyDek").textContent = story.dek;
+      document.getElementById("storyAuthor").textContent = story.author;
       document.getElementById("storySectionMeta").textContent = `${story.sectionLabel} desk`;
       document.getElementById("storyUpdated").textContent = story.updated;
+      document.getElementById("storyReadTime").textContent = story.readTime;
       document.getElementById("storyStamp").textContent = `${story.sectionLabel} route`;
+      document.getElementById("storyVisualLabel").textContent = story.visualLabel;
+      document.getElementById("storyCaption").textContent = story.caption;
+      document.getElementById("contextStamp").textContent = `${story.sectionLabel} desk`;
       document.getElementById("sectionAction").href = sectionHref(story.section);
       document.getElementById("sectionAction").textContent = `Open ${story.sectionLabel} Section`;
 
       document.getElementById("storyBody").innerHTML = story.paragraphs
-        .map((paragraph) => `<p>${paragraph}</p>`)
+        .map((paragraph, index) => `<p${index === 0 ? ' class="lede"' : ""}>${paragraph}</p>`)
         .join("");
 
       document.getElementById("factList").innerHTML = story.facts
@@ -640,6 +1196,19 @@
             </li>
           `;
         })
+        .join("");
+
+      document.getElementById("contextList").innerHTML = story.context
+        .map(
+          (item) => `
+            <li>
+              <a href="${item.href}">
+                <strong>${item.title}</strong>
+                <span>${item.detail}</span>
+              </a>
+            </li>
+          `
+        )
         .join("");
     </script>
   </body>

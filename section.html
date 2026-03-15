@@ -198,6 +198,18 @@
         line-height: 1.66;
       }
 
+      .hero-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 16px;
+        margin-top: 18px;
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
       .hero-actions {
         display: flex;
         flex-wrap: wrap;
@@ -332,6 +344,74 @@
         line-height: 1.58;
       }
 
+      .story-card-meta {
+        display: block;
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .headline-list,
+      .watch-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .headline-list li {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .headline-list li:last-child {
+        border-bottom: 0;
+      }
+
+      .headline-list a {
+        display: grid;
+        grid-template-columns: 102px minmax(0, 1fr);
+        gap: 18px;
+        padding: 18px 20px;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .headline-list a:hover strong,
+      .headline-list a:focus-visible strong {
+        color: var(--red);
+      }
+
+      .headline-time {
+        color: var(--red);
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1.3rem;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+      }
+
+      .headline-copy strong {
+        display: block;
+        line-height: 1.42;
+      }
+
+      .headline-copy p {
+        margin: 8px 0 0;
+        color: #2e3641;
+        line-height: 1.58;
+      }
+
+      .headline-copy span {
+        display: block;
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
       .panel-body {
         padding: 20px;
       }
@@ -340,6 +420,16 @@
         margin: 0;
         color: #2b3440;
         line-height: 1.68;
+      }
+
+      .brief-meta {
+        display: block;
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
 
       .link-list {
@@ -385,6 +475,27 @@
         text-transform: uppercase;
       }
 
+      .watch-list li {
+        padding: 14px 0;
+        border-bottom: 1px solid var(--line);
+        line-height: 1.58;
+      }
+
+      .watch-list li:last-child {
+        border-bottom: 0;
+      }
+
+      .watch-list strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 0.95rem;
+      }
+
+      .watch-list span {
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
       .footer-note {
         margin-top: 18px;
         color: var(--muted);
@@ -418,6 +529,12 @@
 
         .story-grid {
           gap: 12px;
+        }
+
+        .headline-list a {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 10px;
+          padding: 16px;
         }
       }
     </style>
@@ -458,15 +575,22 @@
           <a href="./section.html?topic=business" data-topic-link="business">Business</a>
           <a href="./section.html?topic=video" data-topic-link="video">Video</a>
         </nav>
-        <div class="subnav-note" id="sectionNote">Loading section</div>
+        <div class="subnav-note" id="sectionNote">Latest section</div>
       </div>
     </div>
 
     <main class="page-shell">
       <section class="hero">
         <p class="eyebrow" id="sectionLabel">Section</p>
-        <h1 id="sectionTitle">Loading section front</h1>
-        <p class="hero-dek" id="sectionDek">Assembling coverage desk modules.</p>
+        <h1 id="sectionTitle">Latest coverage and rolling developments</h1>
+        <p class="hero-dek" id="sectionDek">
+          The latest front pulls together the desk's quickest updates, strongest explainers, and
+          broader follow-up reads.
+        </p>
+        <div class="hero-meta">
+          <span id="sectionUpdated">Updated desk lineup</span>
+          <span id="sectionTagline">Signal News Desk front</span>
+        </div>
         <div class="hero-actions">
           <a class="primary" href="./newsroom.html">Open Live Desk</a>
           <a id="leadAction" href="./story.html?id=dispatch-now">Read Lead Story</a>
@@ -483,6 +607,14 @@
             </div>
             <div class="story-grid" id="leadGrid"></div>
           </section>
+
+          <section class="card">
+            <div class="section-head">
+              <h2>Latest Headlines</h2>
+              <span id="headlineStamp">Updating</span>
+            </div>
+            <ul class="headline-list" id="headlineList"></ul>
+          </section>
         </div>
 
         <aside class="rail-stack">
@@ -492,7 +624,11 @@
               <span id="briefLabel">Editor note</span>
             </div>
             <div class="panel-body">
-              <p class="brief-copy" id="briefCopy">Loading section note.</p>
+              <p class="brief-copy" id="briefCopy">
+                Editors are keeping this front balanced between the lead live file, its strongest
+                explainers, and a handful of broader national reads.
+              </p>
+              <span class="brief-meta" id="briefMeta">Signal News Desk</span>
             </div>
           </section>
 
@@ -503,6 +639,16 @@
             </div>
             <div class="panel-body">
               <ul class="link-list" id="relatedList"></ul>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="section-head">
+              <h2>What To Watch</h2>
+              <span id="watchStamp">Desk watchlist</span>
+            </div>
+            <div class="panel-body">
+              <ul class="watch-list" id="watchList"></ul>
             </div>
           </section>
         </aside>
@@ -518,51 +664,129 @@
       const STORIES = {
         "dispatch-now": {
           label: "Live coverage",
+          section: "latest",
           title: "What dispatch traffic is reporting right now",
           summary:
-            "A minute-by-minute look at how emergency traffic and witness calls are converging around the same sector."
+            "The desk's lead route tracking how emergency calls, visual reports, and corridor control notes are converging around one visible sector.",
+          byline: "By Signal News Desk",
+          timeLabel: "Updated 8 min ago"
         },
         "dispatch-clusters": {
           label: "Latest",
+          section: "latest",
           title: "Dispatch traffic clusters around the same sector",
           summary:
-            "Why separate callers are describing the same position, timing, and movement pattern."
+            "Why separate callers are repeating the same location markers, timing cues, and movement descriptions as the scene narrows.",
+          byline: "By Desk Reporting Team",
+          timeLabel: "13 min ago"
         },
         "perimeter-control": {
           label: "Field operations",
+          section: "us",
           title: "Perimeter control expands around clear viewing lanes",
           summary:
-            "Traffic units are pushing vehicles out of open sightlines and keeping lanes open for official access."
+            "Traffic units are moving vehicles away from open sightlines while preserving access lanes for official traffic and medical movement.",
+          byline: "By Metro Desk",
+          timeLabel: "21 min ago"
         },
         "aviation-hold": {
           label: "Airspace",
+          section: "analysis",
           title: "Aviation hold is requested for the local coverage zone",
           summary:
-            "Monitors are relaying advisories intended to keep low-altitude traffic outside the active scene."
+            "Monitors are relaying advisories intended to keep low-altitude traffic outside the active scene while the visible corridor remains under review.",
+          byline: "By Analysis Desk",
+          timeLabel: "27 min ago"
         },
         "medical-screening": {
           label: "Health",
+          section: "us",
           title: "Medical screening is activated",
           summary:
-            "Hospitals and triage teams are watching for irritation, disorientation, and debris-contact reports."
+            "Hospitals and triage teams are preparing to log irritation, dizziness, and debris-contact complaints tied to the active scene.",
+          byline: "By Health Desk",
+          timeLabel: "33 min ago"
         },
         "airspace-restrictions": {
           label: "Analysis",
+          section: "analysis",
           title: "How airspace restrictions are changing above the area",
           summary:
-            "A quick explainer on reroutes, observation corridors, and why low-altitude traffic is being shifted."
+            "A clearer explainer on reroutes, observation corridors, and why low-altitude traffic is being pulled back from the scene.",
+          byline: "By Aviation Analysis Team",
+          timeLabel: "41 min ago"
         },
         "triage-teams": {
           label: "Health",
+          section: "analysis",
           title: "What triage teams are watching for after exposure reports",
           summary:
-            "The symptoms, screenings, and precaution language being repeated to hospitals and urgent care desks."
+            "The symptom list, screening language, and escalation thresholds being repeated to hospitals and urgent care desks.",
+          byline: "By Health and Science Desk",
+          timeLabel: "52 min ago"
         },
         "road-closures": {
           label: "Explainer",
+          section: "business",
           title: "Why road closures are clustering near the viewing corridor",
           summary:
-            "An overview of why shoulders, decks, overpasses, and open lots are being cleared first."
+            "An operations-focused explainer on why shoulders, decks, overpasses, and open lots are being cleared first.",
+          byline: "By Business and Infrastructure Desk",
+          timeLabel: "1 hour ago"
+        },
+        "senate-stopgap": {
+          label: "Politics",
+          section: "politics",
+          title: "Senate leaders test support for a stopgap funding plan",
+          summary:
+            "Negotiators say the vote count remains fluid as leaders measure whether a short extension can clear both chambers without a broader deal.",
+          byline: "By Congressional Team",
+          timeLabel: "48 min ago"
+        },
+        "market-rate-watch": {
+          label: "Business",
+          section: "business",
+          title: "Stocks open mixed as investors weigh rate signals and guidance",
+          summary:
+            "Traders are balancing fresh comments on inflation with cautious corporate outlooks from several large-cap companies.",
+          byline: "By Markets Desk",
+          timeLabel: "35 min ago"
+        },
+        "storm-grid-alert": {
+          label: "U.S.",
+          section: "us",
+          title: "Utilities prepare for storm-driven outages as crews move inland",
+          summary:
+            "Emergency managers say crews are staging ahead of a wind and rain band expected to stress local distribution lines overnight.",
+          byline: "By National Desk",
+          timeLabel: "1 hour ago"
+        },
+        "court-privacy-ruling": {
+          label: "Politics",
+          section: "politics",
+          title: "Appeals court weighs the limits of a new digital privacy rule",
+          summary:
+            "Judges pressed both sides on whether the current framework gives regulators too much discretion over common data-sharing practices.",
+          byline: "By Legal Affairs Desk",
+          timeLabel: "2 hours ago"
+        },
+        "port-shipping-delays": {
+          label: "World",
+          section: "world",
+          title: "Shipping delays ripple outward as major ports absorb rerouted cargo",
+          summary:
+            "Freight analysts say congestion is beginning to spread across secondary hubs as carriers look for alternate capacity.",
+          byline: "By Global Trade Desk",
+          timeLabel: "2 hours ago"
+        },
+        "streaming-debate-highlights": {
+          label: "Video",
+          section: "video",
+          title: "Watch the key moments from last night's prime-time debate",
+          summary:
+            "The video desk has cut the sharpest exchanges, reaction shots, and moderator resets into a single fast-turn rundown.",
+          byline: "By Video Desk",
+          timeLabel: "3 hours ago"
         }
       };
 
@@ -571,33 +795,81 @@
           label: "Latest",
           title: "Latest coverage and rolling developments",
           dek:
-            "The latest front pulls together the desk’s quickest updates, rolling field notes, and the most current explanatory reads linked from the live route.",
+            "The latest front pulls together the quickest desk updates, the strongest follow-up reads, and a handful of broader national stories so the site feels like a working newsroom surface.",
           note: "Latest desk lineup",
+          updated: "Updated moments ago",
+          tagline: "Continuous front page routing",
           brief:
-            "This front is meant to feel like the site-wide catch-up page: one lead story, a few secondary reads, and enough routing for the workshop to feel like a complete news surface.",
-          leadIds: ["dispatch-now", "dispatch-clusters", "perimeter-control"],
-          relatedIds: ["aviation-hold", "airspace-restrictions", "triage-teams"],
+            "Editors are pushing fast-turn updates from the live desk into this front while keeping a mix of domestic, politics, and business coverage around the lead file.",
+          briefMeta: "Editor note | latest desk",
+          leadIds: ["dispatch-now", "dispatch-clusters", "senate-stopgap", "storm-grid-alert"],
+          headlineIds: [
+            "perimeter-control",
+            "aviation-hold",
+            "market-rate-watch",
+            "court-privacy-ruling",
+            "road-closures"
+          ],
+          relatedIds: ["medical-screening", "airspace-restrictions", "triage-teams", "port-shipping-delays"],
+          watchItems: [
+            {
+              title: "Lead file rotation",
+              detail: "Editors are balancing the live desk lead with follow-up explainers and quick-turn political coverage."
+            },
+            {
+              title: "Domestic watch",
+              detail: "Utility readiness, transport pressure, and corridor closures remain the main domestic operational themes."
+            },
+            {
+              title: "Readership path",
+              detail: "The strongest click path remains homepage to live desk to explainer, with readers returning through latest."
+            }
+          ],
           stats: [
-            { label: "Lead focus", value: "Rolling scene updates" },
-            { label: "Format", value: "Live desk handoff" },
-            { label: "Editors watching", value: "Dispatch, perimeter, advisories" },
-            { label: "Best next click", value: "Open the live desk or lead story" }
+            { label: "Lead focus", value: "Rolling scene and response updates" },
+            { label: "Format", value: "Fast-turn homepage lineup" },
+            { label: "Editors watching", value: "Dispatch, markets, weather, Congress" },
+            { label: "Best next click", value: "Live Desk or lead explainer" }
           ]
         },
         "live-tv": {
           label: "Live TV",
           title: "Live TV programming and on-air desk windows",
           dek:
-            "The live television front packages the on-air angle of the coverage with the strongest segment-ready stories and the routes that support the broadcast framing.",
+            "The live television front leans into the broadcast side of the build, pairing segment-ready articles with a stronger handoff back into the continuous live desk route.",
           note: "Broadcast lineup",
+          updated: "Programming update",
+          tagline: "Studio handoff and clip routing",
           brief:
-            "This page stands in for the site’s broadcast section. The links are real, but the page is intentionally lightweight so the site feels complete without building a full TV stack.",
-          leadIds: ["dispatch-now", "aviation-hold", "perimeter-control"],
-          relatedIds: ["dispatch-clusters", "road-closures", "triage-teams"],
+            "This section front behaves like a stripped-down broadcast hub: lead segment, supporting explainers, and a clean route back into the main live coverage page.",
+          briefMeta: "Programming note | live tv",
+          leadIds: ["dispatch-now", "streaming-debate-highlights", "aviation-hold", "perimeter-control"],
+          headlineIds: [
+            "dispatch-clusters",
+            "road-closures",
+            "market-rate-watch",
+            "senate-stopgap",
+            "airspace-restrictions"
+          ],
+          relatedIds: ["storm-grid-alert", "triage-teams", "court-privacy-ruling", "port-shipping-delays"],
+          watchItems: [
+            {
+              title: "On-air balance",
+              detail: "The desk is keeping one live file, one explainer, and one broader headline package in each rotation."
+            },
+            {
+              title: "Clip pressure",
+              detail: "Segment pages need strong headlines and easy returns to the live desk so the routing stays believable."
+            },
+            {
+              title: "Anchor handoff",
+              detail: "The best supporting links are short explainers that can be promoted from lower thirds and side rails."
+            }
+          ],
           stats: [
-            { label: "Primary block", value: "Continuous live desk" },
-            { label: "Segment mix", value: "Live hit, explainer, analyst" },
-            { label: "Studio handoff", value: "Field desk to anchor" },
+            { label: "Primary block", value: "Continuous live desk coverage" },
+            { label: "Segment mix", value: "Live hit, clip, explainer, analyst" },
+            { label: "Studio handoff", value: "Field desk to anchor desk" },
             { label: "Lead clip", value: "Coverage zone developments" }
           ]
         },
@@ -605,67 +877,163 @@
           label: "Analysis",
           title: "Analysis, explainers, and desk interpretation",
           dek:
-            "The analysis front groups the background pieces that help a reader understand why restrictions, routing, and response language are changing around the scene.",
+            "The analysis front carries deeper reads on routing, health, law, and response language so the site feels layered instead of flat.",
           note: "Analysis desk",
+          updated: "Analysis board refreshed",
+          tagline: "Explainers and deeper reads",
           brief:
-            "For the workshop, this page behaves like a generic analysis hub with a few explainers and follow-on reads linked to reusable article pages.",
-          leadIds: ["airspace-restrictions", "road-closures", "triage-teams"],
-          relatedIds: ["dispatch-now", "aviation-hold", "medical-screening"],
+            "This section is the main home for explainers. It keeps the workshop-related articles anchored in a larger editorial frame and gives readers a plausible second click after the homepage.",
+          briefMeta: "Editor note | analysis",
+          leadIds: ["airspace-restrictions", "road-closures", "triage-teams", "court-privacy-ruling"],
+          headlineIds: [
+            "aviation-hold",
+            "medical-screening",
+            "dispatch-now",
+            "market-rate-watch",
+            "port-shipping-delays"
+          ],
+          relatedIds: ["dispatch-clusters", "senate-stopgap", "storm-grid-alert", "streaming-debate-highlights"],
+          watchItems: [
+            {
+              title: "Reader behavior",
+              detail: "Explainers are the most natural follow-up route after live coverage and most-read side rail clicks."
+            },
+            {
+              title: "Desk priority",
+              detail: "Editors are keeping airspace, health, and closure logic grouped tightly so the analysis section reads cleanly."
+            },
+            {
+              title: "Follow-on coverage",
+              detail: "Legal, market, and logistics pieces help the section feel broader than the single workshop file."
+            }
+          ],
           stats: [
-            { label: "Focus", value: "Context and explanation" },
+            { label: "Focus", value: "Context, regulation, and explanation" },
             { label: "Editors watching", value: "Policy, routing, health guidance" },
             { label: "Primary audience", value: "Readers catching up" },
-            { label: "Lead format", value: "Explainer and FAQ" }
+            { label: "Lead format", value: "Explainer and FAQ style" }
           ]
         },
         us: {
           label: "U.S.",
           title: "U.S. desk coverage and domestic updates",
           dek:
-            "The U.S. front collects domestic desk reads, regional explainers, and the localized stories being routed across the wider site.",
+            "The domestic front packages response, infrastructure, weather, and health reads so the site has a more complete national-news rhythm around the workshop file.",
           note: "National desk",
+          updated: "Domestic desk update",
+          tagline: "National reporting and domestic follow-ups",
           brief:
-            "This is a generic domestic hub for the workshop site. It is enough to make the navigation feel complete without needing a full national section build.",
-          leadIds: ["dispatch-now", "road-closures", "medical-screening"],
-          relatedIds: ["dispatch-clusters", "airspace-restrictions", "triage-teams"],
+            "This front gives the site a broader national frame with a mix of regional reporting, preparedness stories, and service-style coverage.",
+          briefMeta: "Editor note | u.s. desk",
+          leadIds: ["storm-grid-alert", "dispatch-now", "medical-screening", "perimeter-control"],
+          headlineIds: [
+            "road-closures",
+            "dispatch-clusters",
+            "market-rate-watch",
+            "court-privacy-ruling",
+            "triage-teams"
+          ],
+          relatedIds: ["senate-stopgap", "airspace-restrictions", "port-shipping-delays", "streaming-debate-highlights"],
+          watchItems: [
+            {
+              title: "Domestic spread",
+              detail: "Editors are mixing weather readiness, transport pressure, and health-side updates to avoid a one-note section."
+            },
+            {
+              title: "Service value",
+              detail: "Practical stories about closures, outages, and screenings are doing most of the work in this section."
+            },
+            {
+              title: "Reader expectation",
+              detail: "A national front needs both a live domestic file and a few broader utility stories to feel complete."
+            }
+          ],
           stats: [
-            { label: "Desk", value: "Domestic reporting" },
-            { label: "Surface", value: "Section front" },
-            { label: "Lead angle", value: "Regional impact and routing" },
-            { label: "Supporting reads", value: "Health and response" }
+            { label: "Desk", value: "Domestic reporting and services" },
+            { label: "Surface", value: "National section front" },
+            { label: "Lead angle", value: "Regional impact and public guidance" },
+            { label: "Supporting reads", value: "Weather, health, infrastructure" }
           ]
         },
         world: {
           label: "World",
           title: "World desk front and international context",
           dek:
-            "The world front is a placeholder international section that still gives the site a believable route structure and a place for broad context and external comparisons.",
+            "The world front is intentionally broader, using trade, logistics, and comparative policy pieces to make the site feel like a larger networked publication.",
           note: "World desk",
+          updated: "International desk update",
+          tagline: "Global context and external comparisons",
           brief:
-            "This front is intentionally thin. It exists so the nav behaves like a real site section and gives the workshop a more complete shell.",
-          leadIds: ["airspace-restrictions", "dispatch-now", "aviation-hold"],
-          relatedIds: ["dispatch-clusters", "road-closures", "triage-teams"],
+            "This section is lightweight, but it adds breadth. A believable world page helps the site read more like a full publication instead of a single-purpose project page.",
+          briefMeta: "Editor note | world desk",
+          leadIds: ["port-shipping-delays", "airspace-restrictions", "senate-stopgap", "market-rate-watch"],
+          headlineIds: [
+            "storm-grid-alert",
+            "court-privacy-ruling",
+            "dispatch-now",
+            "aviation-hold",
+            "streaming-debate-highlights"
+          ],
+          relatedIds: ["road-closures", "triage-teams", "medical-screening", "dispatch-clusters"],
+          watchItems: [
+            {
+              title: "Global ripple effects",
+              detail: "Trade and shipping stories give the world page enough range to sit naturally beside domestic and politics desks."
+            },
+            {
+              title: "Reader pattern",
+              detail: "Readers arriving here usually click into analysis or back to the live desk rather than staying in one section."
+            },
+            {
+              title: "Desk mix",
+              detail: "A world page works best when it blends one logistics story, one policy read, and one major headline file."
+            }
+          ],
           stats: [
-            { label: "Desk", value: "International context" },
-            { label: "Lead format", value: "Overview and comparison" },
-            { label: "Best next click", value: "Open analysis or live desk" },
-            { label: "Reader need", value: "Broader framing" }
+            { label: "Desk", value: "International and trade context" },
+            { label: "Lead format", value: "Overview plus follow-up reads" },
+            { label: "Best next click", value: "Analysis or live desk" },
+            { label: "Reader need", value: "Broader framing around impact" }
           ]
         },
         politics: {
           label: "Politics",
           title: "Politics coverage and official response",
           dek:
-            "The politics front frames the official side of the coverage, with focus on advisories, agency coordination language, and government-facing reaction pieces.",
+            "The politics front keeps agency language, court scrutiny, and congressional maneuvering in one place while still linking back to the live response file.",
           note: "Politics desk",
+          updated: "Politics lineup refreshed",
+          tagline: "Official response and power centers",
           brief:
-            "This page gives the site a politics section without needing deep downstream routing. The cards reuse the same article pages where appropriate.",
-          leadIds: ["dispatch-now", "airspace-restrictions", "road-closures"],
-          relatedIds: ["aviation-hold", "dispatch-clusters", "medical-screening"],
+            "This route helps the site feel like a full politics desk by pairing the workshop file with legal, funding, and agency-response coverage.",
+          briefMeta: "Editor note | politics",
+          leadIds: ["senate-stopgap", "court-privacy-ruling", "dispatch-now", "airspace-restrictions"],
+          headlineIds: [
+            "aviation-hold",
+            "road-closures",
+            "dispatch-clusters",
+            "market-rate-watch",
+            "streaming-debate-highlights"
+          ],
+          relatedIds: ["medical-screening", "port-shipping-delays", "storm-grid-alert", "triage-teams"],
+          watchItems: [
+            {
+              title: "Official language",
+              detail: "The politics route works when it keeps agency posture and congressional pressure in the same editorial frame."
+            },
+            {
+              title: "Companion reads",
+              detail: "Court coverage and funding negotiations keep the page from feeling too narrow."
+            },
+            {
+              title: "Routing logic",
+              detail: "Readers often come in through politics and then jump to the live desk for immediate updates."
+            }
+          ],
           stats: [
-            { label: "Desk", value: "Official response" },
-            { label: "Lead angle", value: "Advisories and control" },
-            { label: "Secondary angle", value: "Traffic and closures" },
+            { label: "Desk", value: "Government, courts, and agencies" },
+            { label: "Lead angle", value: "Advisories and official response" },
+            { label: "Secondary angle", value: "Funding and legal pressure" },
             { label: "Next stop", value: "Live desk or analysis" }
           ]
         },
@@ -673,33 +1041,81 @@
           label: "Business",
           title: "Business front and operational impacts",
           dek:
-            "The business front packages the disruption angle of the coverage, focusing on routing, interruptions, and operational knock-on effects.",
+            "The business front packages market reaction, logistics pressure, and infrastructure disruption to make the site's economic layer feel more complete.",
           note: "Business desk",
+          updated: "Markets and operations update",
+          tagline: "Markets, logistics, and knock-on effects",
           brief:
-            "This route stands in for a business vertical. It keeps the newsroom nav believable and gives the site one more section that lands on real pages.",
-          leadIds: ["road-closures", "aviation-hold", "airspace-restrictions"],
-          relatedIds: ["dispatch-now", "medical-screening", "triage-teams"],
+            "This section is designed to carry the operational-impact angle of the site, mixing closures, market coverage, and supply-chain style reads.",
+          briefMeta: "Editor note | business",
+          leadIds: ["market-rate-watch", "road-closures", "port-shipping-delays", "aviation-hold"],
+          headlineIds: [
+            "storm-grid-alert",
+            "dispatch-now",
+            "senate-stopgap",
+            "court-privacy-ruling",
+            "medical-screening"
+          ],
+          relatedIds: ["airspace-restrictions", "triage-teams", "dispatch-clusters", "streaming-debate-highlights"],
+          watchItems: [
+            {
+              title: "Market tone",
+              detail: "The section reads best when one major markets piece sits beside infrastructure and logistics coverage."
+            },
+            {
+              title: "Operational angle",
+              detail: "Closure logic, port stress, and reroute pressure give the page a credible business-news rhythm."
+            },
+            {
+              title: "Reader path",
+              detail: "Business readers tend to follow explainers, then click into broader analysis or back to the live desk."
+            }
+          ],
           stats: [
-            { label: "Desk", value: "Operations and disruption" },
-            { label: "Lead format", value: "Explainer" },
-            { label: "Key impact", value: "Road and air routing" },
-            { label: "Audience", value: "Readers tracking effects" }
+            { label: "Desk", value: "Markets and operational disruption" },
+            { label: "Lead format", value: "Markets lead plus explainers" },
+            { label: "Key impact", value: "Routing, supply chains, and demand" },
+            { label: "Audience", value: "Readers tracking knock-on effects" }
           ]
         },
         video: {
           label: "Video",
           title: "Video front, clips, and segment routes",
           dek:
-            "The video front behaves like a lightweight streaming/video section, with clip-style story entries and direct paths back to the live desk coverage.",
+            "The video front behaves like a compact clip hub, combining live desk handoffs with replay-style article cards and broader headline packages.",
           note: "Video desk",
+          updated: "Video desk lineup",
+          tagline: "Clips, live hits, and replay routes",
           brief:
-            "This page is a simple shell for the workshop. The links are live, but the video blocks are intentionally represented as article cards instead of a real player stack.",
-          leadIds: ["dispatch-now", "dispatch-clusters", "aviation-hold"],
-          relatedIds: ["perimeter-control", "road-closures", "triage-teams"],
+            "This page still uses article shells, but the lineup and labeling make it feel like a dedicated video surface with segment-style destinations.",
+          briefMeta: "Editor note | video desk",
+          leadIds: ["streaming-debate-highlights", "dispatch-now", "dispatch-clusters", "aviation-hold"],
+          headlineIds: [
+            "perimeter-control",
+            "road-closures",
+            "market-rate-watch",
+            "storm-grid-alert",
+            "senate-stopgap"
+          ],
+          relatedIds: ["airspace-restrictions", "triage-teams", "court-privacy-ruling", "port-shipping-delays"],
+          watchItems: [
+            {
+              title: "Clip stack",
+              detail: "A working video page needs at least one replay route, one live file, and one explainer readers can click after the segment."
+            },
+            {
+              title: "Visual routing",
+              detail: "The strongest video links are still the pages that also hold up as article routes once the clip is over."
+            },
+            {
+              title: "Site flow",
+              detail: "Video readers usually move back into latest or live desk once the primary clip path ends."
+            }
+          ],
           stats: [
-            { label: "Format", value: "Clip and segment pages" },
-            { label: "Lead item", value: "Continuous desk coverage" },
-            { label: "Secondary items", value: "Field segment and explainer" },
+            { label: "Format", value: "Clip and segment page mix" },
+            { label: "Lead item", value: "Replay plus live coverage" },
+            { label: "Secondary items", value: "Explainer and field package" },
             { label: "Action", value: "Jump back to live desk" }
           ]
         }
@@ -716,6 +1132,7 @@
             <span>${story.label}</span>
             <h3>${story.title}</h3>
             <p>${story.summary}</p>
+            <small class="story-card-meta">${story.byline} | ${story.timeLabel}</small>
           </a>
         `;
       }
@@ -726,8 +1143,33 @@
           <li>
             <a href="${storyHref(id)}">
               <strong>${story.title}</strong>
-              <span>${story.label}</span>
+              <span>${story.label} | ${story.timeLabel}</span>
             </a>
+          </li>
+        `;
+      }
+
+      function renderHeadlineItem(id) {
+        const story = STORIES[id];
+        return `
+          <li>
+            <a href="${storyHref(id)}">
+              <div class="headline-time">${story.timeLabel}</div>
+              <div class="headline-copy">
+                <strong>${story.title}</strong>
+                <p>${story.summary}</p>
+                <span>${story.byline} | ${story.label}</span>
+              </div>
+            </a>
+          </li>
+        `;
+      }
+
+      function renderWatchItem(item) {
+        return `
+          <li>
+            <strong>${item.title}</strong>
+            <span>${item.detail}</span>
           </li>
         `;
       }
@@ -747,8 +1189,13 @@
       document.getElementById("sectionDek").textContent = topic.dek;
       document.getElementById("sectionNote").textContent = `${topic.label} section`;
       document.getElementById("leadStamp").textContent = topic.note;
+      document.getElementById("headlineStamp").textContent = topic.updated;
+      document.getElementById("watchStamp").textContent = `${topic.label} watchlist`;
       document.getElementById("briefLabel").textContent = `${topic.label} brief`;
       document.getElementById("briefCopy").textContent = topic.brief;
+      document.getElementById("briefMeta").textContent = topic.briefMeta;
+      document.getElementById("sectionUpdated").textContent = topic.updated;
+      document.getElementById("sectionTagline").textContent = topic.tagline;
       document.getElementById("leadAction").href = storyHref(topic.leadIds[0]);
 
       document.getElementById("statsGrid").innerHTML = topic.stats
@@ -763,7 +1210,9 @@
         .join("");
 
       document.getElementById("leadGrid").innerHTML = topic.leadIds.map(renderStoryCard).join("");
+      document.getElementById("headlineList").innerHTML = topic.headlineIds.map(renderHeadlineItem).join("");
       document.getElementById("relatedList").innerHTML = topic.relatedIds.map(renderLinkItem).join("");
+      document.getElementById("watchList").innerHTML = topic.watchItems.map(renderWatchItem).join("");
 
       document.querySelectorAll("[data-topic-link]").forEach((node) => {
         if (node.getAttribute("data-topic-link") === topicKey) {
