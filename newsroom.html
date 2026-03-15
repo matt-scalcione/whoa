@@ -779,50 +779,54 @@
       .uap-contact-icon {
         background: transparent;
         border: 0;
+        filter: drop-shadow(0 4px 10px rgba(7, 12, 18, 0.32));
       }
 
       .uap-marker {
         position: relative;
         display: inline-block;
-        width: 18px;
-        height: 8px;
-        border: 1px solid rgba(9, 21, 33, 0.7);
+        width: 22px;
+        height: 9px;
+        border: 1px solid rgba(10, 18, 27, 0.84);
         border-radius: 999px;
-        background: linear-gradient(180deg, #eef3f8 0%, #9aa8b5 100%);
-        box-shadow: 0 1px 8px rgba(9, 21, 33, 0.28);
+        background: linear-gradient(180deg, #cad3db 0%, #65707a 52%, #151b22 100%);
+        box-shadow:
+          inset 0 1px 1px rgba(255, 255, 255, 0.22),
+          0 2px 10px rgba(7, 12, 18, 0.3);
       }
 
       .uap-marker::before {
         content: "";
         position: absolute;
-        left: 4px;
-        top: -6px;
-        width: 8px;
-        height: 7px;
-        border-radius: 8px 8px 4px 4px;
-        background: linear-gradient(180deg, #ffffff 0%, #bfc9d2 100%);
-        border: 1px solid rgba(9, 21, 33, 0.55);
+        left: 5px;
+        top: -7px;
+        width: 10px;
+        height: 8px;
+        border-radius: 10px 10px 4px 4px;
+        background: linear-gradient(180deg, #edf2f6 0%, #909aa5 58%, #2c333b 100%);
+        border: 1px solid rgba(10, 18, 27, 0.7);
+        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.18);
       }
 
       .uap-marker::after {
         content: "";
         position: absolute;
-        left: 2px;
-        bottom: -4px;
-        width: 12px;
-        height: 4px;
+        left: 3px;
+        bottom: -5px;
+        width: 16px;
+        height: 5px;
         border-radius: 50%;
-        background: rgba(255, 238, 128, 0.55);
-        filter: blur(1px);
+        background: radial-gradient(circle, rgba(201, 38, 38, 0.48) 0%, rgba(201, 38, 38, 0) 74%);
+        filter: blur(1.2px);
       }
 
       .uap-marker-air {
-        transform: rotate(-8deg);
+        transform: rotate(-4deg) scale(1.02);
       }
 
       .uap-marker-ground {
-        opacity: 0.72;
-        filter: saturate(0.68);
+        opacity: 0.62;
+        filter: saturate(0.62) brightness(0.92);
       }
 
       .air-traffic-legend {
@@ -1154,11 +1158,11 @@
             <span>Live desk is assembling regional updates.</span>
             <span>Field status is loading.</span>
             <span>Coverage zone is resolving.</span>
-            <span>Official posture is updating.</span>
+            <span>Official advisories are updating.</span>
             <span>Live desk is assembling regional updates.</span>
             <span>Field status is loading.</span>
             <span>Coverage zone is resolving.</span>
-            <span>Official posture is updating.</span>
+            <span>Official advisories are updating.</span>
           </div>
         </div>
       </div>
@@ -1173,21 +1177,12 @@
                 <p class="eyebrow" id="heroKicker">Live Developments</p>
                 <h1 id="heroHeadline">Regional response underway after repeated aerial reports</h1>
                 <p class="hero-dek" id="heroDek">
-                  Signal News Desk is loading a location-aware bulletin with live local timing,
-                  response posture, and witness patterns.
+                  Signal News Desk is loading a location-aware bulletin with live local timing
+                  and witness patterns.
                 </p>
                 <div class="hero-meta">
                   <span id="heroDateline">Awaiting local desk</span>
                   <span id="heroUpdated">Updating</span>
-                  <span>Workshop feed</span>
-                </div>
-                <div class="hero-bullets" id="heroBullets">
-                  <div class="hero-bullet">
-                    <div>
-                      <strong>Developing</strong>
-                      <span>Local details are loading.</span>
-                    </div>
-                  </div>
                 </div>
               </div>
               <div class="hero-visual">
@@ -1250,34 +1245,10 @@
 
           <section class="section-card">
             <div class="section-head">
-              <h2>Top Lines</h2>
-              <span id="topLinesStamp">Desk update</span>
-            </div>
-            <div class="headline-grid" id="headlineGrid">
-              <article class="headline-card">
-                <span class="headline-label">Developing</span>
-                <strong>Regional desk headlines are loading.</strong>
-                <p>Location-aware cards will populate once the coverage zone resolves.</p>
-              </article>
-            </div>
-          </section>
-
-          <section class="section-card">
-            <div class="section-head">
               <h2>Latest Updates</h2>
               <span id="updatesLabel">Rolling coverage</span>
             </div>
             <div class="updates-list" id="updatesList"></div>
-          </section>
-
-          <section class="section-card">
-            <div class="section-head">
-              <h2>Response Posture</h2>
-              <span>Field operations</span>
-            </div>
-            <div class="panel-body">
-              <ul class="checklist" id="responseList"></ul>
-            </div>
           </section>
         </div>
 
@@ -1314,35 +1285,8 @@
 
           <section class="rail-card">
             <div class="section-head">
-              <h2>Coverage Map</h2>
-              <span id="mapLabel">Regional view</span>
-            </div>
-            <div class="coverage-frame" aria-hidden="true">
-              <div class="coverage-pin"></div>
-              <div class="coverage-tag" id="coverageTag">Coverage zone</div>
-            </div>
-            <div class="rail-body">
-              <div class="facts-grid">
-                <div class="fact">
-                  <span>Area</span>
-                  <strong id="mapArea">Resolving...</strong>
-                </div>
-                <div class="fact">
-                  <span>Observation Time</span>
-                  <strong id="mapTime">Synchronizing...</strong>
-                </div>
-                <div class="fact">
-                  <span>Signal Read</span>
-                  <strong id="mapSignal">Awaiting witness pattern</strong>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section class="rail-card">
-            <div class="section-head">
               <h2>Anomaly Contacts</h2>
-              <span id="airTrafficStamp">Workshop lens</span>
+              <span id="airTrafficStamp">Live anomaly map</span>
             </div>
             <div class="rail-body">
               <p class="air-traffic-status" id="airTrafficStatus">
@@ -1399,7 +1343,7 @@
           <section class="watch-box">
             <h3>What We’re Watching</h3>
             <p id="watchIntro">
-              The desk is tracking local movement, road posture, and witness consistency.
+              The desk is tracking local movement, perimeter changes, and witness consistency.
             </p>
             <ul class="watch-list" id="watchList">
               <li>Witness reports are loading.</li>
@@ -1518,7 +1462,7 @@
         const city = String(input?.city || "").trim();
         const region = String(input?.region || "").trim();
         const regionCode = String(input?.regionCode || "").trim();
-        const country = String(input?.country || "").trim() || "United States";
+        const country = String(input?.country || "").trim();
         const countryCode = String(input?.countryCode || "").trim();
         const latitude = Number.parseFloat(input?.latitude);
         const longitude = Number.parseFloat(input?.longitude);
@@ -1560,6 +1504,9 @@
         if (location.region) {
           return `${location.city}, ${location.region}`;
         }
+        if (location.city !== "your area" && location.country) {
+          return `${location.city}, ${location.country}`;
+        }
         return location.city;
       }
 
@@ -1567,13 +1514,13 @@
         if (location.regionCode && location.countryCode === "US") {
           return `${location.city}, ${location.regionCode}`;
         }
-        if (location.region && location.country) {
-          return `${location.city}, ${location.region}, ${location.country}`;
+        if (location.region) {
+          return `${location.city}, ${location.region}`;
         }
         if (location.city !== "your area" && location.country) {
           return `${location.city}, ${location.country}`;
         }
-        return location.city;
+        return location.city || location.country || "your area";
       }
 
       function formatCoordinates(location) {
@@ -2107,7 +2054,7 @@
           ticker: [
             `${compactLocation}: dispatch traffic describes ${profile.object}`,
             `Witnesses report ${profile.effect}`,
-            `Traffic posture is tightening around ${corridor}`,
+            `Traffic restrictions are tightening around ${corridor}`,
             `Aviation monitors are holding the sky above ${regionPhrase}`
           ],
           headline: `Authorities tighten response after repeated reports of a low-flying object over ${compactLocation}`,
@@ -2116,27 +2063,13 @@
           dateline: fullLocation,
           updated: `Updated ${topStamp}`,
           lowerThirdTitle: `${compactLocation} | Live Coverage`,
-          lowerThirdCopy: `${profile.behavior}. Authorities say field posture remains active across ${regionPhrase}.`,
+          lowerThirdCopy: `${profile.behavior}. Authorities say the active scene now extends across ${regionPhrase}.`,
           metrics: {
             location: fullLocation,
             time: topStamp,
             coords,
-            status: "Perimeter active, aviation hold requested, medical screening posture up"
+            status: "Perimeter active, aviation hold requested, medical screening active"
           },
-          bullets: [
-            {
-              label: "Witnesses",
-              value: `Residents across ${regionPhrase} describe silent movement, unusual light behavior, and repeated signal interference.`
-            },
-            {
-              label: "Roads",
-              value: `Units are clearing shoulders, elevated lots, and other open sightlines around ${corridor}.`
-            },
-            {
-              label: "Airspace",
-              value: `Regional flight paths are being rerouted to preserve a protected observation zone above ${fullLocation}.`
-            }
-          ],
           story: [
             `Authorities in ${fullLocation} moved to tighten the local response after repeated callers described ${profile.object} lingering over the same area long enough for neighbors to leave homes, gather in open lots, and begin recording the sky.`,
             `Dispatch traffic reviewed by the desk indicates witnesses from multiple parts of ${compactLocation} reported the same core details: little to no engine noise, abrupt directional movement, and intermittent flashes or signal distortion as the object remained visible above ${regionPhrase}.`,
@@ -2162,32 +2095,9 @@
             },
             {
               time: formatDateTime(triageTime, zone, { hour: "numeric", minute: "2-digit" }),
-              title: "Medical screening posture is activated",
+              title: "Medical screening is activated",
               body: `Hospitals are watching for patients reporting dizziness, hearing changes, eye irritation, panic spikes, burns, or contact with unusual debris.`
             }
-          ],
-          topLines: [
-            {
-              label: "Live",
-              title: `Witness descriptions align across ${compactLocation}`,
-              body: `Residents in multiple neighborhoods describe the same shape, motion pattern, and silence profile over ${regionPhrase}.`
-            },
-            {
-              label: "New",
-              title: `Airspace controls tighten above ${fullLocation}`,
-              body: `Regional flight paths are shifting away from the observation zone while aviation monitors coordinate the protected corridor.`
-            },
-            {
-              label: "Watch",
-              title: `Medical screening posture expands near ${compactLocation}`,
-              body: `Hospitals and triage teams are tracking dizziness, hearing changes, eye irritation, and any claimed residue contact.`
-            }
-          ],
-          response: [
-            `Crews are isolating the clearest sightline and holding open access lanes for emergency units.`,
-            `Traffic control is pushing bystanders away from rooftops, shoulders, ramps, and parking decks near ${corridor}.`,
-            `Aviation monitors are coordinating a protected zone above ${fullLocation}.`,
-            `Triage teams are prioritizing dizziness, hearing changes, eye irritation, anxiety spikes, and any claimed contact with residue.`
           ],
           guidance: [
             `Move away from rooftops, parking decks, highway shoulders, and overpasses now, and leave those areas to emergency crews.`,
@@ -2196,16 +2106,12 @@
             `If you experience ringing in the ears, eye irritation, skin irritation, sudden disorientation, or contact with debris, seek medical direction immediately.`,
             `Preserve original video files without editing or compressing them in case investigators request copies.`
           ],
-          railHeadline: `Field crews tighten posture over ${compactLocation}`,
+          railHeadline: `Field crews tighten the perimeter over ${compactLocation}`,
           railCopy:
-            `${profile.effect} is one of the most repeated details in incoming calls. The desk is tracking witness consistency, road closures, and airspace posture in real time.`,
+            `${profile.effect} is one of the most repeated details in incoming calls. The desk is tracking incoming reports, road closures, and official advisories in real time.`,
           datelineFact: fullStamp,
           corridorFact: corridor,
           airspaceFact: `Protected observation zone above ${regionPhrase}`,
-          mapArea: fullLocation,
-          mapTime: topStamp,
-          mapSignal: "Silent motion, strong light bursts, repeated signal disruption",
-          coverageTag: compactLocation,
           watchIntro: `The desk is watching conditions around ${fullLocation} as response agencies coordinate traffic, medical screening, and airspace control.`,
           watchList: [
             `Witness descriptions are staying consistent across different blocks and neighborhoods.`,
@@ -2271,7 +2177,6 @@
         setText("metaUpdated", report.updated);
         setText("storyStamp", report.updated);
         setText("storyDateline", report.dateline);
-        setText("topLinesStamp", report.updated);
         setText("guidanceAlert", report.guidanceAlert);
         setText("lowerThirdTitle", report.lowerThirdTitle);
         setText("lowerThirdCopy", report.lowerThirdCopy);
@@ -2285,11 +2190,6 @@
         setText("factDateline", report.datelineFact);
         setText("factCorridor", report.corridorFact);
         setText("factAirspace", report.airspaceFact);
-        setText("mapArea", report.mapArea);
-        setText("mapTime", report.mapTime);
-        setText("mapSignal", report.mapSignal);
-        setText("coverageTag", report.coverageTag);
-        setText("mapLabel", report.dateline);
         setText("watchIntro", report.watchIntro);
 
         const tickerTrack = document.getElementById("tickerTrack");
@@ -2299,34 +2199,9 @@
         }
 
         renderList(
-          "heroBullets",
-          report.bullets,
-          (item) => `
-            <div class="hero-bullet">
-              <div>
-                <strong>${escapeHtml(item.label)}</strong>
-                <span>${escapeHtml(item.value)}</span>
-              </div>
-            </div>
-          `
-        );
-
-        renderList(
           "storyBody",
           report.story,
           (item) => `<p>${escapeHtml(item)}</p>`
-        );
-
-        renderList(
-          "headlineGrid",
-          report.topLines,
-          (item) => `
-            <article class="headline-card">
-              <span class="headline-label">${escapeHtml(item.label)}</span>
-              <strong>${escapeHtml(item.title)}</strong>
-              <p>${escapeHtml(item.body)}</p>
-            </article>
-          `
         );
 
         renderList(
@@ -2343,7 +2218,6 @@
           `
         );
 
-        renderList("responseList", report.response, (item) => `<li>${escapeHtml(item)}</li>`);
         renderList("guidanceList", report.guidance, (item) => `<li>${escapeHtml(item)}</li>`);
         renderList("watchList", report.watchList, (item) => `<li>${escapeHtml(item)}</li>`);
         renderList(
