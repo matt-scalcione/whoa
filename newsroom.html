@@ -776,6 +776,55 @@
         background: #d7dee8;
       }
 
+      .uap-contact-icon {
+        background: transparent;
+        border: 0;
+      }
+
+      .uap-marker {
+        position: relative;
+        display: inline-block;
+        width: 18px;
+        height: 8px;
+        border: 1px solid rgba(9, 21, 33, 0.7);
+        border-radius: 999px;
+        background: linear-gradient(180deg, #eef3f8 0%, #9aa8b5 100%);
+        box-shadow: 0 1px 8px rgba(9, 21, 33, 0.28);
+      }
+
+      .uap-marker::before {
+        content: "";
+        position: absolute;
+        left: 4px;
+        top: -6px;
+        width: 8px;
+        height: 7px;
+        border-radius: 8px 8px 4px 4px;
+        background: linear-gradient(180deg, #ffffff 0%, #bfc9d2 100%);
+        border: 1px solid rgba(9, 21, 33, 0.55);
+      }
+
+      .uap-marker::after {
+        content: "";
+        position: absolute;
+        left: 2px;
+        bottom: -4px;
+        width: 12px;
+        height: 4px;
+        border-radius: 50%;
+        background: rgba(255, 238, 128, 0.55);
+        filter: blur(1px);
+      }
+
+      .uap-marker-air {
+        transform: rotate(-8deg);
+      }
+
+      .uap-marker-ground {
+        opacity: 0.72;
+        filter: saturate(0.68);
+      }
+
       .air-traffic-legend {
         display: flex;
         flex-wrap: wrap;
@@ -798,20 +847,12 @@
 
       .air-traffic-legend i {
         display: inline-block;
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-      }
-
-      .air-traffic-legend .legend-air {
-        background: var(--red);
-      }
-
-      .air-traffic-legend .legend-ground {
-        background: #405162;
       }
 
       .air-traffic-legend .legend-center {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
         background: #0d0f14;
       }
 
@@ -1300,17 +1341,17 @@
 
           <section class="rail-card">
             <div class="section-head">
-              <h2>Air Traffic</h2>
-              <span id="airTrafficStamp">OpenSky live</span>
+              <h2>Anomaly Contacts</h2>
+              <span id="airTrafficStamp">Workshop lens</span>
             </div>
             <div class="rail-body">
               <p class="air-traffic-status" id="airTrafficStatus">
-                Loading nearby live flights around the current coverage zone.
+                Loading nearby live contacts through the workshop UAP lens.
               </p>
               <p class="air-traffic-note">
-                Live map and flight list are sourced from OpenSky and centered on the same
-                approximate location this page resolved from the current network. The list
-                highlights only the two closest flights.
+                Live map positions still come from OpenSky, but this panel restyles them through
+                a workshop-only anomaly/UAP lens. The list highlights only the two closest
+                contacts.
               </p>
               <div class="facts-grid">
                 <div class="fact">
@@ -1318,7 +1359,7 @@
                   <strong id="airTrafficBounds">Pending</strong>
                 </div>
                 <div class="fact">
-                  <span>Flights Nearby</span>
+                  <span>Contacts Nearby</span>
                   <strong id="airTrafficCount">0</strong>
                 </div>
                 <div class="fact">
@@ -1327,15 +1368,15 @@
                 </div>
               </div>
               <div class="air-traffic-map-shell">
-                <div class="air-traffic-map" id="airTrafficMap" aria-label="Live flight map"></div>
+                <div class="air-traffic-map" id="airTrafficMap" aria-label="Live anomaly contact map"></div>
                 <div class="air-traffic-legend">
                   <span><i class="legend-center"></i> Coverage center</span>
-                  <span><i class="legend-air"></i> Aircraft in the air</span>
-                  <span><i class="legend-ground"></i> Aircraft on the ground</span>
+                  <span><i class="uap-marker uap-marker-air legend-air"></i> Airborne anomaly</span>
+                  <span><i class="uap-marker uap-marker-ground legend-ground"></i> Grounded contact</span>
                 </div>
               </div>
               <ul class="air-traffic-list" id="airTrafficList">
-                <li class="air-traffic-empty">No live flight activity loaded yet.</li>
+                <li class="air-traffic-empty">No live anomaly contacts loaded yet.</li>
               </ul>
             </div>
           </section>
@@ -1580,25 +1621,33 @@
       function formatAltitude(value) {
         const alt = Number(value);
         if (!Number.isFinite(alt)) {
-          return "Alt n/a";
+          return "Altitude read n/a";
         }
-        return `Alt ${Math.round(alt * 3.28084).toLocaleString()} ft`;
+        return `Altitude read ${Math.round(alt * 3.28084).toLocaleString()} ft`;
       }
 
       function formatSpeed(value) {
         const speed = Number(value);
         if (!Number.isFinite(speed)) {
-          return "GS n/a";
+          return "Vector n/a";
         }
-        return `GS ${Math.round(speed * 1.94384)} kt`;
+        return `Vector ${Math.round(speed * 1.94384)} kt`;
       }
 
       function formatVerticalRate(value) {
         const rate = Number(value);
         if (!Number.isFinite(rate)) {
-          return "V/S n/a";
+          return "Vertical shift n/a";
         }
-        return `V/S ${Math.round(rate * 196.85)} fpm`;
+        return `Vertical shift ${Math.round(rate * 196.85)} fpm`;
+      }
+
+      function formatHeading(value) {
+        const heading = Number(value);
+        if (!Number.isFinite(heading)) {
+          return "Heading n/a";
+        }
+        return `Heading ${Math.round(((heading % 360) + 360) % 360)}°`;
       }
 
       function positionSourceLabel(source) {
@@ -1616,6 +1665,49 @@
           return "FLARM";
         }
         return "OpenSky";
+      }
+
+      function anomalyContactLabel(flight) {
+        const raw = String(flight.callsign || flight.icao24 || "contact")
+          .replace(/[^A-Za-z0-9]/g, "")
+          .toUpperCase();
+        const suffix = raw.slice(-4).padStart(4, "0");
+        return `Contact UAP-${suffix}`;
+      }
+
+      function anomalyClassification(flight) {
+        const altitudeFeet = Number(flight.geoAltitude ?? flight.baroAltitude) * 3.28084;
+        const speedKnots = Number(flight.velocity) * 1.94384;
+        const verticalFeetPerMinute = Math.abs(Number(flight.verticalRate) * 196.85);
+
+        if (flight.onGround) {
+          return "Grounded signal return";
+        }
+        if (speedKnots > 500 || verticalFeetPerMinute > 2500) {
+          return "High-energy aerial contact";
+        }
+        if (altitudeFeet > 40000) {
+          return "High-altitude contact";
+        }
+        if (speedKnots < 160 && altitudeFeet > 6000) {
+          return "Slow-drift contact";
+        }
+        return "Unidentified aerial contact";
+      }
+
+      function anomalySensorLabel(source) {
+        const label = positionSourceLabel(source);
+        return label === "OpenSky" ? "Sensor fusion return" : `${label} sensor return`;
+      }
+
+      function anomalySignalLabel(squawk) {
+        return squawk ? `Signal ${squawk}` : "Signal diffuse";
+      }
+
+      function anomalyDistanceLabel(distanceMiles) {
+        return Number.isFinite(distanceMiles)
+          ? `${Math.round(distanceMiles)} mi from locus`
+          : "Distance unresolved";
       }
 
       function haversineMiles(latA, lonA, latB, lonB) {
@@ -1669,6 +1761,20 @@
           squawk: state[14] ? String(state[14]).trim() : "",
           positionSource: state[16]
         };
+      }
+
+      function createUapContactIcon(airborne) {
+        if (typeof window.L === "undefined") {
+          return null;
+        }
+
+        return window.L.divIcon({
+          className: "uap-contact-icon",
+          html: `<span class="uap-marker ${airborne ? "uap-marker-air" : "uap-marker-ground"}"></span>`,
+          iconSize: [20, 16],
+          iconAnchor: [10, 8],
+          popupAnchor: [0, -10]
+        });
       }
 
       function ensureAirTrafficMap(location, bounds) {
@@ -1739,24 +1845,19 @@
 
         for (const flight of flights) {
           const airborne = !flight.onGround;
-          const color = airborne ? "#b5121b" : "#405162";
-          const marker = window.L.circleMarker([flight.lat, flight.lon], {
-            radius: airborne ? 6 : 5,
-            color,
-            weight: 1.5,
-            fillColor: color,
-            fillOpacity: 0.88
+          const marker = window.L.marker([flight.lat, flight.lon], {
+            icon: createUapContactIcon(airborne)
           }).addTo(airTrafficLayerGroup);
 
-          const ident = flight.callsign || flight.icao24 || "Unknown flight";
+          const ident = anomalyContactLabel(flight);
           marker.bindPopup(
             `<strong>${escapeHtml(ident)}</strong><br/>` +
-              `${escapeHtml(flight.originCountry || "Unknown origin")}<br/>` +
+              `${escapeHtml(anomalyClassification(flight))}<br/>` +
               `${escapeHtml(formatAltitude(flight.geoAltitude ?? flight.baroAltitude))}<br/>` +
               `${escapeHtml(formatSpeed(flight.velocity))} · ${escapeHtml(
                 formatVerticalRate(flight.verticalRate)
               )}<br/>` +
-              `${escapeHtml(positionSourceLabel(flight.positionSource))}`
+              `${escapeHtml(anomalySensorLabel(flight.positionSource))}`
           );
         }
       }
@@ -1768,7 +1869,7 @@
 
         if (!Array.isArray(flights) || flights.length === 0) {
           airTrafficList.innerHTML =
-            '<li class="air-traffic-empty">No nearby flights were returned for the current bounds.</li>';
+            '<li class="air-traffic-empty">No nearby anomaly contacts were returned for the current bounds.</li>';
           return;
         }
 
@@ -1797,14 +1898,13 @@
 
         airTrafficList.innerHTML = visibleFlights
           .map((flight) => {
-            const ident = flight.callsign || flight.icao24 || "Unknown flight";
-            const source = positionSourceLabel(flight.positionSource);
+            const ident = anomalyContactLabel(flight);
+            const source = anomalySensorLabel(flight.positionSource);
+            const classification = anomalyClassification(flight);
             const seen = flight.lastContact
-              ? `Seen ${formatShortTime(Number(flight.lastContact) * 1000)}`
-              : "Seen n/a";
-            const distance = Number.isFinite(flight.distanceMiles)
-              ? `${Math.round(flight.distanceMiles)} mi away`
-              : "Distance n/a";
+              ? `Logged ${formatShortTime(Number(flight.lastContact) * 1000)}`
+              : "Logged n/a";
+            const distance = anomalyDistanceLabel(flight.distanceMiles);
 
             return `
               <li class="flight-item">
@@ -1812,13 +1912,13 @@
                   <strong>${escapeHtml(ident)}</strong>
                   <strong>${escapeHtml(distance)}</strong>
                 </div>
-                <div class="flight-meta">${escapeHtml(flight.originCountry || "Unknown origin")} · ${escapeHtml(source)} · ${escapeHtml(seen)}</div>
+                <div class="flight-meta">${escapeHtml(classification)} · ${escapeHtml(source)} · ${escapeHtml(seen)}</div>
                 <div class="flight-stats">
                   <span>${escapeHtml(formatAltitude(flight.geoAltitude ?? flight.baroAltitude))}</span>
                   <span>${escapeHtml(formatSpeed(flight.velocity))}</span>
-                  <span>${escapeHtml(`Track ${Math.round(Number(flight.track) || 0)}°`)}</span>
+                  <span>${escapeHtml(formatHeading(flight.track))}</span>
                   <span>${escapeHtml(formatVerticalRate(flight.verticalRate))}</span>
-                  <span>${escapeHtml(`Squawk ${flight.squawk || "n/a"}`)}</span>
+                  <span>${escapeHtml(anomalySignalLabel(flight.squawk))}</span>
                 </div>
               </li>
             `;
@@ -1880,7 +1980,7 @@
         }
 
         if (!silent) {
-          setAirTrafficStatus("Loading live flights from OpenSky...", "ready");
+          setAirTrafficStatus("Loading live contacts through the workshop anomaly lens...", "ready");
         }
 
         try {
@@ -1905,7 +2005,7 @@
             }`;
           }
           setAirTrafficStatus(
-            `Showing live flights near ${fullLocationLabel(currentResolvedLocation)} from OpenSky's public live states feed.`,
+            `Showing live contacts near ${fullLocationLabel(currentResolvedLocation)} through the workshop anomaly lens.`,
             "ready"
           );
           scheduleAirTrafficRefresh();
