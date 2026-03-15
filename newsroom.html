@@ -20,6 +20,11 @@
       href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      crossorigin=""
+    />
     <style>
       :root {
         --bg: #eef1f5;
@@ -738,60 +743,16 @@
         line-height: 1.4;
       }
 
-      .air-traffic-controls {
-        display: grid;
-        gap: 10px;
-        margin-bottom: 16px;
-      }
-
-      .air-traffic-label {
-        color: var(--muted);
-        font-size: 0.78rem;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .air-traffic-input {
-        width: 100%;
-        padding: 12px 14px;
-        border: 1px solid var(--line);
-        background: #fff;
-        color: var(--ink);
-        font: inherit;
-      }
-
-      .air-traffic-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-
-      .air-traffic-actions button {
-        border: 0;
-        padding: 0.7rem 0.95rem;
-        font: inherit;
-        font-size: 0.88rem;
-        font-weight: 700;
-        cursor: pointer;
-      }
-
-      .air-traffic-actions button.primary {
-        background: var(--red);
-        color: #fff;
-      }
-
-      .air-traffic-actions button.secondary {
-        background: #eff2f6;
-        color: #26303b;
-      }
-
       .air-traffic-note,
       .air-traffic-status {
         margin: 0;
         color: var(--muted);
         font-size: 0.9rem;
         line-height: 1.55;
+      }
+
+      .air-traffic-note {
+        margin-top: 10px;
       }
 
       .air-traffic-status[data-state="error"] {
@@ -801,6 +762,57 @@
 
       .air-traffic-status[data-state="ready"] {
         color: #243140;
+      }
+
+      .air-traffic-map-shell {
+        margin-top: 16px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+      }
+
+      .air-traffic-map {
+        width: 100%;
+        height: 300px;
+        background: #d7dee8;
+      }
+
+      .air-traffic-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 10px 12px;
+        border-top: 1px solid var(--line);
+        background: #f7f8fa;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .air-traffic-legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .air-traffic-legend i {
+        display: inline-block;
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+      }
+
+      .air-traffic-legend .legend-air {
+        background: var(--red);
+      }
+
+      .air-traffic-legend .legend-ground {
+        background: #405162;
+      }
+
+      .air-traffic-legend .legend-center {
+        background: #0d0f14;
       }
 
       .air-traffic-list {
@@ -1289,31 +1301,15 @@
           <section class="rail-card">
             <div class="section-head">
               <h2>Air Traffic</h2>
-              <span id="airTrafficStamp">FR24 live</span>
+              <span id="airTrafficStamp">OpenSky live</span>
             </div>
             <div class="rail-body">
-              <div class="air-traffic-controls">
-                <label class="air-traffic-label" for="fr24TokenInput">FR24 API token</label>
-                <input
-                  class="air-traffic-input"
-                  id="fr24TokenInput"
-                  type="password"
-                  autocomplete="off"
-                  spellcheck="false"
-                  placeholder="Paste a token to load nearby live flights"
-                />
-                <div class="air-traffic-actions">
-                  <button class="primary" id="fr24SaveButton" type="button">Save token</button>
-                  <button class="secondary" id="fr24RefreshButton" type="button">Refresh</button>
-                  <button class="secondary" id="fr24ClearButton" type="button">Clear</button>
-                </div>
-                <p class="air-traffic-note">
-                  Token stays in this browser only and is used to call the official FR24 API
-                  directly from this page.
-                </p>
-              </div>
               <p class="air-traffic-status" id="airTrafficStatus">
-                Add an FR24 API token to load live flights near the current coverage zone.
+                Loading nearby live flights around the current coverage zone.
+              </p>
+              <p class="air-traffic-note">
+                Live map and flight list are sourced from OpenSky and centered on the same
+                approximate location this page resolved from the current network.
               </p>
               <div class="facts-grid">
                 <div class="fact">
@@ -1326,7 +1322,15 @@
                 </div>
                 <div class="fact">
                   <span>Last Refresh</span>
-                  <strong id="airTrafficRefresh">Waiting for token</strong>
+                  <strong id="airTrafficRefresh">Waiting for first update</strong>
+                </div>
+              </div>
+              <div class="air-traffic-map-shell">
+                <div class="air-traffic-map" id="airTrafficMap" aria-label="Live flight map"></div>
+                <div class="air-traffic-legend">
+                  <span><i class="legend-center"></i> Coverage center</span>
+                  <span><i class="legend-air"></i> Aircraft in the air</span>
+                  <span><i class="legend-ground"></i> Aircraft on the ground</span>
                 </div>
               </div>
               <ul class="air-traffic-list" id="airTrafficList">
@@ -1367,10 +1371,10 @@
       </div>
     </div>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script>
-      const FR24_STORAGE_KEY = "signalNewsDesk.fr24Token";
-      const FR24_REFRESH_MS = 60000;
-      const FR24_API_BASE = "https://fr24api.flightradar24.com/api";
+      const OPENSKY_REFRESH_MS = 60000;
+      const OPENSKY_API_URL = "https://opensky-network.org/api/states/all";
 
       const GEO_PROVIDERS = [
         {
@@ -1420,19 +1424,19 @@
         }
       ];
 
-      const fr24TokenInput = document.getElementById("fr24TokenInput");
-      const fr24SaveButton = document.getElementById("fr24SaveButton");
-      const fr24RefreshButton = document.getElementById("fr24RefreshButton");
-      const fr24ClearButton = document.getElementById("fr24ClearButton");
       const airTrafficStatus = document.getElementById("airTrafficStatus");
       const airTrafficBounds = document.getElementById("airTrafficBounds");
       const airTrafficCount = document.getElementById("airTrafficCount");
       const airTrafficRefresh = document.getElementById("airTrafficRefresh");
       const airTrafficList = document.getElementById("airTrafficList");
       const airTrafficStamp = document.getElementById("airTrafficStamp");
+      const airTrafficMap = document.getElementById("airTrafficMap");
 
       let currentResolvedLocation = null;
-      let fr24RefreshTimer = null;
+      let airTrafficRefreshTimer = null;
+      let airTrafficMapInstance = null;
+      let airTrafficLayerGroup = null;
+      let airTrafficCenterMarker = null;
 
       function escapeHtml(value) {
         return String(value ?? "")
@@ -1486,26 +1490,6 @@
           longitude: Number.isFinite(longitude) ? longitude : null,
           timezone
         };
-      }
-
-      function getStoredFr24Token() {
-        try {
-          return window.localStorage.getItem(FR24_STORAGE_KEY) || "";
-        } catch {
-          return "";
-        }
-      }
-
-      function setStoredFr24Token(token) {
-        try {
-          window.localStorage.setItem(FR24_STORAGE_KEY, token);
-        } catch {}
-      }
-
-      function clearStoredFr24Token() {
-        try {
-          window.localStorage.removeItem(FR24_STORAGE_KEY);
-        } catch {}
       }
 
       async function resolveLocation() {
@@ -1571,7 +1555,13 @@
         const west = clamp(location.longitude - lonDelta, -180, 180);
         const east = clamp(location.longitude + lonDelta, -180, 180);
 
-        return `${north.toFixed(3)},${south.toFixed(3)},${west.toFixed(3)},${east.toFixed(3)}`;
+        return {
+          north,
+          south,
+          west,
+          east,
+          label: `N ${north.toFixed(3)} | S ${south.toFixed(3)} | W ${west.toFixed(3)} | E ${east.toFixed(3)}`
+        };
       }
 
       function formatShortTime(value) {
@@ -1590,7 +1580,7 @@
         if (!Number.isFinite(alt)) {
           return "Alt n/a";
         }
-        return `Alt ${alt.toLocaleString()} ft`;
+        return `Alt ${Math.round(alt * 3.28084).toLocaleString()} ft`;
       }
 
       function formatSpeed(value) {
@@ -1598,7 +1588,32 @@
         if (!Number.isFinite(speed)) {
           return "GS n/a";
         }
-        return `GS ${Math.round(speed)} kt`;
+        return `GS ${Math.round(speed * 1.94384)} kt`;
+      }
+
+      function formatVerticalRate(value) {
+        const rate = Number(value);
+        if (!Number.isFinite(rate)) {
+          return "V/S n/a";
+        }
+        return `V/S ${Math.round(rate * 196.85)} fpm`;
+      }
+
+      function positionSourceLabel(source) {
+        const code = Number(source);
+        if (code === 0) {
+          return "ADS-B";
+        }
+        if (code === 1) {
+          return "ASTERIX";
+        }
+        if (code === 2) {
+          return "MLAT";
+        }
+        if (code === 3) {
+          return "FLARM";
+        }
+        return "OpenSky";
       }
 
       function haversineMiles(latA, lonA, latB, lonB) {
@@ -1622,6 +1637,126 @@
         }
         airTrafficStatus.textContent = message;
         airTrafficStatus.dataset.state = state;
+      }
+
+      function normalizeOpenSkyState(state) {
+        if (!Array.isArray(state) || state.length < 17) {
+          return null;
+        }
+
+        const lat = Number(state[6]);
+        const lon = Number(state[5]);
+        if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
+          return null;
+        }
+
+        return {
+          icao24: String(state[0] || "").trim(),
+          callsign: String(state[1] || "").trim(),
+          originCountry: String(state[2] || "").trim(),
+          timePosition: state[3],
+          lastContact: state[4],
+          lon,
+          lat,
+          baroAltitude: Number.isFinite(Number(state[7])) ? Number(state[7]) : null,
+          onGround: Boolean(state[8]),
+          velocity: Number.isFinite(Number(state[9])) ? Number(state[9]) : null,
+          track: Number.isFinite(Number(state[10])) ? Number(state[10]) : null,
+          verticalRate: Number.isFinite(Number(state[11])) ? Number(state[11]) : null,
+          geoAltitude: Number.isFinite(Number(state[13])) ? Number(state[13]) : null,
+          squawk: state[14] ? String(state[14]).trim() : "",
+          positionSource: state[16]
+        };
+      }
+
+      function ensureAirTrafficMap(location, bounds) {
+        if (!airTrafficMap || typeof window.L === "undefined") {
+          return;
+        }
+
+        if (!airTrafficMapInstance) {
+          airTrafficMapInstance = window.L.map(airTrafficMap, {
+            zoomControl: true,
+            attributionControl: true
+          });
+          window.L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            maxZoom: 19,
+            attribution: "&copy; OpenStreetMap contributors"
+          }).addTo(airTrafficMapInstance);
+          airTrafficLayerGroup = window.L.layerGroup().addTo(airTrafficMapInstance);
+        }
+
+        if (!airTrafficCenterMarker) {
+          airTrafficCenterMarker = window.L.circleMarker([location.latitude, location.longitude], {
+            radius: 7,
+            color: "#0d0f14",
+            weight: 2,
+            fillColor: "#0d0f14",
+            fillOpacity: 0.95
+          }).addTo(airTrafficMapInstance);
+        } else {
+          airTrafficCenterMarker.setLatLng([location.latitude, location.longitude]);
+        }
+
+        airTrafficCenterMarker.bindPopup(
+          `<strong>${escapeHtml(fullLocationLabel(location))}</strong><br/>Coverage center`
+        );
+
+        const leafletBounds = [
+          [bounds.south, bounds.west],
+          [bounds.north, bounds.east]
+        ];
+        airTrafficMapInstance.fitBounds(leafletBounds, {
+          padding: [20, 20]
+        });
+      }
+
+      function renderAirTrafficMap(flights, location, bounds) {
+        if (!Number.isFinite(location?.latitude) || !Number.isFinite(location?.longitude)) {
+          return;
+        }
+
+        ensureAirTrafficMap(location, bounds);
+        if (!airTrafficMapInstance || !airTrafficLayerGroup) {
+          return;
+        }
+
+        airTrafficLayerGroup.clearLayers();
+
+        window.L.rectangle(
+          [
+            [bounds.south, bounds.west],
+            [bounds.north, bounds.east]
+          ],
+          {
+            color: "#b5121b",
+            weight: 1.5,
+            fillOpacity: 0.03
+          }
+        ).addTo(airTrafficLayerGroup);
+
+        for (const flight of flights) {
+          const airborne = !flight.onGround;
+          const color = airborne ? "#b5121b" : "#405162";
+          const marker = window.L.circleMarker([flight.lat, flight.lon], {
+            radius: airborne ? 6 : 5,
+            color,
+            weight: 1.5,
+            fillColor: color,
+            fillOpacity: 0.88
+          }).addTo(airTrafficLayerGroup);
+
+          const ident = flight.callsign || flight.icao24 || "Unknown flight";
+          marker.bindPopup(
+            `<strong>${escapeHtml(ident)}</strong><br/>` +
+              `${escapeHtml(flight.originCountry || "Unknown origin")}<br/>` +
+              `${escapeHtml(formatAltitude(flight.geoAltitude ?? flight.baroAltitude))}<br/>` +
+              `${escapeHtml(formatSpeed(flight.velocity))} · ${escapeHtml(
+                formatVerticalRate(flight.verticalRate)
+              )}<br/>` +
+              `${escapeHtml(positionSourceLabel(flight.positionSource))}`
+          );
+        }
       }
 
       function renderAirTrafficFlights(flights, location) {
@@ -1658,9 +1793,11 @@
 
         airTrafficList.innerHTML = sortedFlights
           .map((flight) => {
-            const ident = flight.callsign || flight.hex || flight.fr24_id || "Unknown flight";
-            const source = flight.source || "Unknown source";
-            const seen = flight.timestamp ? `Seen ${formatShortTime(flight.timestamp)}` : "Seen n/a";
+            const ident = flight.callsign || flight.icao24 || "Unknown flight";
+            const source = positionSourceLabel(flight.positionSource);
+            const seen = flight.lastContact
+              ? `Seen ${formatShortTime(Number(flight.lastContact) * 1000)}`
+              : "Seen n/a";
             const distance = Number.isFinite(flight.distanceMiles)
               ? `${Math.round(flight.distanceMiles)} mi away`
               : "Distance n/a";
@@ -1671,11 +1808,12 @@
                   <strong>${escapeHtml(ident)}</strong>
                   <strong>${escapeHtml(distance)}</strong>
                 </div>
-                <div class="flight-meta">${escapeHtml(source)} · ${escapeHtml(seen)}</div>
+                <div class="flight-meta">${escapeHtml(flight.originCountry || "Unknown origin")} · ${escapeHtml(source)} · ${escapeHtml(seen)}</div>
                 <div class="flight-stats">
-                  <span>${escapeHtml(formatAltitude(flight.alt))}</span>
-                  <span>${escapeHtml(formatSpeed(flight.gspeed))}</span>
+                  <span>${escapeHtml(formatAltitude(flight.geoAltitude ?? flight.baroAltitude))}</span>
+                  <span>${escapeHtml(formatSpeed(flight.velocity))}</span>
                   <span>${escapeHtml(`Track ${Math.round(Number(flight.track) || 0)}°`)}</span>
+                  <span>${escapeHtml(formatVerticalRate(flight.verticalRate))}</span>
                   <span>${escapeHtml(`Squawk ${flight.squawk || "n/a"}`)}</span>
                 </div>
               </li>
@@ -1684,21 +1822,21 @@
           .join("");
       }
 
-      async function fetchFr24Flights(token, location) {
+      async function fetchOpenSkyFlights(location) {
         const bounds = createBounds(location);
         if (!bounds) {
           throw new Error("Current location does not include usable coordinates.");
         }
 
-        const url = new URL(`${FR24_API_BASE}/live/flight-positions/light`);
-        url.searchParams.set("bounds", bounds);
-        url.searchParams.set("limit", "10");
+        const url = new URL(OPENSKY_API_URL);
+        url.searchParams.set("lamin", String(bounds.south));
+        url.searchParams.set("lomin", String(bounds.west));
+        url.searchParams.set("lamax", String(bounds.north));
+        url.searchParams.set("lomax", String(bounds.east));
 
         const response = await fetch(url.toString(), {
           headers: {
-            Accept: "application/json",
-            "Accept-Version": "v1",
-            Authorization: `Bearer ${token}`
+            Accept: "application/json"
           }
         });
 
@@ -1708,127 +1846,73 @@
           throw new Error(message);
         }
 
-        if (Array.isArray(payload?.data)) {
-          return {
-            bounds,
-            flights: payload.data
-          };
-        }
-
-        if (Array.isArray(payload)) {
-          return {
-            bounds,
-            flights: payload
-          };
-        }
-
         return {
           bounds,
-          flights: []
+          flights: Array.isArray(payload?.states)
+            ? payload.states.map(normalizeOpenSkyState).filter(Boolean)
+            : [],
+          fetchedAt: Number(payload?.time) || null
         };
       }
 
       function clearAirTrafficTimer() {
-        if (fr24RefreshTimer) {
-          window.clearTimeout(fr24RefreshTimer);
-          fr24RefreshTimer = null;
+        if (airTrafficRefreshTimer) {
+          window.clearTimeout(airTrafficRefreshTimer);
+          airTrafficRefreshTimer = null;
         }
       }
 
       function scheduleAirTrafficRefresh() {
         clearAirTrafficTimer();
-        fr24RefreshTimer = window.setTimeout(() => {
+        airTrafficRefreshTimer = window.setTimeout(() => {
           refreshAirTraffic({ silent: true }).catch(() => {});
-        }, FR24_REFRESH_MS);
+        }, OPENSKY_REFRESH_MS);
       }
 
       async function refreshAirTraffic({ silent = false } = {}) {
-        const token = String(fr24TokenInput?.value || getStoredFr24Token() || "").trim();
-        if (!token) {
-          setAirTrafficStatus(
-            "Add an FR24 API token to load live flights near the current coverage zone.",
-            "idle"
-          );
-          if (airTrafficCount) {
-            airTrafficCount.textContent = "0";
-          }
-          if (airTrafficRefresh) {
-            airTrafficRefresh.textContent = "Waiting for token";
-          }
-          if (airTrafficList) {
-            airTrafficList.innerHTML =
-              '<li class="air-traffic-empty">No live flight activity loaded yet.</li>';
-          }
-          clearAirTrafficTimer();
-          return;
-        }
-
         if (!currentResolvedLocation) {
           setAirTrafficStatus("Waiting for the page to resolve the current location first.", "idle");
           return;
         }
 
         if (!silent) {
-          setAirTrafficStatus("Loading live flights from the FR24 API...", "ready");
+          setAirTrafficStatus("Loading live flights from OpenSky...", "ready");
         }
 
         try {
-          const result = await fetchFr24Flights(token, currentResolvedLocation);
+          const result = await fetchOpenSkyFlights(currentResolvedLocation);
           renderAirTrafficFlights(result.flights, currentResolvedLocation);
+          renderAirTrafficMap(result.flights, currentResolvedLocation, result.bounds);
           if (airTrafficBounds) {
-            airTrafficBounds.textContent = result.bounds;
+            airTrafficBounds.textContent = result.bounds.label;
           }
           if (airTrafficCount) {
             airTrafficCount.textContent = String(result.flights.length);
           }
           if (airTrafficRefresh) {
-            airTrafficRefresh.textContent = formatShortTime(new Date().toISOString());
+            const refreshValue = result.fetchedAt
+              ? formatShortTime(result.fetchedAt * 1000)
+              : formatShortTime(new Date().toISOString());
+            airTrafficRefresh.textContent = refreshValue;
           }
           if (airTrafficStamp) {
-            airTrafficStamp.textContent = `Updated ${formatShortTime(new Date().toISOString())}`;
+            airTrafficStamp.textContent = `Updated ${
+              result.fetchedAt ? formatShortTime(result.fetchedAt * 1000) : formatShortTime(new Date().toISOString())
+            }`;
           }
           setAirTrafficStatus(
-            `Showing live flights near ${fullLocationLabel(currentResolvedLocation)} from the official FR24 API.`,
+            `Showing live flights near ${fullLocationLabel(currentResolvedLocation)} from OpenSky's public live states feed.`,
             "ready"
           );
           scheduleAirTrafficRefresh();
         } catch (error) {
-          const message = error instanceof Error ? error.message : "Unable to load FR24 flights.";
-          setAirTrafficStatus(`FR24 request failed: ${message}`, "error");
+          const message = error instanceof Error ? error.message : "Unable to load OpenSky flights.";
+          setAirTrafficStatus(`OpenSky request failed: ${message}`, "error");
           if (airTrafficRefresh) {
             airTrafficRefresh.textContent = "Request failed";
           }
           clearAirTrafficTimer();
         }
-      }
-
-      function initializeAirTrafficControls() {
-        if (fr24TokenInput) {
-          fr24TokenInput.value = getStoredFr24Token();
-        }
-
-        fr24SaveButton?.addEventListener("click", () => {
-          const token = String(fr24TokenInput?.value || "").trim();
-          if (!token) {
-            setAirTrafficStatus("Paste an FR24 API token before saving.", "error");
-            return;
-          }
-          setStoredFr24Token(token);
-          refreshAirTraffic().catch(() => {});
-        });
-
-        fr24RefreshButton?.addEventListener("click", () => {
-          refreshAirTraffic().catch(() => {});
-        });
-
-        fr24ClearButton?.addEventListener("click", () => {
-          if (fr24TokenInput) {
-            fr24TokenInput.value = "";
-          }
-          clearStoredFr24Token();
-          clearAirTrafficTimer();
-          refreshAirTraffic().catch(() => {});
-        });
       }
 
       function getLocalHour(date, timezone) {
@@ -2171,13 +2255,12 @@
       }
 
       async function init() {
-        initializeAirTrafficControls();
         const location = await resolveLocation();
         currentResolvedLocation = location;
         const report = buildReport(location);
         renderReport(report);
         if (airTrafficBounds) {
-          airTrafficBounds.textContent = createBounds(location) || "Unavailable";
+          airTrafficBounds.textContent = createBounds(location)?.label || "Unavailable";
         }
         refreshAirTraffic({ silent: true }).catch(() => {});
       }
