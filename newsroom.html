@@ -246,15 +246,6 @@
         margin: 22px auto 40px;
       }
 
-      .video-shell {
-        width: min(1380px, calc(100vw - 28px));
-        margin: 18px auto 0;
-      }
-
-      .video-shell .lead-video-media {
-        margin-top: 0;
-      }
-
       .layout {
         display: grid;
         grid-template-columns: minmax(0, 2.1fr) minmax(320px, 0.95fr);
@@ -455,6 +446,19 @@
         margin-top: 12px;
         border: 1px solid rgba(11, 16, 24, 0.16);
         box-shadow: 0 12px 28px rgba(8, 14, 22, 0.18);
+      }
+
+      .lead-video-card {
+        overflow: hidden;
+        background: #05070b;
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+      }
+
+      .lead-video-card .lead-video-media {
+        margin-top: 0;
+        border: 0;
+        box-shadow: none;
       }
 
       .lead-video-player {
@@ -1089,8 +1093,7 @@
       @media (max-width: 760px) {
         .brand-inner,
         .breaking-inner,
-        .page-shell,
-        .video-shell {
+        .page-shell {
           width: min(100vw - 18px, 1380px);
         }
 
@@ -1183,24 +1186,24 @@
       </div>
     </section>
 
-    <div class="video-shell">
-      <div class="lead-video-media">
-        <video
-          class="lead-video-player"
-          controls
-          playsinline
-          preload="metadata"
-          poster="./media/newsroom-main-story-poster.jpg"
-        >
-          <source src="./media/newsroom-main-story.mp4" type="video/mp4" />
-          Your browser does not support HTML5 video.
-        </video>
-      </div>
-    </div>
-
     <div class="page-shell">
       <div class="layout">
         <div class="main-stack">
+          <section class="lead-video-card" aria-label="Lead video">
+            <div class="lead-video-media">
+              <video
+                class="lead-video-player"
+                controls
+                playsinline
+                preload="metadata"
+                poster="./media/newsroom-main-story-poster.jpg"
+              >
+                <source src="./media/newsroom-main-story.mp4" type="video/mp4" />
+                Your browser does not support HTML5 video.
+              </video>
+            </div>
+          </section>
+
           <article class="hero-card">
             <div class="hero-top">
               <div class="hero-copy">
