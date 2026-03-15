@@ -3,17 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Signal News Desk | Live Coverage</title>
+    <title>Signal News Desk | Live Coverage Bulletin</title>
     <meta
       name="description"
-      content="Workshop simulation page styled as a generic live television news network bulletin."
+      content="Live newsroom coverage, regional updates, and analysis from Signal News Desk."
     />
     <meta
       name="robots"
-      content="noindex, nofollow, noarchive, nosnippet, max-image-preview:none"
+      content="noindex, nofollow, noarchive"
     />
     <meta name="theme-color" content="#b5121b" />
     <link rel="canonical" href="https://matt-scalcione.github.io/whoa/newsroom.html" />
+    <link rel="icon" type="image/png" sizes="512x512" href="./media/snd-icon.png" />
+    <link rel="apple-touch-icon" href="./media/snd-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Signal News Desk" />
+    <meta property="og:title" content="Signal News Desk | Live Coverage Bulletin" />
+    <meta
+      property="og:description"
+      content="Live newsroom coverage, regional updates, and analysis from Signal News Desk."
+    />
+    <meta property="og:url" content="https://matt-scalcione.github.io/whoa/newsroom.html" />
+    <meta
+      property="og:image"
+      content="https://matt-scalcione.github.io/whoa/media/newsroom-share-card.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Signal News Desk branded share card" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Signal News Desk | Live Coverage Bulletin" />
+    <meta
+      name="twitter:description"
+      content="Live newsroom coverage, regional updates, and analysis from Signal News Desk."
+    />
+    <meta
+      name="twitter:image"
+      content="https://matt-scalcione.github.io/whoa/media/newsroom-share-card.png"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -2380,12 +2408,12 @@
       }
 
       function applyMeta(report) {
-        document.title = `${report.dateline} | Signal News Desk`;
+        document.title = `Signal News Desk | ${report.dateline}`;
         const description = document.querySelector('meta[name="description"]');
         if (description) {
           description.setAttribute(
             "content",
-            `${report.dateline}: workshop simulation page styled as a generic live television news network bulletin.`
+            `${report.dateline}: live newsroom coverage, regional updates, and desk reporting from Signal News Desk.`
           );
         }
       }
