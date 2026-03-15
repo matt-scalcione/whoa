@@ -487,6 +487,79 @@
         line-height: 1.35;
       }
 
+      .lead-video-card {
+        overflow: hidden;
+      }
+
+      .lead-video-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.9fr);
+      }
+
+      .lead-video-media {
+        background: #05070b;
+      }
+
+      .lead-video-player {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        background: #000;
+      }
+
+      .lead-video-copy {
+        padding: 22px;
+        background:
+          radial-gradient(circle at top right, rgba(181, 18, 27, 0.12), transparent 30%),
+          linear-gradient(180deg, #ffffff 0%, #f7f8fa 100%);
+      }
+
+      .lead-video-kicker {
+        margin: 0;
+        color: var(--red);
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+
+      .lead-video-copy h3 {
+        margin: 10px 0 0;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 2rem;
+        line-height: 0.98;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .lead-video-copy p {
+        margin: 14px 0 0;
+        color: #2d343f;
+        line-height: 1.68;
+      }
+
+      .lead-video-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .lead-video-meta span {
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        padding: 0 12px;
+        background: #fff;
+        border: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
       .section-head {
         display: flex;
         align-items: center;
@@ -1087,7 +1160,8 @@
       @media (max-width: 1160px) {
         .layout,
         .hero-top,
-        .two-up {
+        .two-up,
+        .lead-video-grid {
           grid-template-columns: minmax(0, 1fr);
         }
 
@@ -1144,6 +1218,7 @@
         }
 
         .hero-copy,
+        .lead-video-copy,
         .rail-body,
         .panel-body,
         .watch-box {
@@ -1263,6 +1338,40 @@
               </div>
             </div>
           </article>
+
+          <section class="section-card lead-video-card">
+            <div class="section-head">
+              <h2>Lead Video</h2>
+              <span id="videoStamp">Associated footage</span>
+            </div>
+            <div class="lead-video-grid">
+              <div class="lead-video-media">
+                <video
+                  class="lead-video-player"
+                  controls
+                  playsinline
+                  preload="metadata"
+                  poster="./media/newsroom-main-story-poster.jpg"
+                >
+                  <source src="./media/newsroom-main-story.mp4" type="video/mp4" />
+                  Your browser does not support HTML5 video.
+                </video>
+              </div>
+              <div class="lead-video-copy">
+                <p class="lead-video-kicker">Main Story Footage</p>
+                <h3 id="videoHeadline">Video paired with the lead report</h3>
+                <p id="videoCaption">
+                  This clip appears alongside the desk's main report and is presented as one of
+                  the primary visual pieces on the page.
+                </p>
+                <div class="lead-video-meta">
+                  <span>H.264 Video</span>
+                  <span>15 Seconds</span>
+                  <span id="videoMetaLocation">Awaiting desk</span>
+                </div>
+              </div>
+            </div>
+          </section>
 
           <div class="two-up">
             <section class="section-card">
@@ -2130,6 +2239,12 @@
             coords,
             status: "Perimeter active, aviation hold requested, medical screening active"
           },
+          video: {
+            stamp: reportUpdatedLabel(topStamp),
+            headline: `Lead footage connected to the report in ${fullLocation}`,
+            caption: `This clip appears with the desk's main story from ${fullLocation} and remains one of the primary visual pieces on this page.`,
+            metaLocation: compactLocation
+          },
           story: [
             `Authorities in ${fullLocation} moved to tighten the local response after repeated callers described ${profile.object} lingering over the same area long enough for neighbors to leave homes, gather in open lots, and begin recording the sky.`,
             `Dispatch traffic reviewed by the desk indicates witnesses from multiple parts of ${compactLocation} reported the same core details: little to no engine noise, abrupt directional movement, and intermittent flashes or signal distortion as the object remained visible above ${regionPhrase}.`,
@@ -2215,6 +2330,10 @@
         }
       }
 
+      function reportUpdatedLabel(updated) {
+        return updated.startsWith("Updated ") ? updated : `Updated ${updated}`;
+      }
+
       function renderList(id, items, markupBuilder) {
         const node = document.getElementById(id);
         if (!node) {
@@ -2252,6 +2371,10 @@
         setText("metricTime", report.metrics.time);
         setText("metricCoords", report.metrics.coords);
         setText("metricStatus", report.metrics.status);
+        setText("videoStamp", report.video.stamp);
+        setText("videoHeadline", report.video.headline);
+        setText("videoCaption", report.video.caption);
+        setText("videoMetaLocation", report.video.metaLocation);
         setText("updatesLabel", report.updated);
         setText("railHeadline", report.railHeadline);
         setText("railCopy", report.railCopy);
