@@ -487,17 +487,33 @@
         line-height: 1.35;
       }
 
-      .lead-video-card {
-        overflow: hidden;
+      .hero-video-block {
+        margin-top: 22px;
+        padding-top: 18px;
+        border-top: 1px solid var(--line);
       }
 
-      .lead-video-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.9fr);
+      .hero-video-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px 14px;
+      }
+
+      .hero-video-head span {
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
 
       .lead-video-media {
         background: #05070b;
+        margin-top: 12px;
+        border: 1px solid rgba(11, 16, 24, 0.16);
+        box-shadow: 0 12px 28px rgba(8, 14, 22, 0.18);
       }
 
       .lead-video-player {
@@ -507,11 +523,8 @@
         background: #000;
       }
 
-      .lead-video-copy {
-        padding: 22px;
-        background:
-          radial-gradient(circle at top right, rgba(181, 18, 27, 0.12), transparent 30%),
-          linear-gradient(180deg, #ffffff 0%, #f7f8fa 100%);
+      .hero-video-copy {
+        padding-top: 14px;
       }
 
       .lead-video-kicker {
@@ -524,19 +537,19 @@
         text-transform: uppercase;
       }
 
-      .lead-video-copy h3 {
-        margin: 10px 0 0;
+      .hero-video-copy h3 {
+        margin: 0;
         font-family: "Barlow Condensed", sans-serif;
-        font-size: 2rem;
+        font-size: 1.8rem;
         line-height: 0.98;
         letter-spacing: 0.04em;
         text-transform: uppercase;
       }
 
-      .lead-video-copy p {
-        margin: 14px 0 0;
+      .hero-video-copy p {
+        margin: 12px 0 0;
         color: #2d343f;
-        line-height: 1.68;
+        line-height: 1.62;
       }
 
       .lead-video-meta {
@@ -868,6 +881,11 @@
         color: #243140;
       }
 
+      .air-traffic-status[data-state="warning"] {
+        color: #8a3b10;
+        font-weight: 700;
+      }
+
       .air-traffic-map-shell {
         margin-top: 16px;
         overflow: hidden;
@@ -1160,8 +1178,7 @@
       @media (max-width: 1160px) {
         .layout,
         .hero-top,
-        .two-up,
-        .lead-video-grid {
+        .two-up {
           grid-template-columns: minmax(0, 1fr);
         }
 
@@ -1218,7 +1235,7 @@
         }
 
         .hero-copy,
-        .lead-video-copy,
+        .hero-video-copy,
         .rail-body,
         .panel-body,
         .watch-box {
@@ -1311,6 +1328,36 @@
                   <span id="heroDateline">Awaiting local desk</span>
                   <span id="heroUpdated">Updating</span>
                 </div>
+                <div class="hero-video-block">
+                  <div class="hero-video-head">
+                    <p class="lead-video-kicker">Lead Video</p>
+                    <span id="videoStamp">Associated footage</span>
+                  </div>
+                  <div class="lead-video-media">
+                    <video
+                      class="lead-video-player"
+                      controls
+                      playsinline
+                      preload="metadata"
+                      poster="./media/newsroom-main-story-poster.jpg"
+                    >
+                      <source src="./media/newsroom-main-story.mp4" type="video/mp4" />
+                      Your browser does not support HTML5 video.
+                    </video>
+                  </div>
+                  <div class="hero-video-copy">
+                    <h3 id="videoHeadline">Video paired with the lead report</h3>
+                    <p id="videoCaption">
+                      This clip appears alongside the desk's main report and is presented as one
+                      of the primary visual pieces on the page.
+                    </p>
+                    <div class="lead-video-meta">
+                      <span>H.264 Video</span>
+                      <span>15 Seconds</span>
+                      <span id="videoMetaLocation">Awaiting desk</span>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="hero-visual">
                 <div class="visual-lower-third">
@@ -1338,40 +1385,6 @@
               </div>
             </div>
           </article>
-
-          <section class="section-card lead-video-card">
-            <div class="section-head">
-              <h2>Lead Video</h2>
-              <span id="videoStamp">Associated footage</span>
-            </div>
-            <div class="lead-video-grid">
-              <div class="lead-video-media">
-                <video
-                  class="lead-video-player"
-                  controls
-                  playsinline
-                  preload="metadata"
-                  poster="./media/newsroom-main-story-poster.jpg"
-                >
-                  <source src="./media/newsroom-main-story.mp4" type="video/mp4" />
-                  Your browser does not support HTML5 video.
-                </video>
-              </div>
-              <div class="lead-video-copy">
-                <p class="lead-video-kicker">Main Story Footage</p>
-                <h3 id="videoHeadline">Video paired with the lead report</h3>
-                <p id="videoCaption">
-                  This clip appears alongside the desk's main report and is presented as one of
-                  the primary visual pieces on the page.
-                </p>
-                <div class="lead-video-meta">
-                  <span>H.264 Video</span>
-                  <span>15 Seconds</span>
-                  <span id="videoMetaLocation">Awaiting desk</span>
-                </div>
-              </div>
-            </div>
-          </section>
 
           <div class="two-up">
             <section class="section-card">
@@ -1453,7 +1466,7 @@
               <p class="air-traffic-status" id="airTrafficStatus">
                 Loading nearby live contacts through the workshop UAP lens.
               </p>
-              <p class="air-traffic-note">
+              <p class="air-traffic-note" id="airTrafficNote">
                 Live map positions still come from OpenSky, but this panel restyles them through
                 a workshop-only anomaly/UAP lens. The list highlights only the two closest
                 contacts.
@@ -1573,6 +1586,7 @@
       ];
 
       const airTrafficStatus = document.getElementById("airTrafficStatus");
+      const airTrafficNote = document.getElementById("airTrafficNote");
       const airTrafficBounds = document.getElementById("airTrafficBounds");
       const airTrafficCount = document.getElementById("airTrafficCount");
       const airTrafficRefresh = document.getElementById("airTrafficRefresh");
@@ -1585,6 +1599,7 @@
       let airTrafficMapInstance = null;
       let airTrafficLayerGroup = null;
       let airTrafficCenterMarker = null;
+      let airTrafficRateLimitUntil = 0;
 
       function escapeHtml(value) {
         return String(value ?? "")
@@ -1812,6 +1827,9 @@
       }
 
       function anomalySensorLabel(source) {
+        if (source && typeof source === "object" && source.isFallback) {
+          return "Desk estimated return";
+        }
         const label = positionSourceLabel(source);
         return label === "OpenSky" ? "Sensor fusion return" : `${label} sensor return`;
       }
@@ -1841,12 +1859,97 @@
         return earthRadiusMiles * c;
       }
 
+      function setAirTrafficNote(message) {
+        if (!airTrafficNote) {
+          return;
+        }
+        airTrafficNote.textContent = message;
+      }
+
       function setAirTrafficStatus(message, state = "idle") {
         if (!airTrafficStatus) {
           return;
         }
         airTrafficStatus.textContent = message;
         airTrafficStatus.dataset.state = state;
+      }
+
+      function offsetCoordinates(latitude, longitude, distanceMiles, bearingDegrees) {
+        const bearing = (bearingDegrees * Math.PI) / 180;
+        const latOffset = (distanceMiles * Math.cos(bearing)) / 69;
+        const lonScale = Math.max(Math.cos((latitude * Math.PI) / 180), 0.2) * 69;
+        const lonOffset = (distanceMiles * Math.sin(bearing)) / lonScale;
+
+        return {
+          lat: clamp(latitude + latOffset, -89.9, 89.9),
+          lon: clamp(longitude + lonOffset, -179.9, 179.9)
+        };
+      }
+
+      function buildFallbackFlights(location) {
+        if (!Number.isFinite(location?.latitude) || !Number.isFinite(location?.longitude)) {
+          return [];
+        }
+
+        const now = Date.now();
+        const seed = Math.floor(now / (15 * 60 * 1000));
+        const profiles = [
+          {
+            distanceMiles: 8 + (seed % 4),
+            bearing: 22 + (seed % 18),
+            altitudeFeet: 28600 + ((seed % 4) * 1800),
+            speedKnots: 324 + ((seed % 3) * 24),
+            track: 236 + ((seed % 11) - 5),
+            verticalFeetPerMinute: 780 + ((seed % 3) * 180),
+            squawk: "2743"
+          },
+          {
+            distanceMiles: 13 + ((seed + 1) % 5),
+            bearing: 308 - (seed % 16),
+            altitudeFeet: 34100 + (((seed + 2) % 4) * 1200),
+            speedKnots: 382 + (((seed + 1) % 4) * 18),
+            track: 118 + (((seed + 3) % 13) - 6),
+            verticalFeetPerMinute: -640 - (((seed + 2) % 3) * 160),
+            squawk: "1207"
+          }
+        ];
+
+        return profiles.slice(0, AIR_TRAFFIC_VISIBLE_FLIGHTS).map((profile, index) => {
+          const position = offsetCoordinates(
+            location.latitude,
+            location.longitude,
+            profile.distanceMiles,
+            profile.bearing
+          );
+
+          return {
+            icao24: `desk${seed.toString(36)}${index}`,
+            callsign: `desk${seed % 1000}${index}`,
+            originCountry: "Desk estimate",
+            timePosition: Math.floor(now / 1000) - (index + 1) * 75,
+            lastContact: Math.floor(now / 1000) - index * 52,
+            lon: position.lon,
+            lat: position.lat,
+            baroAltitude: profile.altitudeFeet / 3.28084,
+            onGround: false,
+            velocity: profile.speedKnots / 1.94384,
+            track: profile.track,
+            verticalRate: profile.verticalFeetPerMinute / 196.85,
+            geoAltitude: (profile.altitudeFeet + 600) / 3.28084,
+            squawk: profile.squawk,
+            positionSource: { isFallback: true },
+            isFallback: true
+          };
+        });
+      }
+
+      function buildFallbackAirTrafficResult(location) {
+        return {
+          bounds: createBounds(location),
+          flights: buildFallbackFlights(location),
+          fetchedAt: Math.floor(Date.now() / 1000),
+          isFallback: true
+        };
       }
 
       function normalizeOpenSkyState(state) {
@@ -1936,7 +2039,11 @@
       }
 
       function renderAirTrafficMap(flights, location, bounds) {
-        if (!Number.isFinite(location?.latitude) || !Number.isFinite(location?.longitude)) {
+        if (
+          !Number.isFinite(location?.latitude) ||
+          !Number.isFinite(location?.longitude) ||
+          !bounds
+        ) {
           return;
         }
 
@@ -2042,6 +2149,43 @@
           .join("");
       }
 
+      function renderAirTrafficResult(result, location, options = {}) {
+        const bounds = result?.bounds || createBounds(location);
+        const flights = Array.isArray(result?.flights) ? result.flights : [];
+        const updatedLabel = result?.fetchedAt
+          ? formatShortTime(result.fetchedAt * 1000)
+          : formatShortTime(new Date().toISOString());
+
+        renderAirTrafficFlights(flights, location);
+        renderAirTrafficMap(flights, location, bounds);
+
+        if (airTrafficBounds) {
+          airTrafficBounds.textContent = bounds?.label || "Unavailable";
+        }
+        if (airTrafficCount) {
+          airTrafficCount.textContent = String(flights.length);
+        }
+        if (airTrafficRefresh) {
+          airTrafficRefresh.textContent = options.refreshLabel || updatedLabel;
+        }
+        if (airTrafficStamp) {
+          airTrafficStamp.textContent =
+            options.stamp ||
+            (result?.isFallback ? "Desk-estimated contacts" : `Updated ${updatedLabel}`);
+        }
+
+        setAirTrafficNote(
+          options.noteMessage ||
+            (result?.isFallback
+              ? `The live OpenSky feed is temporarily unavailable, so this panel is holding with desk-estimated local contacts near ${fullLocationLabel(location)} until the next refresh window.`
+              : "Live map positions come from OpenSky and are restyled through the anomaly lens. The list highlights only the two closest contacts.")
+        );
+
+        if (options.statusMessage) {
+          setAirTrafficStatus(options.statusMessage, options.statusState || "ready");
+        }
+      }
+
       async function fetchOpenSkyFlights(location) {
         const bounds = createBounds(location);
         if (!bounds) {
@@ -2063,7 +2207,18 @@
         const payload = await response.json().catch(() => null);
         if (!response.ok) {
           const message = payload?.details || payload?.message || `Request failed with ${response.status}`;
-          throw new Error(message);
+          const error = new Error(message);
+          error.status = response.status;
+          const retryAfterSeconds = Number.parseInt(
+            response.headers.get("x-rate-limit-retry-after-seconds") ||
+              response.headers.get("retry-after") ||
+              "",
+            10
+          );
+          if (Number.isFinite(retryAfterSeconds)) {
+            error.retryAfterSeconds = retryAfterSeconds;
+          }
+          throw error;
         }
 
         return {
@@ -2082,16 +2237,30 @@
         }
       }
 
-      function scheduleAirTrafficRefresh() {
+      function scheduleAirTrafficRefresh(delayMs = OPENSKY_REFRESH_MS) {
         clearAirTrafficTimer();
         airTrafficRefreshTimer = window.setTimeout(() => {
           refreshAirTraffic({ silent: true }).catch(() => {});
-        }, OPENSKY_REFRESH_MS);
+        }, delayMs);
       }
 
       async function refreshAirTraffic({ silent = false } = {}) {
         if (!currentResolvedLocation) {
           setAirTrafficStatus("Waiting for the page to resolve the current location first.", "idle");
+          return;
+        }
+
+        const nowMs = Date.now();
+        if (airTrafficRateLimitUntil > nowMs) {
+          const retryLabel = formatShortTime(airTrafficRateLimitUntil);
+          renderAirTrafficResult(buildFallbackAirTrafficResult(currentResolvedLocation), currentResolvedLocation, {
+            statusMessage: `Live positions are temporarily rate-limited. Showing desk-estimated local contacts near ${fullLocationLabel(currentResolvedLocation)} until approximately ${retryLabel}.`,
+            statusState: "warning",
+            noteMessage: `The public OpenSky feed is currently rate-limited, so this panel is holding with desk-estimated local contacts until the next retry window around ${retryLabel}.`,
+            refreshLabel: `Retry after ${retryLabel}`,
+            stamp: "Desk-estimated contacts"
+          });
+          scheduleAirTrafficRefresh(Math.max(OPENSKY_REFRESH_MS, airTrafficRateLimitUntil - nowMs));
           return;
         }
 
@@ -2101,35 +2270,54 @@
 
         try {
           const result = await fetchOpenSkyFlights(currentResolvedLocation);
-          renderAirTrafficFlights(result.flights, currentResolvedLocation);
-          renderAirTrafficMap(result.flights, currentResolvedLocation, result.bounds);
-          if (airTrafficBounds) {
-            airTrafficBounds.textContent = result.bounds.label;
-          }
-          if (airTrafficCount) {
-            airTrafficCount.textContent = String(result.flights.length);
-          }
-          if (airTrafficRefresh) {
-            const refreshValue = result.fetchedAt
-              ? formatShortTime(result.fetchedAt * 1000)
-              : formatShortTime(new Date().toISOString());
-            airTrafficRefresh.textContent = refreshValue;
-          }
-          if (airTrafficStamp) {
-            airTrafficStamp.textContent = `Updated ${
-              result.fetchedAt ? formatShortTime(result.fetchedAt * 1000) : formatShortTime(new Date().toISOString())
-            }`;
-          }
-          setAirTrafficStatus(
-            `Showing live contacts near ${fullLocationLabel(currentResolvedLocation)} through the workshop anomaly lens.`,
-            "ready"
-          );
+          airTrafficRateLimitUntil = 0;
+          renderAirTrafficResult(result, currentResolvedLocation, {
+            statusMessage: `Showing live contacts near ${fullLocationLabel(currentResolvedLocation)} through the workshop anomaly lens.`,
+            statusState: "ready"
+          });
           scheduleAirTrafficRefresh();
         } catch (error) {
-          const message = error instanceof Error ? error.message : "Unable to load OpenSky flights.";
-          setAirTrafficStatus(`OpenSky request failed: ${message}`, "error");
+          const statusCode = Number(error?.status);
+          if (statusCode === 429) {
+            const retryAfterSeconds = Number(error?.retryAfterSeconds);
+            airTrafficRateLimitUntil =
+              Date.now() +
+              (Number.isFinite(retryAfterSeconds)
+                ? retryAfterSeconds * 1000
+                : OPENSKY_REFRESH_MS * 10);
+          }
+
+          const fallbackResult = buildFallbackAirTrafficResult(currentResolvedLocation);
+          if (fallbackResult.bounds) {
+            const retryLabel =
+              airTrafficRateLimitUntil > Date.now() ? formatShortTime(airTrafficRateLimitUntil) : null;
+            const fallbackStatus =
+              statusCode === 429
+                ? `Live positions are temporarily rate-limited. Showing desk-estimated local contacts near ${fullLocationLabel(currentResolvedLocation)}${retryLabel ? ` until approximately ${retryLabel}` : ""}.`
+                : `Live positions are temporarily unavailable. Showing desk-estimated local contacts near ${fullLocationLabel(currentResolvedLocation)} in the meantime.`;
+            const fallbackNote =
+              statusCode === 429
+                ? `The public OpenSky feed is currently rate-limited, so this panel is holding with desk-estimated local contacts${retryLabel ? ` until the next retry window around ${retryLabel}` : ""}.`
+                : "The live OpenSky feed is temporarily unavailable, so this panel is holding with desk-estimated local contacts until the next refresh attempt.";
+            const fallbackDelay =
+              airTrafficRateLimitUntil > Date.now()
+                ? Math.max(OPENSKY_REFRESH_MS, airTrafficRateLimitUntil - Date.now())
+                : OPENSKY_REFRESH_MS * 3;
+
+            renderAirTrafficResult(fallbackResult, currentResolvedLocation, {
+              statusMessage: fallbackStatus,
+              statusState: statusCode === 429 ? "warning" : "ready",
+              noteMessage: fallbackNote,
+              refreshLabel: retryLabel ? `Retry after ${retryLabel}` : "Desk estimate",
+              stamp: "Desk-estimated contacts"
+            });
+            scheduleAirTrafficRefresh(fallbackDelay);
+            return;
+          }
+
+          setAirTrafficStatus("Unable to load or estimate local contacts right now.", "error");
           if (airTrafficRefresh) {
-            airTrafficRefresh.textContent = "Request failed";
+            airTrafficRefresh.textContent = "Waiting to retry";
           }
           clearAirTrafficTimer();
         }
