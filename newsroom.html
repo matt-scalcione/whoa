@@ -1309,7 +1309,8 @@
               </p>
               <p class="air-traffic-note">
                 Live map and flight list are sourced from OpenSky and centered on the same
-                approximate location this page resolved from the current network.
+                approximate location this page resolved from the current network. The list
+                highlights only the two closest flights.
               </p>
               <div class="facts-grid">
                 <div class="fact">
@@ -1317,7 +1318,7 @@
                   <strong id="airTrafficBounds">Pending</strong>
                 </div>
                 <div class="fact">
-                  <span>Flights Shown</span>
+                  <span>Flights Nearby</span>
                   <strong id="airTrafficCount">0</strong>
                 </div>
                 <div class="fact">
@@ -1374,6 +1375,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script>
       const OPENSKY_REFRESH_MS = 60000;
+      const AIR_TRAFFIC_VISIBLE_FLIGHTS = 2;
       const OPENSKY_API_URL = "https://opensky-network.org/api/states/all";
 
       const GEO_PROVIDERS = [
@@ -1791,7 +1793,9 @@
             return a.distanceMiles - b.distanceMiles;
           });
 
-        airTrafficList.innerHTML = sortedFlights
+        const visibleFlights = sortedFlights.slice(0, AIR_TRAFFIC_VISIBLE_FLIGHTS);
+
+        airTrafficList.innerHTML = visibleFlights
           .map((flight) => {
             const ident = flight.callsign || flight.icao24 || "Unknown flight";
             const source = positionSourceLabel(flight.positionSource);
