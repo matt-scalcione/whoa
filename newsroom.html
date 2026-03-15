@@ -534,6 +534,33 @@
         padding: 18px;
       }
 
+      .story-body {
+        padding: 20px 22px 22px;
+      }
+
+      .story-byline {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 16px;
+        margin-bottom: 12px;
+        color: var(--muted);
+        font-size: 0.84rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .story-body p {
+        margin: 0 0 16px;
+        color: #232b35;
+        font-size: 1.02rem;
+        line-height: 1.72;
+      }
+
+      .story-body p:last-child {
+        margin-bottom: 0;
+      }
+
       .headline-grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -589,6 +616,43 @@
         border-left: 4px solid var(--red);
         background: var(--surface-strong);
         line-height: 1.58;
+      }
+
+      .guidance-card {
+        border-color: #efc7c9;
+        background:
+          linear-gradient(180deg, rgba(181, 18, 27, 0.08), rgba(181, 18, 27, 0)),
+          #fff;
+      }
+
+      .guidance-card .section-head {
+        background:
+          linear-gradient(90deg, var(--red-deep) 0%, var(--red) 100%);
+        color: #fff;
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .guidance-card .section-head span {
+        color: #ffd8db;
+      }
+
+      .guidance-card .panel-body {
+        padding: 18px;
+      }
+
+      .guidance-alert {
+        margin-bottom: 14px;
+        padding: 14px 16px;
+        border-left: 5px solid var(--red);
+        background: rgba(181, 18, 27, 0.08);
+        color: #4a1518;
+        font-weight: 700;
+        line-height: 1.55;
+      }
+
+      .guidance-card .guidance-list li {
+        border-left-color: var(--red-deep);
+        background: rgba(255, 255, 255, 0.8);
       }
 
       .rail-card {
@@ -979,6 +1043,37 @@
             </div>
           </article>
 
+          <div class="two-up">
+            <section class="section-card">
+              <div class="section-head">
+                <h2>The Story</h2>
+                <span id="storyStamp">Desk update</span>
+              </div>
+              <div class="story-body">
+                <div class="story-byline">
+                  <span>By Signal News Desk</span>
+                  <span id="storyDateline">Awaiting local desk</span>
+                </div>
+                <div id="storyBody">
+                  <p>Location-aware story copy is loading.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="section-card guidance-card">
+              <div class="section-head">
+                <h2>Urgent Public Guidance</h2>
+                <span>Safety advisory</span>
+              </div>
+              <div class="panel-body">
+                <div class="guidance-alert" id="guidanceAlert">
+                  Safety guidance is loading for the active coverage zone.
+                </div>
+                <ul class="guidance-list" id="guidanceList"></ul>
+              </div>
+            </section>
+          </div>
+
           <section class="section-card">
             <div class="section-head">
               <h2>Top Lines</h2>
@@ -1001,27 +1096,15 @@
             <div class="updates-list" id="updatesList"></div>
           </section>
 
-          <div class="two-up">
-            <section class="section-card">
-              <div class="section-head">
-                <h2>Response Posture</h2>
-                <span>Field operations</span>
-              </div>
-              <div class="panel-body">
-                <ul class="checklist" id="responseList"></ul>
-              </div>
-            </section>
-
-            <section class="section-card">
-              <div class="section-head">
-                <h2>Public Guidance</h2>
-                <span>Advisories</span>
-              </div>
-              <div class="panel-body">
-                <ul class="guidance-list" id="guidanceList"></ul>
-              </div>
-            </section>
-          </div>
+          <section class="section-card">
+            <div class="section-head">
+              <h2>Response Posture</h2>
+              <span>Field operations</span>
+            </div>
+            <div class="panel-body">
+              <ul class="checklist" id="responseList"></ul>
+            </div>
+          </section>
         </div>
 
         <aside class="rail-stack">
@@ -1352,13 +1435,13 @@
             `Traffic posture is tightening around ${corridor}`,
             `Aviation monitors are holding the sky above ${regionPhrase}`
           ],
-          headline: `Live response builds after repeated aerial reports over ${compactLocation}`,
+          headline: `Authorities tighten response after repeated reports of a low-flying object over ${compactLocation}`,
           dek:
-            `Dispatch traffic from ${fullLocation} describes ${profile.object}. Witnesses say the object stays visible in the ${profile.sky} and moves with no obvious propulsion, rotor wash, or conventional engine noise.`,
+            `Police and aviation monitors in ${fullLocation} are clearing vantage points and adjusting traffic patterns after callers described ${profile.object} moving through the ${profile.sky} without obvious propulsion or conventional engine noise.`,
           dateline: fullLocation,
           updated: `Updated ${topStamp}`,
           lowerThirdTitle: `${compactLocation} | Live Coverage`,
-          lowerThirdCopy: `${profile.behavior}. Field posture remains active across ${regionPhrase}.`,
+          lowerThirdCopy: `${profile.behavior}. Authorities say field posture remains active across ${regionPhrase}.`,
           metrics: {
             location: fullLocation,
             time: topStamp,
@@ -1368,27 +1451,34 @@
           bullets: [
             {
               label: "Witnesses",
-              value: `Residents describe silent movement, unusual light behavior, and repeated signal interference across ${regionPhrase}.`
+              value: `Residents across ${regionPhrase} describe silent movement, unusual light behavior, and repeated signal interference.`
             },
             {
               label: "Roads",
-              value: `Units are clearing shoulders, elevated lots, and other clear sightlines around ${corridor}.`
+              value: `Units are clearing shoulders, elevated lots, and other open sightlines around ${corridor}.`
             },
             {
               label: "Airspace",
-              value: `Regional flight paths are being rerouted to preserve a sterile observation zone above ${fullLocation}.`
+              value: `Regional flight paths are being rerouted to preserve a protected observation zone above ${fullLocation}.`
             }
           ],
+          story: [
+            `Authorities in ${fullLocation} moved to tighten the local response after repeated callers described ${profile.object} lingering over the same area long enough for neighbors to leave homes, gather in open lots, and begin recording the sky.`,
+            `Dispatch traffic reviewed by the desk indicates witnesses from multiple parts of ${compactLocation} reported the same core details: little to no engine noise, abrupt directional movement, and intermittent flashes or signal distortion as the object remained visible above ${regionPhrase}.`,
+            `Police are clearing road shoulders, overpasses, parking decks, and other unobstructed sightlines near ${corridor}, while aviation monitors work to keep low-altitude traffic away from the observation zone. Hospitals and triage teams have also been told to watch for patients reporting dizziness, ringing in the ears, eye irritation, or contact with unusual debris.`
+          ],
+          guidanceAlert:
+            `Officials are urging people in ${fullLocation} to leave open roads and elevated viewing areas immediately and to keep clear of any debris, residue, or suspected landing zone.`,
           updates: [
             {
               time: formatDateTime(firstCall, zone, { hour: "numeric", minute: "2-digit" }),
               title: "Dispatch traffic clusters around the same sector",
-              body: `Callers from ${compactLocation} report ${profile.object} and describe the object holding over the same section of sky long enough for neighbors to come outside and begin filming.`
+              body: `Callers from ${compactLocation} report ${profile.object} and say it remained over the same sector long enough for neighbors to come outside and begin filming.`
             },
             {
               time: formatDateTime(perimeterTime, zone, { hour: "numeric", minute: "2-digit" }),
               title: "Perimeter control expands around clear viewing lanes",
-              body: `Police units are moving vehicles away from overpasses, school lots, parking decks, and open medians to keep the primary sightline clear for emergency crews.`
+              body: `Police units are moving vehicles away from overpasses, school lots, parking decks, and open medians to keep the primary sightline clear for emergency crews and official traffic.`
             },
             {
               time: formatDateTime(aviationTime, zone, { hour: "numeric", minute: "2-digit" }),
@@ -1425,14 +1515,15 @@
             `Triage teams are prioritizing dizziness, hearing changes, eye irritation, anxiety spikes, and any claimed contact with residue.`
           ],
           guidance: [
-            `Stay indoors or watch only from a covered position if you already have a direct line of sight in ${fullLocation}.`,
-            `Do not stop on highway shoulders, overpasses, school property, or elevated lots to record the object.`,
-            `If you notice ringing in the ears, skin irritation, sudden disorientation, or contact with falling material, move away and seek medical direction immediately.`,
-            `Keep pets inside, charge devices, and preserve any original video files without editing or compressing them for investigators.`
+            `Move away from rooftops, parking decks, highway shoulders, and overpasses now, and leave those areas to emergency crews.`,
+            `Go indoors immediately if you are in an open viewing area and keep children and pets inside until officials reopen the area.`,
+            `Do not approach falling material, residue, or any suspected landing site. Leave the area and report the location to authorities instead.`,
+            `If you experience ringing in the ears, eye irritation, skin irritation, sudden disorientation, or contact with debris, seek medical direction immediately.`,
+            `Preserve original video files without editing or compressing them in case investigators request copies.`
           ],
           railHeadline: `Field crews tighten posture over ${compactLocation}`,
           railCopy:
-            `${profile.effect} is one of the most repeated details in incoming calls. The desk is tracking witness consistency, local road closures, and airspace posture in real time.`,
+            `${profile.effect} is one of the most repeated details in incoming calls. The desk is tracking witness consistency, road closures, and airspace posture in real time.`,
           datelineFact: fullStamp,
           corridorFact: corridor,
           airspaceFact: `Protected observation zone above ${regionPhrase}`,
@@ -1503,7 +1594,10 @@
         setText("heroUpdated", report.updated);
         setText("metaDateline", report.dateline);
         setText("metaUpdated", report.updated);
+        setText("storyStamp", report.updated);
+        setText("storyDateline", report.dateline);
         setText("topLinesStamp", report.updated);
+        setText("guidanceAlert", report.guidanceAlert);
         setText("lowerThirdTitle", report.lowerThirdTitle);
         setText("lowerThirdCopy", report.lowerThirdCopy);
         setText("metricLocation", report.metrics.location);
@@ -1540,6 +1634,12 @@
               </div>
             </div>
           `
+        );
+
+        renderList(
+          "storyBody",
+          report.story,
+          (item) => `<p>${escapeHtml(item)}</p>`
         );
 
         renderList(
