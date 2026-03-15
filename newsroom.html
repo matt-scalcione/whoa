@@ -241,20 +241,28 @@
 
       .breaking-copy {
         overflow: hidden;
-        white-space: nowrap;
         min-height: 54px;
         display: flex;
         align-items: center;
+        padding: 0 20px;
       }
 
       .ticker-track {
-        display: inline-flex;
-        gap: 34px;
-        min-width: max-content;
-        padding-left: 20px;
+        display: flex;
+        width: max-content;
+        min-width: 100%;
         font-weight: 700;
         letter-spacing: 0.02em;
-        animation: ticker 24s linear infinite;
+        will-change: transform;
+        animation: ticker 28s linear infinite;
+      }
+
+      .ticker-group {
+        display: flex;
+        flex: 0 0 auto;
+        gap: 34px;
+        padding-right: 34px;
+        white-space: nowrap;
       }
 
       @keyframes ticker {
@@ -262,7 +270,7 @@
           transform: translateX(0);
         }
         to {
-          transform: translateX(-34%);
+          transform: translateX(-50%);
         }
       }
 
@@ -1089,6 +1097,16 @@
 
         .breaking-copy {
           min-height: 46px;
+          padding: 0 14px;
+        }
+
+        .ticker-track {
+          animation-duration: 22s;
+        }
+
+        .ticker-group {
+          gap: 22px;
+          padding-right: 22px;
         }
 
         .hero-copy,
@@ -2194,8 +2212,13 @@
 
         const tickerTrack = document.getElementById("tickerTrack");
         if (tickerTrack) {
-          const repeated = [...report.ticker, ...report.ticker];
-          tickerTrack.innerHTML = repeated.map((item) => `<span>${escapeHtml(item)}</span>`).join("");
+          const groupMarkup = report.ticker
+            .map((item) => `<span>${escapeHtml(item)}</span>`)
+            .join("");
+          tickerTrack.innerHTML = `
+            <div class="ticker-group">${groupMarkup}</div>
+            <div class="ticker-group" aria-hidden="true">${groupMarkup}</div>
+          `;
         }
 
         renderList(
